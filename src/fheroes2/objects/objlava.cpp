@@ -27,7 +27,7 @@
 #include "mp2.h"
 #include "objlava.h"
 
-int ObjLav2::GetPassable( u32 index )
+int ObjLav2::GetPassable( uint32_t index )
 {
     if ( isShadow( index ) )
         return DIRECTION_ALL;
@@ -37,18 +37,18 @@ int ObjLav2::GetPassable( u32 index )
     return DIRECTION_CENTER_ROW | DIRECTION_BOTTOM_ROW;
 }
 
-bool ObjLav2::isAction( u32 index )
+bool ObjLav2::isAction( uint32_t index )
 {
     return MP2::OBJ_ZERO != GetActionObject( index );
 }
 
-bool ObjLav2::isShadow( u32 index )
+bool ObjLav2::isShadow( uint32_t index )
 {
-    const u8 shadows[] = {0, 7, 14, 29, 33, 44, 55, 78};
+    const uint8_t shadows[] = {0, 7, 14, 29, 33, 44, 55, 78};
     return ARRAY_COUNT_END( shadows ) != std::find( shadows, ARRAY_COUNT_END( shadows ), index );
 }
 
-int ObjLav3::GetPassable( u32 index )
+int ObjLav3::GetPassable( uint32_t index )
 {
     if ( isShadow( index ) )
         return DIRECTION_ALL;
@@ -58,22 +58,22 @@ int ObjLav3::GetPassable( u32 index )
     return DIRECTION_CENTER_ROW | DIRECTION_BOTTOM_ROW;
 }
 
-bool ObjLav3::isAction( u32 index )
+bool ObjLav3::isAction( uint32_t index )
 {
     return MP2::OBJ_ZERO != GetActionObject( index );
 }
 
-bool ObjLav3::isShadow( u32 index )
+bool ObjLav3::isShadow( uint32_t index )
 {
-    const u8 shadows[] = {0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 165, 180, 195, 210, 225, 243};
+    const uint8_t shadows[] = {0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 165, 180, 195, 210, 225, 243};
     return ARRAY_COUNT_END( shadows ) != std::find( shadows, ARRAY_COUNT_END( shadows ), index );
 }
 
-int ObjLava::GetPassable( u32 index )
+int ObjLava::GetPassable( uint32_t index )
 {
-    const u8 disabled[] = {2, 3, 4, 5, 12, 13, 14, 15, 18, 27, 28, 29, 30, 31, 32, 39, 40, 41, 46, 47, 48, 53, 54, 57, 60, 61, 64, 65, 69, 70, 120, 121};
+    const uint8_t disabled[] = {2, 3, 4, 5, 12, 13, 14, 15, 18, 27, 28, 29, 30, 31, 32, 39, 40, 41, 46, 47, 48, 53, 54, 57, 60, 61, 64, 65, 69, 70, 120, 121};
 
-    const u8 restricted[]
+    const uint8_t restricted[]
         = {6, 7, 8, 9, 16, 17, 19, 20, 33, 34, 35, 36, 37, 38, 42, 43, 44, 50, 51, 52, 55, 56, 58, 59, 62, 66, 67, 68, 72, 73, 76, 77, 88, 98, 114, 122, 123, 125};
 
     if ( isAction( index ) || ARRAY_COUNT_END( disabled ) != std::find( disabled, ARRAY_COUNT_END( disabled ), index ) )
@@ -82,28 +82,28 @@ int ObjLava::GetPassable( u32 index )
     return ARRAY_COUNT_END( restricted ) != std::find( restricted, ARRAY_COUNT_END( restricted ), index ) ? DIRECTION_CENTER_ROW | DIRECTION_BOTTOM_ROW : DIRECTION_ALL;
 }
 
-bool ObjLava::isAction( u32 index )
+bool ObjLava::isAction( uint32_t index )
 {
     return MP2::OBJ_ZERO != GetActionObject( index );
 }
 
-bool ObjLava::isShadow( u32 index )
+bool ObjLava::isShadow( uint32_t index )
 {
-    const u8 shadows[] = {10, 11, 45, 49, 77, 109, 113, 116};
+    const uint8_t shadows[] = {10, 11, 45, 49, 77, 109, 113, 116};
     return ARRAY_COUNT_END( shadows ) != std::find( shadows, ARRAY_COUNT_END( shadows ), index );
 }
 
-int ObjLav2::GetActionObject( u32 )
+int ObjLav2::GetActionObject( uint32_t )
 {
     return MP2::OBJ_ZERO;
 }
 
-int ObjLav3::GetActionObject( u32 )
+int ObjLav3::GetActionObject( uint32_t )
 {
     return MP2::OBJ_ZERO;
 }
 
-int ObjLava::GetActionObject( u32 index )
+int ObjLava::GetActionObject( uint32_t index )
 {
     switch ( index ) {
     case 110:

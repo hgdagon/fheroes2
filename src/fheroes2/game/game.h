@@ -250,14 +250,14 @@ namespace Game
     void DialogPlayers( int color, std::string );
     void SetCurrentMusic( int );
     int CurrentMusic( void );
-    u32 & CastleAnimationFrame( void );
-    u32 & MapsAnimationFrame( void );
-    u32 GetRating( void );
-    u32 GetGameOverScores( void );
-    u32 GetLostTownDays( void );
-    u32 GetViewDistance( u32 );
-    u32 GetWhirlpoolPercent( void );
-    u32 SelectCountPlayers( void );
+    uint32_t & CastleAnimationFrame( void );
+    uint32_t & MapsAnimationFrame( void );
+    uint32_t GetRating( void );
+    uint32_t GetGameOverScores( void );
+    uint32_t GetLostTownDays( void );
+    uint32_t GetViewDistance( uint32_t );
+    uint32_t GetWhirlpoolPercent( void );
+    uint32_t SelectCountPlayers( void );
     void ShowMapLoadingText( void );
     void PlayPickupSound( void );
     void DisableChangeMusic( bool );
@@ -302,7 +302,7 @@ namespace Game
         void FinishFadeTask();
     }
 
-    u32 GetStep4Player( u32, u32, u32 );
+    uint32_t GetStep4Player( uint32_t, uint32_t, uint32_t );
     std::string CountScoute( uint32_t count, int scoute, bool shorts = false );
     std::string CountThievesGuild( uint32_t monsterCount, int guildCount );
 }

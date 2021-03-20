@@ -180,7 +180,7 @@ void Cursor::Refresh()
     Get().SetThemes( Get().Themes(), true );
 }
 
-int Cursor::DistanceThemes( int theme, u32 dist )
+int Cursor::DistanceThemes( int theme, uint32_t dist )
 {
     if ( 0 == dist )
         return POINTER;

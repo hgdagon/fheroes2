@@ -27,10 +27,10 @@
 #include "mp2.h"
 #include "objwatr.h"
 
-int ObjWat2::GetPassable( u32 index )
+int ObjWat2::GetPassable( uint32_t index )
 {
-    const u8 disabled[] = {11, 12, 19, 22};
-    const u8 restricted[] = {2, 20};
+    const uint8_t disabled[] = {11, 12, 19, 22};
+    const uint8_t restricted[] = {2, 20};
 
     if ( isShadow( index ) )
         return DIRECTION_ALL;
@@ -44,10 +44,10 @@ int ObjWat2::GetPassable( u32 index )
     return ARRAY_COUNT_END( restricted ) != std::find( restricted, ARRAY_COUNT_END( restricted ), index ) ? DIRECTION_CENTER_ROW | DIRECTION_BOTTOM_ROW : DIRECTION_ALL;
 }
 
-int ObjWatr::GetPassable( u32 index )
+int ObjWatr::GetPassable( uint32_t index )
 {
-    const u8 disabled[] = {11, 12, 19, 22};
-    const u8 restricted[] = {69, 182, 183, 185, 186, 187, 248};
+    const uint8_t disabled[] = {11, 12, 19, 22};
+    const uint8_t restricted[] = {69, 182, 183, 185, 186, 187, 248};
 
     if ( isShadow( index ) )
         return DIRECTION_ALL;
@@ -57,28 +57,28 @@ int ObjWatr::GetPassable( u32 index )
     return ARRAY_COUNT_END( restricted ) != std::find( restricted, ARRAY_COUNT_END( restricted ), index ) ? DIRECTION_CENTER_ROW | DIRECTION_BOTTOM_ROW : DIRECTION_ALL;
 }
 
-bool ObjWat2::isAction( u32 index )
+bool ObjWat2::isAction( uint32_t index )
 {
     return MP2::OBJ_ZERO != GetActionObject( index );
 }
 
-bool ObjWatr::isAction( u32 index )
+bool ObjWatr::isAction( uint32_t index )
 {
     return MP2::OBJ_ZERO != GetActionObject( index );
 }
 
-bool ObjWatr::isShadow( u32 index )
+bool ObjWatr::isShadow( uint32_t index )
 {
-    const u8 shadows[] = {12, 38, 52, 55, 118, 166, 188, 240};
+    const uint8_t shadows[] = {12, 38, 52, 55, 118, 166, 188, 240};
     return ARRAY_COUNT_END( shadows ) != std::find( shadows, ARRAY_COUNT_END( shadows ), index );
 }
 
-bool ObjWat2::isShadow( u32 index )
+bool ObjWat2::isShadow( uint32_t index )
 {
     return index == 1;
 }
 
-int ObjWatr::GetActionObject( u32 index )
+int ObjWatr::GetActionObject( uint32_t index )
 {
     switch ( index ) {
     case 62:
@@ -101,7 +101,7 @@ int ObjWatr::GetActionObject( u32 index )
     return MP2::OBJ_ZERO;
 }
 
-int ObjWat2::GetActionObject( u32 index )
+int ObjWat2::GetActionObject( uint32_t index )
 {
     switch ( index ) {
     case 21:

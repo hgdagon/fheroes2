@@ -50,7 +50,7 @@
 
 void CastleRedrawTownName( const Castle & castle, const Point & dst );
 
-bool AllowFlashBuilding( u32 build )
+bool AllowFlashBuilding( uint32_t build )
 {
     switch ( build ) {
     case BUILD_TAVERN:
@@ -93,9 +93,9 @@ bool AllowFlashBuilding( u32 build )
     return false;
 }
 
-fheroes2::Sprite GetActualSpriteBuilding( const Castle & castle, u32 build )
+fheroes2::Sprite GetActualSpriteBuilding( const Castle & castle, uint32_t build )
 {
-    u32 index = 0;
+    uint32_t index = 0;
     // correct index (mage guild)
     switch ( build ) {
     case BUILD_MAGEGUILD1:
@@ -166,14 +166,14 @@ fheroes2::Image GetMeetingSprite( void )
     return result;
 }
 
-MeetingButton::MeetingButton( s32 px, s32 py )
+MeetingButton::MeetingButton( int32_t px, int32_t py )
 {
     const fheroes2::Image & sprite = GetMeetingSprite();
     setSprite( sprite, sprite );
     setPosition( px, py );
 }
 
-SwapButton::SwapButton( s32 px, s32 py )
+SwapButton::SwapButton( int32_t px, int32_t py )
 {
     const fheroes2::Image & sprite = GetMeetingSprite();
     // Custom graphics: rotate existing sprtie

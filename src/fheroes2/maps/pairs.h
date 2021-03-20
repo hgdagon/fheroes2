@@ -29,13 +29,13 @@
 #include "mp2.h"
 #include "resource.h"
 
-class IndexDistance : public std::pair<s32, u32>
+class IndexDistance : public std::pair<int32_t, uint32_t>
 {
 public:
     IndexDistance()
-        : std::pair<s32, u32>( -1, 0 ){};
-    IndexDistance( s32 i, u32 d )
-        : std::pair<s32, u32>( i, d ){};
+        : std::pair<int32_t, uint32_t>( -1, 0 ){};
+    IndexDistance( int32_t i, uint32_t d )
+        : std::pair<int32_t, uint32_t>( i, d ){};
 
     static bool Shortest( const IndexDistance & id1, const IndexDistance & id2 )
     {
@@ -49,15 +49,15 @@ public:
 
 StreamBase & operator>>( StreamBase &, IndexDistance & );
 
-class IndexObject : public std::pair<s32, int>
+class IndexObject : public std::pair<int32_t, int>
 {
 public:
     IndexObject()
-        : std::pair<s32, int>( -1, MP2::OBJ_ZERO ){};
-    IndexObject( s32 index, int object )
-        : std::pair<s32, int>( index, object ){};
+        : std::pair<int32_t, int>( -1, MP2::OBJ_ZERO ){};
+    IndexObject( int32_t index, int object )
+        : std::pair<int32_t, int>( index, object ){};
 
-    bool isIndex( s32 index ) const
+    bool isIndex( int32_t index ) const
     {
         return index == first;
     };
@@ -89,13 +89,13 @@ public:
 
 StreamBase & operator>>( StreamBase &, ObjectColor & );
 
-class ResourceCount : public std::pair<int, u32>
+class ResourceCount : public std::pair<int, uint32_t>
 {
 public:
     ResourceCount()
-        : std::pair<int, u32>( Resource::UNKNOWN, 0 ){};
-    ResourceCount( int res, u32 count )
-        : std::pair<int, u32>( res, count ){};
+        : std::pair<int, uint32_t>( Resource::UNKNOWN, 0 ){};
+    ResourceCount( int res, uint32_t count )
+        : std::pair<int, uint32_t>( res, count ){};
 
     bool isResource( int res ) const
     {

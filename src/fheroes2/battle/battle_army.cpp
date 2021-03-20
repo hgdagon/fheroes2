@@ -172,14 +172,14 @@ void Battle::Units::SortArchers( void )
     std::sort( begin(), end(), []( const Troop * t1, const Troop * t2 ) { return t1->isArchers() && !t2->isArchers(); } );
 }
 
-Battle::Unit * Battle::Units::FindUID( u32 pid )
+Battle::Unit * Battle::Units::FindUID( uint32_t pid )
 {
     iterator it = std::find_if( begin(), end(), [pid]( const Unit * unit ) { return unit->isUID( pid ); } );
 
     return it == end() ? NULL : *it;
 }
 
-Battle::Unit * Battle::Units::FindMode( u32 mod )
+Battle::Unit * Battle::Units::FindMode( uint32_t mod )
 {
     iterator it = std::find_if( begin(), end(), [mod]( const Unit * unit ) { return unit->Modes( mod ); } );
 
@@ -191,10 +191,10 @@ Battle::Force::Force( Army & parent, bool opposite )
 {
     uids.reserve( army.Size() );
 
-    for ( u32 index = 0; index < army.Size(); ++index ) {
+    for ( uint32_t index = 0; index < army.Size(); ++index ) {
         const Troop * troop = army.GetTroop( index );
-        const u32 position = army.isSpreadFormat() ? index * 22 : 22 + index * 11;
-        u32 uid = 0;
+        const uint32_t position = army.isSpreadFormat() ? index * 22 : 22 + index * 11;
+        uint32_t uid = 0;
 
         if ( troop && troop->isValid() ) {
             push_back( new Unit( *troop, ( opposite ? position + 10 : position ), opposite ) );
@@ -337,7 +337,7 @@ Battle::Unit * Battle::Force::GetCurrentUnit( const Force & army1, const Force &
 
 StreamBase & Battle::operator<<( StreamBase & msg, const Force & f )
 {
-    msg << static_cast<const BitModes &>( f ) << static_cast<u32>( f.size() );
+    msg << static_cast<const BitModes &>( f ) << static_cast<uint32_t>( f.size() );
 
     for ( Force::const_iterator it = f.begin(); it != f.end(); ++it )
         msg << ( *it )->GetUID() << **it;
@@ -347,12 +347,12 @@ StreamBase & Battle::operator<<( StreamBase & msg, const Force & f )
 
 StreamBase & Battle::operator>>( StreamBase & msg, Force & f )
 {
-    u32 size = 0;
-    u32 uid = 0;
+    uint32_t size = 0;
+    uint32_t uid = 0;
 
     msg >> static_cast<BitModes &>( f ) >> size;
 
-    for ( u32 ii = 0; ii < size; ++ii ) {
+    for ( uint32_t ii = 0; ii < size; ++ii ) {
         msg >> uid;
         Unit * b = f.FindUID( uid );
         if ( b )
@@ -419,9 +419,9 @@ bool Battle::Force::HasMonster( const Monster & mons ) const
     return end() != std::find_if( begin(), end(), [&mons]( const Unit * unit ) { return unit->isMonster( mons.GetID() ); } );
 }
 
-u32 Battle::Force::GetDeadCounts( void ) const
+uint32_t Battle::Force::GetDeadCounts( void ) const
 {
-    u32 res = 0;
+    uint32_t res = 0;
 
     for ( const_iterator it = begin(); it != end(); ++it )
         res += ( *it )->GetDead();
@@ -429,9 +429,9 @@ u32 Battle::Force::GetDeadCounts( void ) const
     return res;
 }
 
-u32 Battle::Force::GetDeadHitPoints( void ) const
+uint32_t Battle::Force::GetDeadHitPoints( void ) const
 {
-    u32 res = 0;
+    uint32_t res = 0;
 
     for ( const_iterator it = begin(); it != end(); ++it ) {
         res += static_cast<Monster *>( *it )->GetHitPoints() * ( *it )->GetDead();
@@ -448,7 +448,7 @@ void Battle::Force::SyncArmyCount( bool checkResurrected )
     if ( checkResurrected ) {
         bool isAllDead = true;
         std::vector<Troop *> armyMonsters;
-        for ( u32 index = 0; index < army.Size(); ++index ) {
+        for ( uint32_t index = 0; index < army.Size(); ++index ) {
             Troop * troop = army.GetTroop( index );
 
             if ( troop && troop->isValid() ) {
@@ -477,7 +477,7 @@ void Battle::Force::SyncArmyCount( bool checkResurrected )
         }
     }
 
-    for ( u32 index = 0; index < army.Size(); ++index ) {
+    for ( uint32_t index = 0; index < army.Size(); ++index ) {
         Troop * troop = army.GetTroop( index );
 
         if ( troop && troop->isValid() ) {

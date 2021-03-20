@@ -76,14 +76,14 @@ enum
 
 struct settings_t
 {
-    u32 id;
+    uint32_t id;
     const char * str;
 
     bool operator==( const std::string & s ) const
     {
         return str && s == str;
     };
-    bool operator==( u32 i ) const
+    bool operator==( uint32_t i ) const
     {
         return id && id == i;
     };
@@ -1350,7 +1350,7 @@ bool Settings::WinsFindUltimateArtifact( void ) const
     return current_maps_file.WinsFindUltimateArtifact();
 }
 
-u32 Settings::WinsAccumulateGold( void ) const
+uint32_t Settings::WinsAccumulateGold( void ) const
 {
     return current_maps_file.WinsAccumulateGold();
 }
@@ -1365,7 +1365,7 @@ Point Settings::LossMapsPositionObject( void ) const
     return current_maps_file.LossMapsPositionObject();
 }
 
-u32 Settings::LossCountDays( void ) const
+uint32_t Settings::LossCountDays( void ) const
 {
     return current_maps_file.LossCountDays();
 }
@@ -1452,14 +1452,14 @@ void Settings::SetShowStatus( bool f )
     f ? opt_global.SetModes( GLOBAL_SHOWSTATUS ) : opt_global.ResetModes( GLOBAL_SHOWSTATUS );
 }
 
-bool Settings::CanChangeInGame( u32 f ) const
+bool Settings::CanChangeInGame( uint32_t f ) const
 {
     return ( f >> 28 ) == 0x01; // GAME_ and POCKETPC_
 }
 
-bool Settings::ExtModes( u32 f ) const
+bool Settings::ExtModes( uint32_t f ) const
 {
-    const u32 mask = 0x0FFFFFFF;
+    const uint32_t mask = 0x0FFFFFFF;
     switch ( f >> 28 ) {
     case 0x01:
         return opt_game.Modes( f & mask );
@@ -1475,16 +1475,16 @@ bool Settings::ExtModes( u32 f ) const
     return false;
 }
 
-const char * Settings::ExtName( u32 f ) const
+const char * Settings::ExtName( uint32_t f ) const
 {
     const settings_t * ptr = std::find( settingsFHeroes2, ARRAY_COUNT_END( settingsFHeroes2 ) - 1, f );
 
     return ptr ? _( ptr->str ) : NULL;
 }
 
-void Settings::ExtSetModes( u32 f )
+void Settings::ExtSetModes( uint32_t f )
 {
-    const u32 mask = 0x0FFFFFFF;
+    const uint32_t mask = 0x0FFFFFFF;
     switch ( f >> 28 ) {
     case 0x01:
         opt_game.SetModes( f & mask );
@@ -1503,9 +1503,9 @@ void Settings::ExtSetModes( u32 f )
     }
 }
 
-void Settings::ExtResetModes( u32 f )
+void Settings::ExtResetModes( uint32_t f )
 {
-    const u32 mask = 0x0FFFFFFF;
+    const uint32_t mask = 0x0FFFFFFF;
     switch ( f >> 28 ) {
     case 0x01:
         opt_game.ResetModes( f & mask );
@@ -1796,7 +1796,7 @@ void Settings::BinarySave( void ) const
     fs.setbigendian( true );
 
     if ( fs.open( fname, "wb" ) ) {
-        fs << static_cast<u16>( CURRENT_FORMAT_VERSION ) << opt_game << opt_world << opt_battle << opt_addons << pos_radr << pos_bttn << pos_icon << pos_stat;
+        fs << static_cast<uint16_t>( CURRENT_FORMAT_VERSION ) << opt_game << opt_world << opt_battle << opt_addons << pos_radr << pos_bttn << pos_icon << pos_stat;
     }
 }
 
@@ -1811,7 +1811,7 @@ void Settings::BinaryLoad( void )
     fs.setbigendian( true );
 
     if ( fs.open( fname, "rb" ) ) {
-        u16 version = 0;
+        uint16_t version = 0;
 
         fs >> version >> opt_game >> opt_world >> opt_battle >> opt_addons >> pos_radr >> pos_bttn >> pos_icon >> pos_stat;
     }
@@ -1840,7 +1840,7 @@ StreamBase & operator>>( StreamBase & msg, Settings & conf )
     msg >> conf._loadedFileLanguage;
 
     int debug;
-    u32 opt_game = 0; // skip: settings
+    uint32_t opt_game = 0; // skip: settings
 
     // map file
     msg >> conf.current_maps_file >> conf.game_difficulty >> conf.game_type >> conf.preferably_count_players >> debug >> opt_game >> conf.opt_world >> conf.opt_battle

@@ -33,7 +33,7 @@ public:
         : Interface::ListBox<Maps::FileInfo>( pt )
         , selectOk( false ){};
 
-    void RedrawItem( const Maps::FileInfo &, s32, s32, bool );
+    void RedrawItem( const Maps::FileInfo &, int32_t, int32_t, bool );
     void RedrawBackground( const Point & );
 
     void ActionCurrentUp( void ){};

@@ -34,16 +34,16 @@
 #include "ui_window.h"
 #include "world.h"
 
-const u8 zone1_index[] = {0, 1, 2, 3, 4, 5, 6, 11, 12, 17, 18, 23, 24, 29, 30, 35, 36, 41, 42, 43, 44, 45, 46, 47};
-const u8 zone2_index[] = {7, 8, 9, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 38, 39, 40};
-const u8 zone3_index[] = {14, 15, 32, 33};
-const u8 zone4_index[] = {20, 21, 26, 27};
+const uint8_t zone1_index[] = {0, 1, 2, 3, 4, 5, 6, 11, 12, 17, 18, 23, 24, 29, 30, 35, 36, 41, 42, 43, 44, 45, 46, 47};
+const uint8_t zone2_index[] = {7, 8, 9, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 38, 39, 40};
+const uint8_t zone3_index[] = {14, 15, 32, 33};
+const uint8_t zone4_index[] = {20, 21, 26, 27};
 
-bool ClosedTilesExists( const Puzzle &, const u8 *, const u8 * );
-void ZoneOpenFirstTiles( Puzzle &, u32 &, const u8 *, const u8 * );
+bool ClosedTilesExists( const Puzzle &, const uint8_t *, const uint8_t * );
+void ZoneOpenFirstTiles( Puzzle &, uint32_t &, const uint8_t *, const uint8_t * );
 void ShowStandardDialog( const Puzzle &, const fheroes2::Image & );
 void ShowExtendedDialog( const Puzzle &, const fheroes2::Image & );
-void PuzzlesDraw( const Puzzle &, const fheroes2::Image &, s32, s32 );
+void PuzzlesDraw( const Puzzle &, const fheroes2::Image &, int32_t, int32_t );
 
 Puzzle::Puzzle()
 {
@@ -70,10 +70,10 @@ Puzzle & Puzzle::operator=( const char * str )
     return *this;
 }
 
-void Puzzle::Update( u32 open_obelisk, u32 total_obelisk )
+void Puzzle::Update( uint32_t open_obelisk, uint32_t total_obelisk )
 {
-    u32 open_puzzle = open_obelisk * PUZZLETILES / total_obelisk;
-    u32 need_puzzle = open_puzzle > count() ? open_puzzle - count() : 0;
+    uint32_t open_puzzle = open_obelisk * PUZZLETILES / total_obelisk;
+    uint32_t need_puzzle = open_puzzle > count() ? open_puzzle - count() : 0;
 
     if ( need_puzzle && ClosedTilesExists( *this, zone1_order, ARRAY_COUNT_END( zone1_order ) ) )
         ZoneOpenFirstTiles( *this, need_puzzle, zone1_order, ARRAY_COUNT_END( zone1_order ) );
@@ -113,7 +113,7 @@ void Puzzle::ShowMapsDialog( void ) const
     }
 }
 
-bool ClosedTilesExists( const Puzzle & pzl, const u8 * it1, const u8 * it2 )
+bool ClosedTilesExists( const Puzzle & pzl, const uint8_t * it1, const uint8_t * it2 )
 {
     while ( it1 < it2 )
         if ( !pzl.test( *it1++ ) )
@@ -121,10 +121,10 @@ bool ClosedTilesExists( const Puzzle & pzl, const u8 * it1, const u8 * it2 )
     return false;
 }
 
-void ZoneOpenFirstTiles( Puzzle & pzl, u32 & opens, const u8 * it1, const u8 * it2 )
+void ZoneOpenFirstTiles( Puzzle & pzl, uint32_t & opens, const uint8_t * it1, const uint8_t * it2 )
 {
     while ( opens ) {
-        const u8 * it = it1;
+        const uint8_t * it = it1;
         while ( it < it2 && pzl.test( *it ) )
             ++it;
 
@@ -220,7 +220,7 @@ void ShowExtendedDialog( const Puzzle & pzl, const fheroes2::Image & sf )
     radar.SetRedraw();
 }
 
-void PuzzlesDraw( const Puzzle & pzl, const fheroes2::Image & sf, s32 dstx, s32 dsty )
+void PuzzlesDraw( const Puzzle & pzl, const fheroes2::Image & sf, int32_t dstx, int32_t dsty )
 {
     fheroes2::Display & display = fheroes2::Display::instance();
     Cursor & cursor = Cursor::Get();
@@ -258,20 +258,20 @@ StreamBase & operator<<( StreamBase & msg, const Puzzle & pzl )
     msg << pzl.to_string<char, std::char_traits<char>, std::allocator<char> >();
 
     // orders
-    msg << static_cast<u8>( ARRAY_COUNT( pzl.zone1_order ) );
-    for ( u32 ii = 0; ii < ARRAY_COUNT( pzl.zone1_order ); ++ii )
+    msg << static_cast<uint8_t>( ARRAY_COUNT( pzl.zone1_order ) );
+    for ( uint32_t ii = 0; ii < ARRAY_COUNT( pzl.zone1_order ); ++ii )
         msg << pzl.zone1_order[ii];
 
-    msg << static_cast<u8>( ARRAY_COUNT( pzl.zone2_order ) );
-    for ( u32 ii = 0; ii < ARRAY_COUNT( pzl.zone2_order ); ++ii )
+    msg << static_cast<uint8_t>( ARRAY_COUNT( pzl.zone2_order ) );
+    for ( uint32_t ii = 0; ii < ARRAY_COUNT( pzl.zone2_order ); ++ii )
         msg << pzl.zone2_order[ii];
 
-    msg << static_cast<u8>( ARRAY_COUNT( pzl.zone3_order ) );
-    for ( u32 ii = 0; ii < ARRAY_COUNT( pzl.zone3_order ); ++ii )
+    msg << static_cast<uint8_t>( ARRAY_COUNT( pzl.zone3_order ) );
+    for ( uint32_t ii = 0; ii < ARRAY_COUNT( pzl.zone3_order ); ++ii )
         msg << pzl.zone3_order[ii];
 
-    msg << static_cast<u8>( ARRAY_COUNT( pzl.zone4_order ) );
-    for ( u32 ii = 0; ii < ARRAY_COUNT( pzl.zone4_order ); ++ii )
+    msg << static_cast<uint8_t>( ARRAY_COUNT( pzl.zone4_order ) );
+    for ( uint32_t ii = 0; ii < ARRAY_COUNT( pzl.zone4_order ); ++ii )
         msg << pzl.zone4_order[ii];
 
     return msg;
@@ -284,22 +284,22 @@ StreamBase & operator>>( StreamBase & msg, Puzzle & pzl )
     msg >> str;
     pzl = str.c_str();
 
-    u8 size;
+    uint8_t size;
 
     msg >> size;
-    for ( u32 ii = 0; ii < size; ++ii )
+    for ( uint32_t ii = 0; ii < size; ++ii )
         msg >> pzl.zone1_order[ii];
 
     msg >> size;
-    for ( u32 ii = 0; ii < size; ++ii )
+    for ( uint32_t ii = 0; ii < size; ++ii )
         msg >> pzl.zone2_order[ii];
 
     msg >> size;
-    for ( u32 ii = 0; ii < size; ++ii )
+    for ( uint32_t ii = 0; ii < size; ++ii )
         msg >> pzl.zone3_order[ii];
 
     msg >> size;
-    for ( u32 ii = 0; ii < size; ++ii )
+    for ( uint32_t ii = 0; ii < size; ++ii )
         msg >> pzl.zone4_order[ii];
 
     return msg;

@@ -400,7 +400,7 @@ void Heroes::Redraw( fheroes2::Image & dst, int32_t dx, int32_t dy, const Rect &
     if ( !( visibleTileROI & GetCenter() ) )
         return;
 
-    const s32 centerIndex = GetIndex();
+    const int32_t centerIndex = GetIndex();
     const bool reflect = ReflectSprite( direction );
 
     int flagFrameID = sprite_index;
@@ -424,8 +424,8 @@ void Heroes::Redraw( fheroes2::Image & dst, int32_t dx, int32_t dy, const Rect &
 
     // apply offset
     if ( sprite_index < 45 ) {
-        s32 ox = 0;
-        s32 oy = 0;
+        int32_t ox = 0;
+        int32_t oy = 0;
         int frame = ( sprite_index % 9 );
         if ( frame > 0 )
             --frame;
@@ -550,7 +550,7 @@ void Heroes::Redraw( fheroes2::Image & dst, int32_t dx, int32_t dy, const Rect &
     }
 }
 
-void Heroes::MoveStep( Heroes & hero, s32 indexTo, bool newpos )
+void Heroes::MoveStep( Heroes & hero, int32_t indexTo, bool newpos )
 {
     Route::Path & path = hero.GetPath();
     hero.ApplyPenaltyMovement( path.GetFrontPenalty() );

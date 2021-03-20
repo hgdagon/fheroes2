@@ -47,7 +47,7 @@ fheroes2::Image GetNonStandardSizeIcon( void )
     return icon;
 }
 
-void ScenarioListBox::RedrawItem( const Maps::FileInfo & info, s32 dstx, s32 dsty, bool current )
+void ScenarioListBox::RedrawItem( const Maps::FileInfo & info, int32_t dstx, int32_t dsty, bool current )
 {
     fheroes2::Display & display = fheroes2::Display::instance();
 

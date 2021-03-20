@@ -30,12 +30,12 @@
 #include "settings.h"
 #include "world.h"
 
-s32 Route::Step::GetIndex( void ) const
+int32_t Route::Step::GetIndex( void ) const
 {
     return currentIndex;
 }
 
-s32 Route::Step::GetFrom( void ) const
+int32_t Route::Step::GetFrom( void ) const
 {
     return from;
 }
@@ -45,7 +45,7 @@ int Route::Step::GetDirection( void ) const
     return direction;
 }
 
-u32 Route::Step::GetPenalty( void ) const
+uint32_t Route::Step::GetPenalty( void ) const
 {
     return penalty;
 }
@@ -85,7 +85,7 @@ int Route::Path::GetFrontDirection( void ) const
     return empty() ? ( dst != hero->GetIndex() ? Maps::GetDirection( hero->GetIndex(), dst ) : Direction::CENTER ) : front().GetDirection();
 }
 
-u32 Route::Path::GetFrontPenalty( void ) const
+uint32_t Route::Path::GetFrontPenalty( void ) const
 {
     return empty() ? 0 : front().GetPenalty();
 }
@@ -104,17 +104,17 @@ void Route::Path::PopBack( void )
     }
 }
 
-s32 Route::Path::GetDestinationIndex( void ) const
+int32_t Route::Path::GetDestinationIndex( void ) const
 {
     return empty() ? GetDestinedIndex() : GetLastIndex();
 }
 
-s32 Route::Path::GetLastIndex( void ) const
+int32_t Route::Path::GetLastIndex( void ) const
 {
     return empty() ? -1 : back().GetIndex();
 }
 
-s32 Route::Path::GetDestinedIndex( void ) const
+int32_t Route::Path::GetDestinedIndex( void ) const
 {
     return dst;
 }
@@ -414,9 +414,9 @@ int Route::Path::GetIndexSprite( int from, int to, int mod )
 }
 
 /* total penalty cast */
-u32 Route::Path::GetTotalPenalty( void ) const
+uint32_t Route::Path::GetTotalPenalty( void ) const
 {
-    u32 result = 0;
+    uint32_t result = 0;
 
     for ( const_iterator it = begin(); it != end(); ++it )
         result += ( *it ).GetPenalty();
@@ -472,7 +472,7 @@ std::string Route::Path::String( void ) const
 
 bool StepIsObstacle( const Route::Step & s )
 {
-    s32 index = s.GetIndex();
+    int32_t index = s.GetIndex();
     int obj = 0 <= index ? world.GetTiles( index ).GetObject() : MP2::OBJ_ZERO;
 
     switch ( obj ) {
@@ -500,7 +500,7 @@ void Route::Path::RescanObstacle( void )
 
     if ( it != end() && ( *it ).GetIndex() != GetLastIndex() ) {
         size_t size1 = size();
-        s32 reduce = ( *it ).GetFrom();
+        int32_t reduce = ( *it ).GetFrom();
 
         std::list<Step> path = world.getPath( *hero, dst );
         const bool reducePath = path.size() > size1 * 2;

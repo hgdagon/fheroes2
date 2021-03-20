@@ -37,9 +37,9 @@
 
 struct aggfat_t
 {
-    u32 crc;
-    u32 offset;
-    u32 size;
+    uint32_t crc;
+    uint32_t offset;
+    uint32_t size;
 };
 
 int main( int argc, char ** argv )
@@ -59,7 +59,7 @@ int main( int argc, char ** argv )
 
     System::MakeDirectory( argv[2] );
 
-    const u32 size = sf1.size();
+    const uint32_t size = sf1.size();
     int total = 0;
     int count_items = sf1.getLE16();
 
@@ -81,7 +81,7 @@ int main( int argc, char ** argv )
         const aggfat_t & fat = ( *it ).second;
         const std::string & fn = System::ConcatePath( argv[2], ( *it ).first );
         sf1.seek( fat.offset );
-        std::vector<u8> buf = sf1.getRaw( fat.size );
+        std::vector<uint8_t> buf = sf1.getRaw( fat.size );
 
         if ( buf.size() && sf2.open( fn, "wb" ) ) {
             sf2.putRaw( reinterpret_cast<char *>( &buf[0] ), buf.size() );

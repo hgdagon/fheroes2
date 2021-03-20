@@ -66,13 +66,13 @@ bool Battle::Bridge::isBridgeOccupied( void ) const
            || graveyard->GetLastTroopUID( GATES_CELL );
 }
 
-bool Battle::Bridge::NeedDown( const Unit & b, s32 dstPos ) const
+bool Battle::Bridge::NeedDown( const Unit & b, int32_t dstPos ) const
 {
     // no if bridge is destroyed or already lowered or there are any troops (alive or dead) on or under the bridge
     if ( !isValid() || isDown() || isBridgeOccupied() )
         return false;
 
-    const s32 prevPos = b.GetHeadIndex();
+    const int32_t prevPos = b.GetHeadIndex();
 
     if ( dstPos == GATES_CELL ) {
         if ( prevPos == CELL_AFTER_GATES )
@@ -110,7 +110,7 @@ void Battle::Bridge::SetPassable( const Unit & b )
     }
 }
 
-void Battle::Bridge::Action( const Unit & b, s32 dst )
+void Battle::Bridge::Action( const Unit & b, int32_t dst )
 {
     bool action_down = false;
 

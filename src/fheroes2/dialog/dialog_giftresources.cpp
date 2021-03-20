@@ -64,14 +64,14 @@ struct SelectRecipientsColors
         positions.reserve( colors.size() );
 
         for ( Colors::const_iterator it = colors.begin(); it != colors.end(); ++it ) {
-            const u32 current = std::distance( colors.begin(), it );
+            const uint32_t current = std::distance( colors.begin(), it );
             const fheroes2::Sprite & sprite = fheroes2::AGG::GetICN( ICN::CELLWIN, 43 );
 
             positions.emplace_back( pos.x + Game::GetStep4Player( current, sprite.width() + 15, colors.size() ), pos.y, sprite.width(), sprite.height() );
         }
     }
 
-    s32 GetIndexClick( void ) const
+    int32_t GetIndexClick( void ) const
     {
         return GetIndexClickRects( positions );
     }
@@ -91,7 +91,7 @@ struct SelectRecipientsColors
 
     bool QueueEventProcessing( void )
     {
-        const s32 index = GetIndexClick();
+        const int32_t index = GetIndexClick();
 
         if ( index >= 0 ) {
             const int cols = colors[index];
@@ -113,7 +113,7 @@ struct ResourceBar
     Funds & resource;
     std::vector<fheroes2::Rect> positions;
 
-    ResourceBar( Funds & funds, s32 posx, s32 posy )
+    ResourceBar( Funds & funds, int32_t posx, int32_t posy )
         : resource( funds )
     {
         positions.reserve( 7 );
@@ -128,7 +128,7 @@ struct ResourceBar
         positions.emplace_back( posx + 240, posy, sprite.width(), sprite.height() );
     }
 
-    static void RedrawResource( int type, s32 count, s32 posx, s32 posy )
+    static void RedrawResource( int type, int32_t count, int32_t posx, int32_t posy )
     {
         std::ostringstream os;
 
@@ -150,22 +150,22 @@ struct ResourceBar
         }
     }
 
-    s32 GetIndexClick( void ) const
+    int32_t GetIndexClick( void ) const
     {
         return GetIndexClickRects( positions );
     }
 
-    bool QueueEventProcessing( Funds & funds, u32 mul )
+    bool QueueEventProcessing( Funds & funds, uint32_t mul )
     {
-        const s32 index = GetIndexClick();
+        const int32_t index = GetIndexClick();
 
         if ( index >= 0 ) {
             int rs = Resource::FromIndexSprite2( index );
-            u32 step = rs == Resource::GOLD ? 100 : 1;
+            uint32_t step = rs == Resource::GOLD ? 100 : 1;
 
-            u32 cur = resource.Get( rs );
-            u32 sel = cur;
-            u32 max = mul > 1 ? ( funds.Get( rs ) + resource.Get( rs ) ) / mul : funds.Get( rs ) + resource.Get( rs );
+            uint32_t cur = resource.Get( rs );
+            uint32_t sel = cur;
+            uint32_t max = mul > 1 ? ( funds.Get( rs ) + resource.Get( rs ) ) / mul : funds.Get( rs ) + resource.Get( rs );
 
             if ( 0 == mul ) {
                 Dialog::Message( "", "First select recipients!", Font::BIG, Dialog::OK );
@@ -180,11 +180,11 @@ struct ResourceBar
                 StringReplace( msg, "%{resource}", Resource::String( rs ) );
 
                 if ( Dialog::SelectCount( msg, 0, max, sel, step ) && cur != sel ) {
-                    s32 * from = funds.GetPtr( rs );
-                    s32 * to = resource.GetPtr( rs );
+                    int32_t * from = funds.GetPtr( rs );
+                    int32_t * to = resource.GetPtr( rs );
 
                     if ( from && to ) {
-                        s32 count = sel - cur;
+                        int32_t count = sel - cur;
 
                         *from -= mul > 1 ? count * mul : count;
                         *to += count;
@@ -243,13 +243,13 @@ void Dialog::MakeGiftResource( void )
     cursor.Show();
     display.render();
 
-    u32 count = Color::Count( selector.recipients );
+    uint32_t count = Color::Count( selector.recipients );
 
     // message loop
     int result = Dialog::ZERO;
     while ( result == Dialog::ZERO && le.HandleEvents() ) {
         if ( selector.QueueEventProcessing() ) {
-            u32 new_count = Color::Count( selector.recipients );
+            uint32_t new_count = Color::Count( selector.recipients );
             cursor.Hide();
             if ( 0 == new_count || 0 == funds2.GetValidItemsCount() )
                 btnGroups.button( 0 ).disable();

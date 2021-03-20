@@ -42,7 +42,7 @@
 #include "text.h"
 #include "world.h"
 
-void Interface::Basic::CalculateHeroPath( Heroes * hero, s32 destinationIdx )
+void Interface::Basic::CalculateHeroPath( Heroes * hero, int32_t destinationIdx )
 {
     if ( ( hero == NULL ) || hero->Modes( Heroes::GUARDIAN ) )
         return;
@@ -69,7 +69,7 @@ void Interface::Basic::CalculateHeroPath( Heroes * hero, s32 destinationIdx )
     }
 }
 
-void Interface::Basic::ShowPathOrStartMoveHero( Heroes * hero, s32 destinationIdx )
+void Interface::Basic::ShowPathOrStartMoveHero( Heroes * hero, int32_t destinationIdx )
 {
     if ( !hero || hero->Modes( Heroes::GUARDIAN ) )
         return;
@@ -96,7 +96,7 @@ void Interface::Basic::MoveHeroFromArrowKeys( Heroes & hero, int direct )
 {
     const bool fromWater = hero.isShipMaster();
     if ( Maps::isValidDirection( hero.GetIndex(), direct ) ) {
-        s32 dst = Maps::GetDirectionIndex( hero.GetIndex(), direct );
+        int32_t dst = Maps::GetDirectionIndex( hero.GetIndex(), direct );
         const Maps::Tiles & tile = world.GetTiles( dst );
         bool allow = false;
 

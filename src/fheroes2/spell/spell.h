@@ -124,14 +124,14 @@ public:
     const char * GetName( void ) const;
     const char * GetDescription( void ) const;
 
-    u32 SpellPoint( const HeroBase * hero = NULL ) const;
-    u32 MovePoint( void ) const;
+    uint32_t SpellPoint( const HeroBase * hero = NULL ) const;
+    uint32_t MovePoint( void ) const;
     int Level( void ) const;
-    u32 Damage( void ) const;
-    u32 Restore( void ) const;
-    u32 Resurrect( void ) const;
+    uint32_t Damage( void ) const;
+    uint32_t Restore( void ) const;
+    uint32_t Resurrect( void ) const;
 
-    u32 ExtraValue( void ) const;
+    uint32_t ExtraValue( void ) const;
     payment_t GetCost( void ) const;
 
     bool isValid( void ) const;
@@ -155,16 +155,16 @@ public:
     bool isEnabled() const;
 
     /* return index sprite spells.icn */
-    u32 IndexSprite( void ) const;
+    uint32_t IndexSprite( void ) const;
     /* return index in spellinl.icn */
-    u32 InlIndexSprite( void ) const;
+    uint32_t InlIndexSprite( void ) const;
 
     static Spell RandCombat( int lvl );
     static Spell RandAdventure( int lvl );
     static Spell Rand( int lvl, bool adv );
 
     static void UpdateStats( const std::string & );
-    static u32 CalculateDimensionDoorDistance( u32 current_sp, u32 total_hp );
+    static uint32_t CalculateDimensionDoorDistance( uint32_t current_sp, uint32_t total_hp );
 
 private:
     friend StreamBase & operator<<( StreamBase &, const Spell & );

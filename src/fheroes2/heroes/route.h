@@ -36,16 +36,16 @@ namespace Route
     {
     public:
         Step() {}
-        Step( int index, s32 fromIndex, int dir, u32 cost )
+        Step( int index, int32_t fromIndex, int dir, uint32_t cost )
             : currentIndex( index )
             , from( fromIndex )
             , direction( dir )
             , penalty( cost )
         {}
 
-        s32 GetIndex( void ) const;
-        u32 GetPenalty( void ) const;
-        s32 GetFrom( void ) const;
+        int32_t GetIndex( void ) const;
+        uint32_t GetPenalty( void ) const;
+        int32_t GetFrom( void ) const;
         int GetDirection( void ) const;
         bool isBad( void ) const;
 
@@ -67,12 +67,12 @@ namespace Route
 
         Path & operator=( const Path & );
 
-        s32 GetDestinationIndex( void ) const;
-        s32 GetLastIndex( void ) const;
-        s32 GetDestinedIndex( void ) const;
+        int32_t GetDestinationIndex( void ) const;
+        int32_t GetLastIndex( void ) const;
+        int32_t GetDestinedIndex( void ) const;
         int GetFrontDirection( void ) const;
-        u32 GetFrontPenalty( void ) const;
-        u32 GetTotalPenalty( void ) const;
+        uint32_t GetFrontPenalty( void ) const;
+        uint32_t GetTotalPenalty( void ) const;
         uint32_t getLastMovePenalty() const;
         void setPath( const std::list<Step> & path, int32_t destIndex );
 
@@ -109,7 +109,7 @@ namespace Route
         friend StreamBase & operator>>( StreamBase &, Path & );
 
         const Heroes * hero;
-        s32 dst;
+        int32_t dst;
         bool hide;
     };
 

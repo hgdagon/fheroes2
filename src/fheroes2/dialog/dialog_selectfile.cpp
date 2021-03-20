@@ -52,7 +52,7 @@ public:
         , edit_mode( edit )
         , _isDoubleClicked( false ){};
 
-    void RedrawItem( const Maps::FileInfo &, s32, s32, bool );
+    void RedrawItem( const Maps::FileInfo &, int32_t, int32_t, bool );
     void RedrawBackground( const Point & );
 
     void ActionCurrentUp( void );
@@ -72,7 +72,7 @@ private:
     bool _isDoubleClicked;
 };
 
-void FileInfoListBox::RedrawItem( const Maps::FileInfo & info, s32 dstx, s32 dsty, bool current )
+void FileInfoListBox::RedrawItem( const Maps::FileInfo & info, int32_t dstx, int32_t dsty, bool current )
 {
     char shortDate[20];
     char shortHours[20];
@@ -145,10 +145,10 @@ std::string ResizeToShortName( const std::string & str )
     return res;
 }
 
-size_t GetInsertPosition( const std::string & name, s32 cx, s32 posx )
+size_t GetInsertPosition( const std::string & name, int32_t cx, int32_t posx )
 {
     if ( name.size() ) {
-        s32 tw = Text::width( name, Font::SMALL );
+        int32_t tw = Text::width( name, Font::SMALL );
         if ( cx <= posx )
             return 0;
         else if ( cx >= posx + tw )

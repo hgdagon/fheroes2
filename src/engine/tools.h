@@ -43,25 +43,25 @@ std::list<std::string> StringSplit( const std::string &, const std::string & );
 void StringReplace( std::string &, const char *, const std::string & );
 void StringReplace( std::string &, const char *, int );
 
-int CountBits( u32 );
-int CheckSum( const std::vector<u8> & );
+int CountBits( uint32_t );
+int CheckSum( const std::vector<uint8_t> & );
 int CheckSum( const std::string & );
 
 std::string EncodeString( const std::string &, const char * charset );
-std::vector<u16> StringUTF8_to_UNICODE( const std::string & );
-std::string StringUNICODE_to_UTF8( const std::vector<u16> & );
+std::vector<uint16_t> StringUTF8_to_UNICODE( const std::string & );
+std::string StringUNICODE_to_UTF8( const std::vector<uint16_t> & );
 
-std::vector<u8> decodeBase64( const std::string & );
+std::vector<uint8_t> decodeBase64( const std::string & );
 
 std::string InsertString( const std::string &, size_t, const char * );
 
-bool SaveMemToFile( const std::vector<u8> &, const std::string & );
-std::vector<u8> LoadFileToMem( const std::string & );
+bool SaveMemToFile( const std::vector<uint8_t> &, const std::string & );
+std::vector<uint8_t> LoadFileToMem( const std::string & );
 
 double GetAngle( const Point & start, const Point & target );
-Points GetEuclideanLine( const Point & pt1, const Point & pt2, u16 step );
-Points GetLinePoints( const Point & pt1, const Point & pt2, u16 step );
-Points GetArcPoints( const Point & from, const Point & to, const Point & max, u16 step );
+Points GetEuclideanLine( const Point & pt1, const Point & pt2, uint16_t step );
+Points GetLinePoints( const Point & pt1, const Point & pt2, uint16_t step );
+Points GetArcPoints( const Point & from, const Point & to, const Point & max, uint16_t step );
 
 // std::clamp replacement until we can use C++17
 template <typename T>

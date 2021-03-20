@@ -79,22 +79,22 @@ namespace AGG
     fheroes2::AGGFile heroes2_agg;
     fheroes2::AGGFile heroes2x_agg;
 
-    std::map<int, std::vector<u8> > wav_cache;
-    std::map<int, std::vector<u8> > mid_cache;
+    std::map<int, std::vector<uint8_t> > wav_cache;
+    std::map<int, std::vector<uint8_t> > mid_cache;
     std::vector<loop_sound_t> loop_sounds;
-    // std::map<u32, fnt_cache_t> fnt_cache;
+    // std::map<uint32_t, fnt_cache_t> fnt_cache;
 
 #ifdef WITH_TTF
     FontTTF * fonts; /* small, medium */
 
-    // void LoadTTFChar( u32 );
+    // void LoadTTFChar( uint32_t );
 #endif
 
-    const std::vector<u8> & GetWAV( int m82 );
-    const std::vector<u8> & GetMID( int xmi );
+    const std::vector<uint8_t> & GetWAV( int m82 );
+    const std::vector<uint8_t> & GetMID( int xmi );
 
-    void LoadWAV( int m82, std::vector<u8> & );
-    void LoadMID( int xmi, std::vector<u8> & );
+    void LoadWAV( int m82, std::vector<uint8_t> & );
+    void LoadMID( int xmi, std::vector<uint8_t> & );
 
     void LoadFNT( void );
 
@@ -106,7 +106,7 @@ namespace AGG
     void LoadLOOPXXSoundsInternally( const std::vector<int> & vols );
 
     /* return letter sprite */
-    // Surface GetUnicodeLetter( u32 ch, u32 ft )
+    // Surface GetUnicodeLetter( uint32_t ch, uint32_t ft )
     // {
     //     bool ttf_valid = fonts[0].isValid() && fonts[1].isValid();
     //
@@ -341,7 +341,7 @@ bool AGG::ReadDataDir( void )
 std::vector<uint8_t> AGG::ReadChunk( const std::string & key, bool ignoreExpansion )
 {
     if ( !ignoreExpansion && heroes2x_agg.isGood() ) {
-        const std::vector<u8> & buf = heroes2x_agg.read( key );
+        const std::vector<uint8_t> & buf = heroes2x_agg.read( key );
         if ( buf.size() )
             return buf;
     }
@@ -361,7 +361,7 @@ std::vector<uint8_t> AGG::ReadMusicChunk( const std::string & key, const bool ig
 }
 
 /* load 82M object to AGG::Cache in Audio::CVT */
-void AGG::LoadWAV( int m82, std::vector<u8> & v )
+void AGG::LoadWAV( int m82, std::vector<uint8_t> & v )
 {
 #ifdef WITH_MIXER
     const Settings & conf = Settings::Get();
@@ -391,7 +391,7 @@ void AGG::LoadWAV( int m82, std::vector<u8> & v )
 #endif
 
     DEBUG_LOG( DBG_ENGINE, DBG_TRACE, M82::GetString( m82 ) );
-    const std::vector<u8> & body = ReadMusicChunk( M82::GetString( m82 ) );
+    const std::vector<uint8_t> & body = ReadMusicChunk( M82::GetString( m82 ) );
 
     if ( body.size() ) {
 #ifdef WITH_MIXER
@@ -425,9 +425,9 @@ void AGG::LoadWAV( int m82, std::vector<u8> & v )
         Audio::CVT cvt;
 
         if ( cvt.Build( wav_spec, hardware ) ) {
-            const u32 size = cvt.len_mult * body.size();
+            const uint32_t size = cvt.len_mult * body.size();
 
-            cvt.buf = new u8[size];
+            cvt.buf = new uint8_t[size];
             cvt.len = body.size();
 
             memcpy( cvt.buf, &body[0], body.size() );
@@ -444,7 +444,7 @@ void AGG::LoadWAV( int m82, std::vector<u8> & v )
 }
 
 /* load XMI object */
-void AGG::LoadMID( int xmi, std::vector<u8> & v )
+void AGG::LoadMID( int xmi, std::vector<uint8_t> & v )
 {
     DEBUG_LOG( DBG_ENGINE, DBG_TRACE, XMI::GetString( xmi ) );
     const std::vector<uint8_t> & body = ReadMusicChunk( XMI::GetString( xmi ), xmi >= XMI::MIDI_ORIGINAL_KNIGHT );
@@ -455,18 +455,18 @@ void AGG::LoadMID( int xmi, std::vector<u8> & v )
 }
 
 /* return CVT */
-const std::vector<u8> & AGG::GetWAV( int m82 )
+const std::vector<uint8_t> & AGG::GetWAV( int m82 )
 {
-    std::vector<u8> & v = wav_cache[m82];
+    std::vector<uint8_t> & v = wav_cache[m82];
     if ( Mixer::isValid() && v.empty() )
         LoadWAV( m82, v );
     return v;
 }
 
 /* return MID */
-const std::vector<u8> & AGG::GetMID( int xmi )
+const std::vector<uint8_t> & AGG::GetMID( int xmi )
 {
-    std::vector<u8> & v = mid_cache[xmi];
+    std::vector<uint8_t> & v = mid_cache[xmi];
     if ( Mixer::isValid() && v.empty() )
         LoadMID( xmi, v );
     return v;
@@ -526,7 +526,7 @@ void AGG::LoadLOOPXXSoundsInternally( const std::vector<int> & vols )
         else
             // new sound
             if ( 0 != vol ) {
-            const std::vector<u8> & v = GetWAV( m82 );
+            const std::vector<uint8_t> & v = GetWAV( m82 );
             const int ch = Mixer::Play( &v[0], v.size(), -1, true );
 
             if ( 0 <= ch ) {
@@ -572,7 +572,7 @@ void AGG::PlaySoundInternally( const int m82 )
     std::lock_guard<std::mutex> mutexLock( g_asyncSoundManager.resourceMutex() );
 
     DEBUG_LOG( DBG_ENGINE, DBG_TRACE, M82::GetString( m82 ) );
-    const std::vector<u8> & v = AGG::GetWAV( m82 );
+    const std::vector<uint8_t> & v = AGG::GetWAV( m82 );
     const int ch = Mixer::Play( &v[0], v.size(), -1, false );
     Mixer::Pause( ch );
     Mixer::Volume( ch, Mixer::MaxVolume() * conf.SoundVolume() / 10 );
@@ -665,7 +665,7 @@ void AGG::PlayMusicInternally( const int mus, const bool loop )
 
         if ( XMI::UNKNOWN != xmi ) {
 #ifdef WITH_MIXER
-            const std::vector<u8> & v = GetMID( xmi );
+            const std::vector<uint8_t> & v = GetMID( xmi );
             if ( v.size() )
                 Music::Play( v, loop );
 #else
@@ -684,7 +684,7 @@ void AGG::PlayMusicInternally( const int mus, const bool loop )
 }
 
 #ifdef WITH_TTF
-// void AGG::LoadTTFChar( u32 ch )
+// void AGG::LoadTTFChar( uint32_t ch )
 // {
 //     const Settings & conf = Settings::Get();
 //      const RGBA white( 0xFF, 0xFF, 0xFF );
@@ -710,9 +710,9 @@ void AGG::LoadFNT( void )
     // }
     // else if ( fnt_cache.empty() ) {
     //     const std::string letters = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-    //     std::vector<u16> unicode = StringUTF8_to_UNICODE( letters );
+    //     std::vector<uint16_t> unicode = StringUTF8_to_UNICODE( letters );
     //
-    //     for ( std::vector<u16>::const_iterator it = unicode.begin(); it != unicode.end(); ++it )
+    //     for ( std::vector<uint16_t>::const_iterator it = unicode.begin(); it != unicode.end(); ++it )
     //         LoadTTFChar( *it );
     //
     //     if ( fnt_cache.empty() ) {
@@ -726,7 +726,7 @@ void AGG::LoadFNT( void )
     // }
 }
 
-u32 AGG::GetFontHeight( bool small )
+uint32_t AGG::GetFontHeight( bool small )
 {
     return small ? fonts[0].Height() : fonts[1].Height();
 }
@@ -739,7 +739,7 @@ void AGG::LoadFNT( void )
 #endif
 
 // This exists to avoid exposing AGG::ReadChunk
-std::vector<u8> AGG::LoadBINFRM( const char * frm_file )
+std::vector<uint8_t> AGG::LoadBINFRM( const char * frm_file )
 {
     DEBUG_LOG( DBG_ENGINE, DBG_TRACE, frm_file );
     return AGG::ReadChunk( frm_file );

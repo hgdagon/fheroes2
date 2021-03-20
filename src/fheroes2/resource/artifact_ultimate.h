@@ -30,10 +30,10 @@ class UltimateArtifact : public Artifact
 public:
     UltimateArtifact();
 
-    bool isPosition( s32 ) const;
+    bool isPosition( int32_t ) const;
     bool isFound( void ) const;
     void SetFound( bool );
-    void Set( s32, const Artifact & );
+    void Set( int32_t, const Artifact & );
     void Reset( void );
 
     const fheroes2::Image & GetPuzzleMapSurface( void ) const;
@@ -46,7 +46,7 @@ private:
     void MakeSurface( void );
 
     fheroes2::Image puzzlemap;
-    s32 index;
+    int32_t index;
     bool isfound;
 };
 

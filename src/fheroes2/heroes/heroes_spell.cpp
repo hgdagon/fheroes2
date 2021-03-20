@@ -65,29 +65,29 @@ bool ActionSpellTownPortal( Heroes & hero );
 bool ActionSpellVisions( Heroes & hero );
 bool ActionSpellSetGuardian( Heroes & hero, const Spell & spell );
 
-class CastleIndexListBox : public Interface::ListBox<s32>
+class CastleIndexListBox : public Interface::ListBox<int32_t>
 {
 public:
     CastleIndexListBox( const Point & pt, int & res, const bool isEvilInterface )
-        : Interface::ListBox<s32>( pt )
+        : Interface::ListBox<int32_t>( pt )
         , result( res )
         , _townFrameIcnId( isEvilInterface ? ICN::ADVBORDE : ICN::ADVBORD )
         , _listBoxIcnId( isEvilInterface ? ICN::LISTBOX_EVIL : ICN::LISTBOX )
     {}
 
-    virtual void RedrawItem( const s32 &, s32, s32, bool ) override;
+    virtual void RedrawItem( const int32_t &, int32_t, int32_t, bool ) override;
     virtual void RedrawBackground( const Point & ) override;
 
     virtual void ActionCurrentUp( void ) override {}
 
     virtual void ActionCurrentDn( void ) override {}
 
-    virtual void ActionListDoubleClick( s32 & ) override
+    virtual void ActionListDoubleClick( int32_t & ) override
     {
         result = Dialog::OK;
     }
 
-    virtual void ActionListSingleClick( s32 & ) override {}
+    virtual void ActionListSingleClick( int32_t & ) override {}
 
     virtual void ActionListPressRight( int32_t & index ) override
     {
@@ -105,7 +105,7 @@ private:
     int _listBoxIcnId;
 };
 
-void CastleIndexListBox::RedrawItem( const s32 & index, s32 dstx, s32 dsty, bool current )
+void CastleIndexListBox::RedrawItem( const int32_t & index, int32_t dstx, int32_t dsty, bool current )
 {
     const Castle * castle = world.GetCastle( Maps::GetPoint( index ) );
 
@@ -263,8 +263,8 @@ bool HeroesTownGate( Heroes & hero, const Castle * castle )
     if ( castle ) {
         Interface::Basic & I = Interface::Basic::Get();
 
-        const s32 src = hero.GetIndex();
-        const s32 dst = castle->GetIndex();
+        const int32_t src = hero.GetIndex();
+        const int32_t dst = castle->GetIndex();
 
         if ( !Maps::isValidAbsIndex( src ) || !Maps::isValidAbsIndex( dst ) )
             return false;
@@ -406,7 +406,7 @@ bool ActionSpellSummonBoat( const Heroes & hero )
 
 bool ActionSpellDimensionDoor( Heroes & hero )
 {
-    const u32 distance = Spell::CalculateDimensionDoorDistance( hero.GetPower(), hero.GetArmy().GetHitPoints() );
+    const uint32_t distance = Spell::CalculateDimensionDoorDistance( hero.GetPower(), hero.GetArmy().GetHitPoints() );
 
     Interface::Basic & I = Interface::Basic::Get();
     Cursor & cursor = Cursor::Get();
@@ -417,9 +417,9 @@ bool ActionSpellDimensionDoor( Heroes & hero )
     I.RedrawFocus();
     I.Redraw();
 
-    const s32 src = hero.GetIndex();
+    const int32_t src = hero.GetIndex();
     // get destination
-    const s32 dst = I.GetDimensionDoorDestination( src, distance, hero.isShipMaster() );
+    const int32_t dst = I.GetDimensionDoorDestination( src, distance, hero.isShipMaster() );
 
     if ( Maps::isValidAbsIndex( src ) && Maps::isValidAbsIndex( dst ) ) {
         AGG::PlaySound( M82::KILLFADE );
@@ -458,8 +458,8 @@ bool ActionSpellTownGate( Heroes & hero )
     KingdomCastles::const_iterator it;
 
     const Castle * castle = NULL;
-    const s32 center = hero.GetIndex();
-    s32 min = -1;
+    const int32_t center = hero.GetIndex();
+    int32_t min = -1;
 
     // find the nearest castle
     for ( it = castles.begin(); it != castles.end(); ++it )
@@ -495,7 +495,7 @@ bool ActionSpellTownGate( Heroes & hero )
 bool ActionSpellTownPortal( Heroes & hero )
 {
     const Kingdom & kingdom = hero.GetKingdom();
-    std::vector<s32> castles;
+    std::vector<int32_t> castles;
 
     fheroes2::Display & display = fheroes2::Display::instance();
     Cursor & cursor = Cursor::Get();
@@ -560,7 +560,7 @@ bool ActionSpellTownPortal( Heroes & hero )
 
 bool ActionSpellVisions( Heroes & hero )
 {
-    const u32 dist = hero.GetVisionsDistance();
+    const uint32_t dist = hero.GetVisionsDistance();
     const MapsIndexes & monsters = Maps::ScanAroundObject( hero.GetIndex(), dist, MP2::OBJ_MONSTER );
     if ( monsters.empty() ) {
         std::string msg = _( "You must be within %{count} spaces of a monster for the Visions spell to work." );
@@ -627,7 +627,7 @@ bool ActionSpellSetGuardian( Heroes & hero, const Spell & spell )
         return false;
     }
 
-    const u32 count = hero.GetPower() * spell.ExtraValue();
+    const uint32_t count = hero.GetPower() * spell.ExtraValue();
 
     if ( count ) {
         tile.SetQuantity3( spell() );

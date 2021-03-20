@@ -144,7 +144,7 @@ void Interface::Radar::SavePosition( void )
     Settings::Get().SetPosRadar( GetRect() );
 }
 
-void Interface::Radar::SetPos( s32 ox, s32 oy )
+void Interface::Radar::SetPos( int32_t ox, int32_t oy )
 {
     BorderWindow::SetPosition( ox, oy );
 }
@@ -375,8 +375,8 @@ void Interface::Radar::RedrawCursor( const Rect * roiRectangle /* =nullptr */ )
         const Rect & rect = GetArea();
         const Rect & rectMaps = roiRectangle == nullptr ? interface.GetGameArea().GetVisibleTileROI() : *roiRectangle;
 
-        s32 areaw = ( offset.x ? rect.w - 2 * offset.x : rect.w );
-        s32 areah = ( offset.y ? rect.h - 2 * offset.y : rect.h );
+        int32_t areaw = ( offset.x ? rect.w - 2 * offset.x : rect.w );
+        int32_t areah = ( offset.y ? rect.h - 2 * offset.y : rect.h );
 
         int32_t xStart = rectMaps.x;
         int32_t xEnd = rectMaps.x + rectMaps.w;

@@ -174,18 +174,18 @@ public:
 
     void Reset( void );
 
-    u32 ExtraValue( void ) const;
+    uint32_t ExtraValue( void ) const;
     int Level( void ) const;
     int LoyaltyLevel( void ) const;
     int Type( void ) const;
     int getArtifactValue() const;
 
     /* objnarti.icn */
-    u32 IndexSprite( void ) const;
+    uint32_t IndexSprite( void ) const;
     /* artfx.icn */
-    u32 IndexSprite32( void ) const;
+    uint32_t IndexSprite32( void ) const;
     /* artifact.icn */
-    u32 IndexSprite64( void ) const;
+    uint32_t IndexSprite64( void ) const;
 
     void SetSpell( int );
     int GetSpell( void ) const;
@@ -194,7 +194,7 @@ public:
     std::string GetDescription( void ) const;
 
     static int Rand( level_t );
-    static Artifact FromMP2IndexSprite( u32 );
+    static Artifact FromMP2IndexSprite( uint32_t );
     static const char * GetScenario( const Artifact & );
     static void UpdateStats( const std::string & );
 
@@ -208,7 +208,7 @@ private:
 
 StreamBase & operator<<( StreamBase &, const Artifact & );
 StreamBase & operator>>( StreamBase &, Artifact & );
-u32 GoldInsteadArtifact( int );
+uint32_t GoldInsteadArtifact( int );
 
 class BagArtifacts : public std::vector<Artifact>
 {
@@ -227,8 +227,8 @@ public:
     void exchangeArtifacts( BagArtifacts & giftBag );
 
     int getArtifactValue() const;
-    u32 CountArtifacts( void ) const;
-    u32 Count( const Artifact & ) const;
+    uint32_t CountArtifacts( void ) const;
+    uint32_t Count( const Artifact & ) const;
 
     std::string String( void ) const;
 };

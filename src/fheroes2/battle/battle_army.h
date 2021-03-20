@@ -40,8 +40,8 @@ namespace Battle
 
         Units & operator=( const Units & );
 
-        Unit * FindMode( u32 );
-        Unit * FindUID( u32 );
+        Unit * FindMode( uint32_t );
+        Unit * FindUID( uint32_t );
 
         void SortSlowest( bool );
         void SortFastest( bool );
@@ -61,8 +61,8 @@ namespace Battle
 
         bool isValid( void ) const;
         bool HasMonster( const Monster & ) const;
-        u32 GetDeadHitPoints( void ) const;
-        u32 GetDeadCounts( void ) const;
+        uint32_t GetDeadHitPoints( void ) const;
+        uint32_t GetDeadCounts( void ) const;
         int GetColor( void ) const;
         int GetControl( void ) const;
         uint32_t GetSurrenderCost( void ) const;
@@ -79,7 +79,7 @@ namespace Battle
 
     private:
         Army & army;
-        std::vector<u32> uids;
+        std::vector<uint32_t> uids;
     };
 
     StreamBase & operator<<( StreamBase &, const Force & );

@@ -37,7 +37,7 @@ namespace Interface
         Radar( Basic & );
         Radar( const Radar & radar );
 
-        void SetPos( s32, s32 );
+        void SetPos( int32_t, int32_t );
         void SetRedraw( void ) const;
         void Build( void );
         void Redraw();

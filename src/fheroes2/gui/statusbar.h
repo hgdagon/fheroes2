@@ -30,7 +30,7 @@ class StatusBar : public TextSprite
 public:
     StatusBar();
 
-    void SetCenter( s32 cx, s32 cy );
+    void SetCenter( int32_t cx, int32_t cy );
 
     void ShowMessage( const std::string & msg );
     void Redraw( void );

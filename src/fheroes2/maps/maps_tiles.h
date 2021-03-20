@@ -64,7 +64,7 @@ namespace Maps
         };
 
         TilesAddon();
-        TilesAddon( int lv, u32 gid, int obj, u32 ii );
+        TilesAddon( int lv, uint32_t gid, int obj, uint32_t ii );
         TilesAddon( const TilesAddon & ta );
         TilesAddon & operator=( const TilesAddon & ta );
 
@@ -101,16 +101,16 @@ namespace Maps
 
         static bool ForceLevel1( const TilesAddon & );
 
-        u32 uniq;
-        u8 level;
-        u8 object;
-        u8 index;
-        u8 tmp;
+        uint32_t uniq;
+        uint8_t level;
+        uint8_t object;
+        uint8_t index;
+        uint8_t tmp;
     };
 
     struct Addons : public std::list<TilesAddon>
     {
-        void Remove( u32 uniq );
+        void Remove( uint32_t uniq );
     };
 
     class Tiles
@@ -118,7 +118,7 @@ namespace Maps
     public:
         Tiles();
 
-        void Init( s32, const MP2::mp2tile_t & );
+        void Init( int32_t, const MP2::mp2tile_t & );
 
         int32_t GetIndex() const
         {
@@ -132,7 +132,7 @@ namespace Maps
         uint8_t GetObjectSpriteIndex() const;
         void SetObjectSpriteIndex( const uint8_t index );
 
-        u32 GetObjectUID() const;
+        uint32_t GetObjectUID() const;
 
         // Get Tile metadata field #1 (used for things like monster count or resource amount)
         uint8_t GetQuantity1() const
@@ -156,8 +156,8 @@ namespace Maps
         int GetGround() const;
         bool isWater() const;
 
-        u32 TileSpriteIndex( void ) const;
-        u32 TileSpriteShape( void ) const;
+        uint32_t TileSpriteIndex( void ) const;
+        uint32_t TileSpriteShape( void ) const;
 
         const fheroes2::Image & GetTileSurface( void ) const;
 
@@ -172,10 +172,10 @@ namespace Maps
 
         TilesAddon * FindAddonICN( int icn1, int level = -1, int index = -1 );
 
-        TilesAddon * FindAddonLevel1( u32 uniq1 );
-        TilesAddon * FindAddonLevel2( u32 uniq2 );
+        TilesAddon * FindAddonLevel1( uint32_t uniq1 );
+        TilesAddon * FindAddonLevel2( uint32_t uniq2 );
 
-        void SetTile( u32 sprite_index, u32 shape /* 0: none, 1 : vert, 2: horz, 3: both */ );
+        void SetTile( uint32_t sprite_index, uint32_t shape /* 0: none, 1 : vert, 2: horz, 3: both */ );
         void SetObject( int object );
 
         void SetIndex( const uint32_t index )
@@ -215,7 +215,7 @@ namespace Maps
         void AddonsPushLevel2( const TilesAddon & );
 
         void AddonsSort( void );
-        void Remove( u32 uniqID );
+        void Remove( uint32_t uniqID );
         void RemoveObjectSprite( void );
         void UpdateObjectSprite( uint32_t uniqID, uint8_t rawTileset, uint8_t newTileset, int indexChange );
         void ReplaceObjectSprite( uint32_t uniqID, uint8_t rawTileset, uint8_t newTileset, uint8_t indexToReplace, uint8_t newIndex );
@@ -239,8 +239,8 @@ namespace Maps
         void MonsterSetJoinCondition( int );
         void MonsterSetFixedCount( void );
         bool MonsterFixedCount( void ) const;
-        void MonsterSetCount( u32 count );
-        u32 MonsterCount( void ) const;
+        void MonsterSetCount( uint32_t count );
+        uint32_t MonsterCount( void ) const;
 
         bool CaptureObjectIsProtection( void ) const;
 
@@ -252,7 +252,7 @@ namespace Maps
         int QuantityVariant( void ) const;
         int QuantityExt( void ) const;
         int QuantityColor( void ) const;
-        u32 QuantityGold( void ) const;
+        uint32_t QuantityGold( void ) const;
         Spell QuantitySpell( void ) const;
         Skill::Secondary QuantitySkill( void ) const;
         Artifact QuantityArtifact( void ) const;
@@ -281,13 +281,13 @@ namespace Maps
         static int GetPassable( uint32_t tileset, uint32_t index );
         static std::pair<int, int> ColorRaceFromHeroSprite( uint32_t heroSpriteIndex );
         static std::pair<uint32_t, uint32_t> GetMonsterSpriteIndices( const Tiles & tile, uint32_t monsterIndex );
-        static void PlaceMonsterOnTile( Tiles &, const Monster &, u32 );
+        static void PlaceMonsterOnTile( Tiles &, const Monster &, uint32_t );
         static void UpdateAbandoneMineSprite( Tiles & );
         static void FixedPreload( Tiles & );
 
     private:
         TilesAddon * FindFlags( void );
-        void CorrectFlags32( u32 index, bool );
+        void CorrectFlags32( uint32_t index, bool );
         void RemoveJailSprite( void );
         bool isLongObject( int direction );
 
@@ -299,7 +299,7 @@ namespace Maps
         void QuantitySetSkill( int );
         void QuantitySetSpell( int );
         void QuantitySetArtifact( int );
-        void QuantitySetResource( int, u32 );
+        void QuantitySetResource( int, uint32_t );
 
         static void UpdateMonsterInfo( Tiles & );
         static void UpdateDwellingPopulation( Tiles & tile, bool isFirstLoad );

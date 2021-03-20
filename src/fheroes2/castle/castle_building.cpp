@@ -38,7 +38,7 @@ fheroes2::Rect CastleGetCoordBuilding( int, building_t, const Point & );
 void CastlePackOrdersBuildings( const Castle &, std::vector<building_t> & );
 Rect CastleGetMaxArea( const Castle &, const Point & );
 
-void CastleDialog::RedrawBuildingSpriteToArea( const fheroes2::Sprite & sprite, s32 dst_x, s32 dst_y, const Rect & max, uint8_t alpha )
+void CastleDialog::RedrawBuildingSpriteToArea( const fheroes2::Sprite & sprite, int32_t dst_x, int32_t dst_y, const Rect & max, uint8_t alpha )
 {
     std::pair<Rect, Point> res = Rect::Fixed4Blit( Rect( dst_x, dst_y, sprite.width(), sprite.height() ), max );
     fheroes2::AlphaBlit( sprite, res.first.x, res.first.y, fheroes2::Display::instance(), res.second.x, res.second.y, res.first.w, res.first.h, alpha );
@@ -233,7 +233,7 @@ void CastleRedrawCurrentBuilding( const Castle & castle, const Point & dst_pt, c
     }
 }
 
-void CastleDialog::CastleRedrawBuilding( const Castle & castle, const Point & dst_pt, u32 build, u32 frame, uint8_t alpha )
+void CastleDialog::CastleRedrawBuilding( const Castle & castle, const Point & dst_pt, uint32_t build, uint32_t frame, uint8_t alpha )
 {
     if ( build == BUILD_TENT ) // we don't need to draw a tent as it's on the background image
         return;
@@ -256,7 +256,7 @@ void CastleDialog::CastleRedrawBuilding( const Castle & castle, const Point & ds
 
     const int race = castle.GetRace();
     const int icn = Castle::GetICNBuilding( build, race );
-    u32 index = 0;
+    uint32_t index = 0;
 
     // correct index (mage guild)
     switch ( build ) {
@@ -301,7 +301,7 @@ void CastleDialog::CastleRedrawBuilding( const Castle & castle, const Point & ds
         }
 
         // second anime sprite
-        if ( const u32 index2 = ICN::AnimationFrame( icn, index, frame ) ) {
+        if ( const uint32_t index2 = ICN::AnimationFrame( icn, index, frame ) ) {
             const fheroes2::Sprite & sprite2 = fheroes2::AGG::GetICN( icn, index2 );
 
             CastleDialog::RedrawBuildingSpriteToArea( sprite2, dst_pt.x + sprite2.x(), dst_pt.y + sprite2.y(), max, alpha );
@@ -320,7 +320,7 @@ void CastleDialog::CastleRedrawBuilding( const Castle & castle, const Point & ds
     }
 }
 
-void CastleDialog::CastleRedrawBuildingExtended( const Castle & castle, const Point & dst_pt, u32 build, u32 frame, uint8_t alpha )
+void CastleDialog::CastleRedrawBuildingExtended( const Castle & castle, const Point & dst_pt, uint32_t build, uint32_t frame, uint8_t alpha )
 {
     if ( build == BUILD_TENT ) // we don't need to draw a tent as it's on the background image
         return;
@@ -337,13 +337,13 @@ void CastleDialog::CastleRedrawBuildingExtended( const Castle & castle, const Po
             const fheroes2::Sprite & sprite40 = fheroes2::AGG::GetICN( icn2, 0 );
             CastleDialog::RedrawBuildingSpriteToArea( sprite40, dst_pt.x + sprite40.x(), dst_pt.y + sprite40.y(), max, alpha );
 
-            if ( const u32 index2 = ICN::AnimationFrame( icn2, 0, frame ) ) {
+            if ( const uint32_t index2 = ICN::AnimationFrame( icn2, 0, frame ) ) {
                 const fheroes2::Sprite & sprite41 = fheroes2::AGG::GetICN( icn2, index2 );
                 CastleDialog::RedrawBuildingSpriteToArea( sprite41, dst_pt.x + sprite41.x(), dst_pt.y + sprite41.y(), max, alpha );
             }
         }
         else {
-            if ( const u32 index2 = ICN::AnimationFrame( icn, 0, frame ) ) {
+            if ( const uint32_t index2 = ICN::AnimationFrame( icn, 0, frame ) ) {
                 const fheroes2::Sprite & sprite3 = fheroes2::AGG::GetICN( icn, index2 );
                 CastleDialog::RedrawBuildingSpriteToArea( sprite3, dst_pt.x + sprite3.x(), dst_pt.y + sprite3.y(), max, alpha );
             }
@@ -355,7 +355,7 @@ void CastleDialog::CastleRedrawBuildingExtended( const Castle & castle, const Po
         const fheroes2::Sprite & sprite20 = fheroes2::AGG::GetICN( icn2, 0 );
         CastleDialog::RedrawBuildingSpriteToArea( sprite20, dst_pt.x + sprite20.x(), dst_pt.y + sprite20.y(), max, alpha );
 
-        if ( const u32 index2 = ICN::AnimationFrame( icn2, 0, frame ) ) {
+        if ( const uint32_t index2 = ICN::AnimationFrame( icn2, 0, frame ) ) {
             const fheroes2::Sprite & sprite21 = fheroes2::AGG::GetICN( icn2, index2 );
             CastleDialog::RedrawBuildingSpriteToArea( sprite21, dst_pt.x + sprite21.x(), dst_pt.y + sprite21.y(), max, alpha );
         }

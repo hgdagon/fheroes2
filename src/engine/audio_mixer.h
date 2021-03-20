@@ -38,24 +38,24 @@ namespace Mixer
 
     void FreeChunk( chunk_t * );
     chunk_t * LoadWAV( const char * );
-    chunk_t * LoadWAV( const u8 *, u32 );
+    chunk_t * LoadWAV( const uint8_t *, uint32_t );
 
     int Play( chunk_t *, int, bool );
     int Play( const char *, int = -1, bool = false );
 #endif
-    int Play( const u8 *, u32, int = -1, bool = false );
+    int Play( const uint8_t *, uint32_t, int = -1, bool = false );
 
-    void SetChannels( u8 );
-    u16 MaxVolume( void );
-    u16 Volume( int ch, int16_t = -1 );
+    void SetChannels( uint8_t );
+    uint16_t MaxVolume( void );
+    uint16_t Volume( int ch, int16_t = -1 );
 
     void Pause( int ch = -1 );
     void Resume( int ch = -1 );
     void Stop( int ch = -1 );
     void Reset( void );
 
-    u8 isPlaying( int );
-    u8 isPaused( int );
+    uint8_t isPlaying( int );
+    uint8_t isPaused( int );
     bool isValid( void );
 
     void Reduce( void );

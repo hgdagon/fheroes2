@@ -39,11 +39,11 @@ enum
 struct spellstats_t
 {
     const char * name;
-    u8 sp;
-    u16 mp;
-    u8 sprite;
-    u8 extra;
-    u8 bits;
+    uint8_t sp;
+    uint16_t mp;
+    uint8_t sprite;
+    uint8_t extra;
+    uint8_t bits;
     cost_t cost;
     const char * description;
 };
@@ -233,15 +233,15 @@ const char * Spell::GetDescription( void ) const
     return _( spells[id].description );
 }
 
-u32 Spell::MovePoint( void ) const
+uint32_t Spell::MovePoint( void ) const
 {
     return spells[id].mp;
 }
 
-u32 Spell::SpellPoint( const HeroBase * hero ) const
+uint32_t Spell::SpellPoint( const HeroBase * hero ) const
 {
-    u32 res = spells[id].sp;
-    u32 acount = 0;
+    uint32_t res = spells[id].sp;
+    uint32_t acount = 0;
 
     if ( hero ) {
         switch ( id ) {
@@ -425,7 +425,7 @@ bool Spell::isDamage( void ) const
     return Damage() != 0;
 }
 
-u32 Spell::Damage( void ) const
+uint32_t Spell::Damage( void ) const
 {
     switch ( id ) {
     case ARROW:
@@ -467,12 +467,12 @@ bool Spell::isMindInfluence( void ) const
     return false;
 }
 
-u32 Spell::IndexSprite( void ) const
+uint32_t Spell::IndexSprite( void ) const
 {
     return spells[id].sprite;
 }
 
-u32 Spell::InlIndexSprite( void ) const
+uint32_t Spell::InlIndexSprite( void ) const
 {
     switch ( id ) {
     case HASTE:
@@ -517,7 +517,7 @@ u32 Spell::InlIndexSprite( void ) const
     return 0;
 }
 
-u32 Spell::Restore( void ) const
+uint32_t Spell::Restore( void ) const
 {
     switch ( id ) {
     case Spell::CURE:
@@ -531,7 +531,7 @@ u32 Spell::Restore( void ) const
     return Resurrect();
 }
 
-u32 Spell::Resurrect( void ) const
+uint32_t Spell::Resurrect( void ) const
 {
     switch ( id ) {
     case Spell::ANIMATEDEAD:
@@ -556,7 +556,7 @@ bool Spell::isResurrect( void ) const
     return Resurrect();
 }
 
-u32 Spell::ExtraValue( void ) const
+uint32_t Spell::ExtraValue( void ) const
 {
     return spells[id].extra;
 }
@@ -566,7 +566,7 @@ Spell Spell::Rand( int lvl, bool adv )
     std::vector<Spell> v;
     v.reserve( 15 );
 
-    for ( u32 sp = NONE; sp < STONE; ++sp ) {
+    for ( uint32_t sp = NONE; sp < STONE; ++sp ) {
         const Spell spell( sp );
         if ( ( ( adv && !spell.isCombat() ) || ( !adv && spell.isCombat() ) ) && lvl == spell.Level() && spell.isEnabled() )
             v.push_back( spell );
@@ -809,10 +809,10 @@ bool Spell::isRaceCompatible( int race ) const
     return true;
 }
 
-u32 Spell::CalculateDimensionDoorDistance( u32 current_sp, u32 total_hp )
+uint32_t Spell::CalculateDimensionDoorDistance( uint32_t current_sp, uint32_t total_hp )
 {
     if ( GameStatic::Spell_DD_Distance() && GameStatic::Spell_DD_HP() && GameStatic::Spell_DD_SP() && total_hp ) {
-        const u32 res = ( GameStatic::Spell_DD_Distance() * current_sp * GameStatic::Spell_DD_HP() ) / ( GameStatic::Spell_DD_SP() * total_hp );
+        const uint32_t res = ( GameStatic::Spell_DD_Distance() * current_sp * GameStatic::Spell_DD_HP() ) / ( GameStatic::Spell_DD_SP() * total_hp );
         return res ? ( res < 255 ? res : 255 ) : 1;
     }
     // original h2 variant

@@ -29,7 +29,7 @@ UltimateArtifact::UltimateArtifact()
     , isfound( false )
 {}
 
-void UltimateArtifact::Set( s32 pos, const Artifact & a )
+void UltimateArtifact::Set( int32_t pos, const Artifact & a )
 {
     Artifact & art = *this;
     art = a.isValid() ? a : Artifact::Rand( Artifact::ART_ULTIMATE );
@@ -59,7 +59,7 @@ void UltimateArtifact::SetFound( bool f )
     isfound = f;
 }
 
-bool UltimateArtifact::isPosition( s32 pos ) const
+bool UltimateArtifact::isPosition( int32_t pos ) const
 {
     return 0 <= index && pos == index;
 }

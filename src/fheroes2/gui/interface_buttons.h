@@ -35,7 +35,7 @@ namespace Interface
     public:
         ButtonsArea( Basic & );
 
-        void SetPos( s32, s32 );
+        void SetPos( int32_t, int32_t );
         void SavePosition( void );
         void SetRedraw( void ) const;
 

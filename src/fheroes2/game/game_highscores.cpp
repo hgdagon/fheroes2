@@ -58,9 +58,9 @@ struct hgs_t
 
     std::string player;
     std::string land;
-    u32 localtime;
-    u32 days;
-    u32 rating;
+    uint32_t localtime;
+    uint32_t days;
+    uint32_t rating;
 };
 
 StreamBase & operator<<( StreamBase & msg, const hgs_t & hgs )
@@ -90,7 +90,7 @@ public:
 
     bool Load( const std::string & );
     bool Save( const std::string & ) const;
-    void ScoreRegistry( const std::string &, const std::string &, u32, u32 );
+    void ScoreRegistry( const std::string &, const std::string &, uint32_t, uint32_t );
     void RedrawList( int32_t ox, int32_t oy );
 
 private:
@@ -104,7 +104,7 @@ bool HGSData::Load( const std::string & fn )
         return false;
 
     hdata.setbigendian( true );
-    u16 hgs_id = 0;
+    uint16_t hgs_id = 0;
 
     hdata >> hgs_id;
 
@@ -120,14 +120,14 @@ bool HGSData::Save( const std::string & fn ) const
 {
     ZStreamFile hdata;
     hdata.setbigendian( true );
-    hdata << static_cast<u16>( HGS_ID ) << list;
+    hdata << static_cast<uint16_t>( HGS_ID ) << list;
     if ( hdata.fail() || !hdata.write( fn ) )
         return false;
 
     return true;
 }
 
-void HGSData::ScoreRegistry( const std::string & p, const std::string & m, u32 r, u32 s )
+void HGSData::ScoreRegistry( const std::string & p, const std::string & m, uint32_t r, uint32_t s )
 {
     hgs_t h;
 
@@ -225,8 +225,8 @@ int Game::HighScores()
     cursor.Show();
     display.render();
 
-    const u32 rating = GetGameOverScores();
-    const u32 days = world.CountDay();
+    const uint32_t rating = GetGameOverScores();
+    const uint32_t days = world.CountDay();
     GameOver::Result & gameResult = GameOver::Result::Get();
 
     if ( rating && ( gameResult.GetResult() & GameOver::WINS ) ) {

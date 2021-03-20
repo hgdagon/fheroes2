@@ -90,7 +90,7 @@ namespace Dialog
     int Message( const std::string &, const std::string &, int ft, int buttons = 0 /* buttons: OK : CANCEL : OK|CANCEL : YES|NO */ );
     void ExtSettings( bool );
     int LevelUpSelectSkill( const std::string &, const std::string &, const Skill::Secondary &, const Skill::Secondary &, Heroes & );
-    bool SelectGoldOrExp( const std::string &, const std::string &, u32 gold, u32 expr, const Heroes & );
+    bool SelectGoldOrExp( const std::string &, const std::string &, uint32_t gold, uint32_t expr, const Heroes & );
     void SpellInfo( const Spell &, bool ok_button = true );
     void SpellInfo( const std::string &, const std::string &, const Spell &, bool ok_button = true );
     void SecondarySkillInfo( const Skill::Secondary &, const Heroes & hero, const bool ok_button = true );
@@ -100,14 +100,14 @@ namespace Dialog
     int ArtifactInfo( const std::string &, const std::string &, const Artifact &, int buttons = Dialog::OK );
     int ResourceInfo( const std::string &, const std::string &, const Funds &, int buttons = Dialog::OK );
     int SelectSkillFromArena( void );
-    bool SelectCount( const std::string &, u32 min, u32 max, u32 & res, int step = 1 );
+    bool SelectCount( const std::string &, uint32_t min, uint32_t max, uint32_t & res, int step = 1 );
     bool InputString( const std::string &, std::string & );
-    Troop RecruitMonster( const Monster &, u32 available, bool );
-    void DwellingInfo( const Monster &, u32 available );
+    Troop RecruitMonster( const Monster &, uint32_t available, bool );
+    void DwellingInfo( const Monster &, uint32_t available );
     bool SetGuardian( Heroes &, Troop &, CapturedObject &, bool readonly );
     int ArmyInfo( const Troop & troop, int flags, bool isReflected = false );
     int ArmyJoinFree( const Troop &, Heroes & );
-    int ArmyJoinWithCost( const Troop &, u32 join, u32 gold, Heroes & );
+    int ArmyJoinWithCost( const Troop &, uint32_t join, uint32_t gold, Heroes & );
     int ArmySplitTroop( const uint32_t freeSlots, const uint32_t redistributeMax, const bool saveLastTroop, uint32_t & redistributeCount, bool & useFastSplit );
     void Marketplace( bool fromTradingPost = false );
     void MakeGiftResource( void );
@@ -151,7 +151,7 @@ namespace Dialog
         FrameBorder( int v = BORDERWIDTH );
         FrameBorder( const fheroes2::Size & );
         FrameBorder( const fheroes2::Size &, const fheroes2::Image & );
-        FrameBorder( s32, s32, u32, u32 );
+        FrameBorder( int32_t, int32_t, uint32_t, uint32_t );
         ~FrameBorder();
 
         int BorderWidth() const;

@@ -42,7 +42,7 @@ RowSpells::RowSpells( const Point & pos, const Castle & castle, int lvl )
     const fheroes2::Sprite & roll_hide = fheroes2::AGG::GetICN( ICN::TOWNWIND, 1 );
     const fheroes2::Sprite & roll = ( hide ? roll_hide : roll_show );
 
-    u32 count = 0;
+    uint32_t count = 0;
 
     switch ( lvl ) {
     case 1:
@@ -60,7 +60,7 @@ RowSpells::RowSpells( const Point & pos, const Castle & castle, int lvl )
         break;
     }
 
-    for ( u32 ii = 0; ii < count; ++ii )
+    for ( uint32_t ii = 0; ii < count; ++ii )
         coords.push_back( Rect( pos.x + coords.size() * 110 - roll.width() / 2, pos.y, roll.width(), roll.height() ) );
 
     if ( castle.HaveLibraryCapability() ) {
@@ -109,7 +109,7 @@ bool RowSpells::QueueEventProcessing( void )
     LocalEvent & le = LocalEvent::Get();
     const Cursor & cursor = Cursor::Get();
 
-    const s32 index = coords.GetIndex( le.GetMouseCursor() );
+    const int32_t index = coords.GetIndex( le.GetMouseCursor() );
 
     if ( 0 <= index && ( le.MouseClickLeft() || le.MousePressRight() ) ) {
         const Spell & spell = spells[index];

@@ -41,7 +41,7 @@ Funds::Funds()
     , gold( 0 )
 {}
 
-Funds::Funds( s32 _ore, s32 _wood, s32 _mercury, s32 _sulfur, s32 _crystal, s32 _gems, s32 _gold )
+Funds::Funds( int32_t _ore, int32_t _wood, int32_t _mercury, int32_t _sulfur, int32_t _crystal, int32_t _gems, int32_t _gold )
     : wood( _wood )
     , mercury( _mercury )
     , ore( _ore )
@@ -51,7 +51,7 @@ Funds::Funds( s32 _ore, s32 _wood, s32 _mercury, s32 _sulfur, s32 _crystal, s32 
     , gold( _gold )
 {}
 
-Funds::Funds( int rs, u32 count )
+Funds::Funds( int rs, uint32_t count )
     : wood( 0 )
     , mercury( 0 )
     , ore( 0 )
@@ -108,7 +108,7 @@ Funds::Funds( const ResourceCount & rs )
     , gems( 0 )
     , gold( 0 )
 {
-    s32 * ptr = GetPtr( rs.first );
+    int32_t * ptr = GetPtr( rs.first );
     if ( ptr )
         *ptr = rs.second;
 }
@@ -137,7 +137,7 @@ int Resource::Rand( bool with_gold )
     return Resource::UNKNOWN;
 }
 
-s32 * Funds::GetPtr( int rs )
+int32_t * Funds::GetPtr( int rs )
 {
     switch ( rs ) {
     case Resource::ORE:
@@ -160,7 +160,7 @@ s32 * Funds::GetPtr( int rs )
     return NULL;
 }
 
-s32 Funds::Get( int rs ) const
+int32_t Funds::Get( int rs ) const
 {
     switch ( rs ) {
     case Resource::ORE:
@@ -277,7 +277,7 @@ int Funds::getLowestQuotient( const Funds & divisor ) const
 }
 
 // operator Funds *
-Funds Funds::operator*( u32 mul ) const
+Funds Funds::operator*( uint32_t mul ) const
 {
     Funds res;
 
@@ -292,7 +292,7 @@ Funds Funds::operator*( u32 mul ) const
     return res;
 }
 
-Funds & Funds::operator*=( u32 mul )
+Funds & Funds::operator*=( uint32_t mul )
 {
     wood *= mul;
     mercury *= mul;
@@ -365,7 +365,7 @@ const char * Resource::String( int resource )
 }
 
 /* return index sprite objnrsrc.icn */
-u32 Resource::GetIndexSprite( int resource )
+uint32_t Resource::GetIndexSprite( int resource )
 {
     switch ( resource ) {
     case Resource::WOOD:
@@ -389,7 +389,7 @@ u32 Resource::GetIndexSprite( int resource )
     return 0;
 }
 
-int Resource::FromIndexSprite( u32 index )
+int Resource::FromIndexSprite( uint32_t index )
 {
     switch ( index ) {
     case 1:
@@ -415,7 +415,7 @@ int Resource::FromIndexSprite( u32 index )
 }
 
 /* return index sprite resource.icn */
-u32 Resource::GetIndexSprite2( int resource )
+uint32_t Resource::GetIndexSprite2( int resource )
 {
     switch ( resource ) {
     case Resource::WOOD:
@@ -439,7 +439,7 @@ u32 Resource::GetIndexSprite2( int resource )
     return 0;
 }
 
-int Resource::FromIndexSprite2( u32 index )
+int Resource::FromIndexSprite2( uint32_t index )
 {
     switch ( index ) {
     case 0:
@@ -486,9 +486,9 @@ int Funds::GetValidItems( void ) const
     return rs;
 }
 
-u32 Funds::GetValidItemsCount( void ) const
+uint32_t Funds::GetValidItemsCount( void ) const
 {
-    u32 result = 0;
+    uint32_t result = 0;
 
     if ( wood )
         ++result;
@@ -537,11 +537,11 @@ void Funds::Reset( void )
     gold = 0;
 }
 
-Resource::BoxSprite::BoxSprite( const Funds & f, u32 width )
+Resource::BoxSprite::BoxSprite( const Funds & f, uint32_t width )
     : Rect( 0, 0, width, 0 )
     , rs( f )
 {
-    const u32 count = rs.GetValidItemsCount();
+    const uint32_t count = rs.GetValidItemsCount();
     h = 4 > count ? 45 : ( 7 > count ? 90 : 135 );
 }
 
@@ -550,13 +550,13 @@ const Rect & Resource::BoxSprite::GetArea( void ) const
     return *this;
 }
 
-void Resource::BoxSprite::SetPos( s32 px, s32 py )
+void Resource::BoxSprite::SetPos( int32_t px, int32_t py )
 {
     x = px;
     y = py;
 }
 
-void RedrawResourceSprite( const fheroes2::Image & sf, const Point & pos, u32 count, u32 width, u32 offset, s32 value )
+void RedrawResourceSprite( const fheroes2::Image & sf, const Point & pos, uint32_t count, uint32_t width, uint32_t offset, int32_t value )
 {
     const fheroes2::Point dst_pt( pos.x + width / 2 + count * width, pos.y + offset );
     fheroes2::Blit( sf, fheroes2::Display::instance(), dst_pt.x - sf.width() / 2, dst_pt.y - sf.height() );

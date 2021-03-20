@@ -72,7 +72,7 @@ void Network::Socket::Assign( const TCPsocket csd )
     }
 }
 
-u32 Network::Socket::Host( void ) const
+uint32_t Network::Socket::Host( void ) const
 {
     IPaddress * remoteIP = sd ? SDLNet_TCP_GetPeerAddress( sd ) : NULL;
     if ( remoteIP )
@@ -81,7 +81,7 @@ u32 Network::Socket::Host( void ) const
     return 0;
 }
 
-u16 Network::Socket::Port( void ) const
+uint16_t Network::Socket::Port( void ) const
 {
     IPaddress * remoteIP = sd ? SDLNet_TCP_GetPeerAddress( sd ) : NULL;
     if ( remoteIP )
@@ -120,7 +120,7 @@ bool Network::Socket::Send( const char * buf, int len )
     return !( status & ERROR_SEND );
 }
 
-bool Network::Socket::Recv32( u32 & v )
+bool Network::Socket::Recv32( uint32_t & v )
 {
     if ( Recv( reinterpret_cast<char *>( &v ), sizeof( v ) ) ) {
         SwapBE32( v );
@@ -129,7 +129,7 @@ bool Network::Socket::Recv32( u32 & v )
     return false;
 }
 
-bool Network::Socket::Recv16( u16 & v )
+bool Network::Socket::Recv16( uint16_t & v )
 {
     if ( Recv( reinterpret_cast<char *>( &v ), sizeof( v ) ) ) {
         SwapBE16( v );
@@ -140,7 +140,7 @@ bool Network::Socket::Recv16( u16 & v )
 
 bool Network::Socket::Send32( const uint32_t v0 )
 {
-    u32 v = v0;
+    uint32_t v = v0;
     SwapBE32( v );
 
     return Send( reinterpret_cast<char *>( &v ), sizeof( v ) );
@@ -148,7 +148,7 @@ bool Network::Socket::Send32( const uint32_t v0 )
 
 bool Network::Socket::Send16( const uint16_t v0 )
 {
-    u16 v = v0;
+    uint16_t v = v0;
     SwapBE16( v );
 
     return Send( reinterpret_cast<char *>( &v ), sizeof( v ) );
@@ -203,7 +203,7 @@ void Network::Quit( void )
     SDLNet_Quit();
 }
 
-bool Network::ResolveHost( IPaddress & ip, const char * host, u16 port )
+bool Network::ResolveHost( IPaddress & ip, const char * host, uint16_t port )
 {
     if ( SDLNet_ResolveHost( &ip, host, port ) < 0 ) {
         ERROR_LOG( SDLNet_GetError() );

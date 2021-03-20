@@ -40,40 +40,40 @@ namespace MP2
     // origin mp2 tile
     struct mp2tile_t
     {
-        u16 tileIndex; // tile (ocean, grass, snow, swamp, lava, desert, dirt, wasteland, beach)
-        u8 objectName1; // level 1.0
-        u8 indexName1; // index level 1.0 or 0xFF
-        u8 quantity1; // Bitfield, first 3 bits are flags, rest is used as quantity
-        u8 quantity2; // Used as a part of quantity, field size is actually 13 bits. Has most significant bits
-        u8 objectName2; // level 2.0
-        u8 indexName2; // index level 2.0 or 0xFF
-        u8 flags; // Bitfield: 1st bit is passability, last two is tile shape: 0 none, 1 vertical, 2 horizontal, 3 any
-        u8 mapObject; // zero or object
-        u16 indexAddon; // zero or index addons_t
-        u32 editorObjectLink; // Map editor variable: object link
-        u32 editorObjectOverlay; // Map editor variable: overlay link
+        uint16_t tileIndex; // tile (ocean, grass, snow, swamp, lava, desert, dirt, wasteland, beach)
+        uint8_t objectName1; // level 1.0
+        uint8_t indexName1; // index level 1.0 or 0xFF
+        uint8_t quantity1; // Bitfield, first 3 bits are flags, rest is used as quantity
+        uint8_t quantity2; // Used as a part of quantity, field size is actually 13 bits. Has most significant bits
+        uint8_t objectName2; // level 2.0
+        uint8_t indexName2; // index level 2.0 or 0xFF
+        uint8_t flags; // Bitfield: 1st bit is passability, last two is tile shape: 0 none, 1 vertical, 2 horizontal, 3 any
+        uint8_t mapObject; // zero or object
+        uint16_t indexAddon; // zero or index addons_t
+        uint32_t editorObjectLink; // Map editor variable: object link
+        uint32_t editorObjectOverlay; // Map editor variable: overlay link
     };
 
     // origin mp2 addons tile
     struct mp2addon_t
     {
-        u16 indexAddon; // zero or next addons_t
-        u8 objectNameN1; // level 1.N. Last bit indicates if object is animated. Second-last controls overlay
-        u8 indexNameN1; // level 1.N or 0xFF
-        u8 quantityN; // Bitfield containing metadata
-        u8 objectNameN2; // level 2.N
-        u8 indexNameN2; // level 1.N or 0xFF
-        u32 editorObjectLink; // Map editor variable: object link
-        u32 editorObjectOverlay; // Map editor variable: overlay link
+        uint16_t indexAddon; // zero or next addons_t
+        uint8_t objectNameN1; // level 1.N. Last bit indicates if object is animated. Second-last controls overlay
+        uint8_t indexNameN1; // level 1.N or 0xFF
+        uint8_t quantityN; // Bitfield containing metadata
+        uint8_t objectNameN2; // level 2.N
+        uint8_t indexNameN2; // level 1.N or 0xFF
+        uint32_t editorObjectLink; // Map editor variable: object link
+        uint32_t editorObjectOverlay; // Map editor variable: overlay link
     };
 
     // origin mp2 castle
     // 0x0046 - size
     struct mp2castle_t
     {
-        u8 color; // 00 blue, 01 green, 02 red, 03 yellow, 04 orange, 05 purpl, ff unknown
+        uint8_t color; // 00 blue, 01 green, 02 red, 03 yellow, 04 orange, 05 purpl, ff unknown
         bool customBuilding;
-        u16 building;
+        uint16_t building;
         /*
         0000 0000 0000 0010	Thieve's Guild
         0000 0000 0000 0100	Tavern
@@ -87,7 +87,7 @@ namespace MP2
         0001 0000 0000 0000	Moat
         0010 0000 0000 0000	Fortification, Coliseum, Rainbow, Dungeon, Library, Storm
         */
-        u16 dwelling;
+        uint16_t dwelling;
         /*
         0000 0000 0000 1000	dweling1
         0000 0000 0001 0000	dweling2
@@ -101,98 +101,98 @@ namespace MP2
         0001 0000 0000 0000	upgDweling5
         0010 0000 0000 0000	upgDweling6
         */
-        u8 magicTower;
+        uint8_t magicTower;
         bool customTroops;
-        u8 monster1;
-        u8 monster2;
-        u8 monster3;
-        u8 monster4;
-        u8 monster5;
-        u16 count1;
-        u16 count2;
-        u16 count3;
-        u16 count4;
-        u16 count5;
+        uint8_t monster1;
+        uint8_t monster2;
+        uint8_t monster3;
+        uint8_t monster4;
+        uint8_t monster5;
+        uint16_t count1;
+        uint16_t count2;
+        uint16_t count3;
+        uint16_t count4;
+        uint16_t count5;
         bool capitan;
         bool customCastleName;
         char castleName[13]; // name + '\0'
-        u8 type; // 00 knight, 01 barb, 02 sorc, 03 warl, 04 wiz, 05 necr, 06 rnd
+        uint8_t type; // 00 knight, 01 barb, 02 sorc, 03 warl, 04 wiz, 05 necr, 06 rnd
         bool castle;
-        u8 allowCastle; // 00 TRUE, 01 FALSE
-        u8 unknown[29];
+        uint8_t allowCastle; // 00 TRUE, 01 FALSE
+        uint8_t unknown[29];
     };
 
     // origin mp2 heroes
     // 0x004c - size
     struct mp2heroes_t
     {
-        u8 unknown;
+        uint8_t unknown;
         bool customTroops;
-        u8 monster1; // 0xff none
-        u8 monster2; // 0xff none
-        u8 monster3; // 0xff none
-        u8 monster4; // 0xff none
-        u8 monster5; // 0xff none
-        u16 countMonter1;
-        u16 countMonter2;
-        u16 countMonter3;
-        u16 countMonter4;
-        u16 countMonter5;
-        u8 customPortrate;
-        u8 portrate;
-        u8 artifact1; // 0xff none
-        u8 artifact2; // 0xff none
-        u8 artifact3; // 0xff none
-        u8 unknown2; // 0
-        u32 exerience;
+        uint8_t monster1; // 0xff none
+        uint8_t monster2; // 0xff none
+        uint8_t monster3; // 0xff none
+        uint8_t monster4; // 0xff none
+        uint8_t monster5; // 0xff none
+        uint16_t countMonter1;
+        uint16_t countMonter2;
+        uint16_t countMonter3;
+        uint16_t countMonter4;
+        uint16_t countMonter5;
+        uint8_t customPortrate;
+        uint8_t portrate;
+        uint8_t artifact1; // 0xff none
+        uint8_t artifact2; // 0xff none
+        uint8_t artifact3; // 0xff none
+        uint8_t unknown2; // 0
+        uint32_t exerience;
         bool customSkill;
-        u8 skill1; // 0xff none
-        u8 skill2; // pathfinding, archery, logistic, scouting,
-        u8 skill3; // diplomacy, navigation, leadership, wisdom,
-        u8 skill4; // mysticism, luck, ballistics, eagle, necromance, estate
-        u8 skill5;
-        u8 skill6;
-        u8 skill7;
-        u8 skill8;
-        u8 skillLevel1;
-        u8 skillLevel2;
-        u8 skillLevel3;
-        u8 skillLevel4;
-        u8 skillLevel5;
-        u8 skillLevel6;
-        u8 skillLevel7;
-        u8 skillLevel8;
-        u8 unknown3; // 0
-        u8 customName;
+        uint8_t skill1; // 0xff none
+        uint8_t skill2; // pathfinding, archery, logistic, scouting,
+        uint8_t skill3; // diplomacy, navigation, leadership, wisdom,
+        uint8_t skill4; // mysticism, luck, ballistics, eagle, necromance, estate
+        uint8_t skill5;
+        uint8_t skill6;
+        uint8_t skill7;
+        uint8_t skill8;
+        uint8_t skillLevel1;
+        uint8_t skillLevel2;
+        uint8_t skillLevel3;
+        uint8_t skillLevel4;
+        uint8_t skillLevel5;
+        uint8_t skillLevel6;
+        uint8_t skillLevel7;
+        uint8_t skillLevel8;
+        uint8_t unknown3; // 0
+        uint8_t customName;
         char name[13]; // name + '\0'
         bool patrol;
-        u8 countSquare; // for patrol
-        u8 unknown4[15]; // 0
+        uint8_t countSquare; // for patrol
+        uint8_t unknown4[15]; // 0
     };
 
     // origin mp2 sign or bottle
     struct mp2info_t
     {
-        u8 id; // 0x01
-        u8 zero[8]; // 8 byte 0x00
+        uint8_t id; // 0x01
+        uint8_t zero[8]; // 8 byte 0x00
         char text; // message  + '/0'
     };
 
     // origin mp2 event for coord
     struct mp2eventcoord_t
     {
-        u8 id; // 0x01
-        u32 wood;
-        u32 mercury;
-        u32 ore;
-        u32 sulfur;
-        u32 crystal;
-        u32 gems;
-        u32 golds;
-        u16 artifact; // 0xffff - none
+        uint8_t id; // 0x01
+        uint32_t wood;
+        uint32_t mercury;
+        uint32_t ore;
+        uint32_t sulfur;
+        uint32_t crystal;
+        uint32_t gems;
+        uint32_t golds;
+        uint16_t artifact; // 0xffff - none
         bool computer; // allow events for computer
         bool cancel; // cancel event after first visit
-        u8 zero[10]; // 10 byte 0x00
+        uint8_t zero[10]; // 10 byte 0x00
         bool blue;
         bool green;
         bool red;
@@ -205,19 +205,19 @@ namespace MP2
     // origin mp2 event for day
     struct mp2eventday_t
     {
-        u8 id; // 0x00
-        u32 wood;
-        u32 mercury;
-        u32 ore;
-        u32 sulfur;
-        u32 crystal;
-        u32 gems;
-        u32 golds;
-        u16 artifact; // always 0xffff - none
-        u16 computer; // allow events for computer
-        u16 first; // day of first occurent
-        u16 subsequent; // subsequent occurrences
-        u8 zero[6]; // 6 byte 0x00 and end 0x01
+        uint8_t id; // 0x00
+        uint32_t wood;
+        uint32_t mercury;
+        uint32_t ore;
+        uint32_t sulfur;
+        uint32_t crystal;
+        uint32_t gems;
+        uint32_t golds;
+        uint16_t artifact; // always 0xffff - none
+        uint16_t computer; // allow events for computer
+        uint16_t first; // day of first occurent
+        uint16_t subsequent; // subsequent occurrences
+        uint8_t zero[6]; // 6 byte 0x00 and end 0x01
         bool blue;
         bool green;
         bool red;
@@ -230,24 +230,24 @@ namespace MP2
     // origin mp2 rumor
     struct mp2rumor_t
     {
-        u8 id; // 0x00
-        u8 zero[7]; // 7 byte 0x00
+        uint8_t id; // 0x00
+        uint8_t zero[7]; // 7 byte 0x00
         char text; // message + '/0'
     };
 
     // origin mp2 riddle sphinx
     struct mp2riddle_t
     {
-        u8 id; // 0x00
-        u32 wood;
-        u32 mercury;
-        u32 ore;
-        u32 sulfur;
-        u32 crystal;
-        u32 gems;
-        u32 golds;
-        u16 artifact; // 0xffff - none
-        u8 count; // count answers (1, 8)
+        uint8_t id; // 0x00
+        uint32_t wood;
+        uint32_t mercury;
+        uint32_t ore;
+        uint32_t sulfur;
+        uint32_t crystal;
+        uint32_t gems;
+        uint32_t golds;
+        uint16_t artifact; // 0xffff - none
+        uint8_t count; // count answers (1, 8)
         char answer1[13];
         char answer2[13];
         char answer3[13];

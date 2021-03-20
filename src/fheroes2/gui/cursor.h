@@ -134,7 +134,7 @@ public:
     static Cursor & Get( void );
 
     static void Redraw( int32_t, int32_t );
-    static int DistanceThemes( int, u32 );
+    static int DistanceThemes( int, uint32_t );
     static int WithoutDistanceThemes( int );
     static void Refresh();
 

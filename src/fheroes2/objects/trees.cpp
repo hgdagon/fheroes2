@@ -27,7 +27,7 @@
 #include "mp2.h"
 #include "trees.h"
 
-int ObjTree::GetPassable( u32 index )
+int ObjTree::GetPassable( uint32_t index )
 {
     if ( isShadow( index ) )
         return DIRECTION_ALL;
@@ -35,18 +35,18 @@ int ObjTree::GetPassable( u32 index )
     return ( 5 == index || 15 == index || 22 == index || 27 == index ? 0 : DIRECTION_CENTER_ROW | DIRECTION_BOTTOM_ROW );
 }
 
-bool ObjTree::isAction( u32 index )
+bool ObjTree::isAction( uint32_t index )
 {
     return MP2::OBJ_ZERO != GetActionObject( index );
 }
 
-bool ObjTree::isShadow( u32 index )
+bool ObjTree::isShadow( uint32_t index )
 {
-    const u8 shadows[] = {0, 3, 7, 10, 13, 17, 20, 23, 26, 29, 32, 34};
+    const uint8_t shadows[] = {0, 3, 7, 10, 13, 17, 20, 23, 26, 29, 32, 34};
     return ARRAY_COUNT_END( shadows ) != std::find( shadows, ARRAY_COUNT_END( shadows ), index );
 }
 
-int ObjTree::GetActionObject( u32 )
+int ObjTree::GetActionObject( uint32_t )
 {
     return MP2::OBJ_ZERO;
 }

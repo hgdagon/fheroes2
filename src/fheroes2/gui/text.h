@@ -65,7 +65,7 @@ public:
     virtual int h( void ) const = 0;
     virtual size_t Size( void ) const = 0;
 
-    virtual void Blit( s32, s32, int maxw, fheroes2::Image & sf = fheroes2::Display::instance() ) = 0;
+    virtual void Blit( int32_t, int32_t, int maxw, fheroes2::Image & sf = fheroes2::Display::instance() ) = 0;
 
 protected:
     int font;
@@ -85,10 +85,10 @@ public:
     virtual int h( void ) const override;
     virtual size_t Size( void ) const override;
 
-    int w( u32, u32 ) const;
+    int w( uint32_t, uint32_t ) const;
     int h( int ) const;
 
-    virtual void Blit( s32, s32, int maxw, fheroes2::Image & sf = fheroes2::Display::instance() ) override;
+    virtual void Blit( int32_t, int32_t, int maxw, fheroes2::Image & sf = fheroes2::Display::instance() ) override;
     static int CharWidth( int, int ft );
     static int CharHeight( int ft );
     static int CharAscent( int ft );
@@ -104,7 +104,7 @@ class TextUnicode : public TextInterface
 public:
     TextUnicode(){};
     TextUnicode( const std::string &, int ft = Font::BIG );
-    TextUnicode( const u16 *, size_t, int ft = Font::BIG );
+    TextUnicode( const uint16_t *, size_t, int ft = Font::BIG );
 
     virtual void SetText( const std::string & ) override;
     virtual void SetFont( int ) override;
@@ -114,17 +114,17 @@ public:
     virtual int h( void ) const override;
     virtual size_t Size( void ) const override;
 
-    int w( u32, u32 ) const;
+    int w( uint32_t, uint32_t ) const;
     int h( int ) const;
 
-    virtual void Blit( s32, s32, int maxw, fheroes2::Image & sf = fheroes2::Display::instance() ) override;
+    virtual void Blit( int32_t, int32_t, int maxw, fheroes2::Image & sf = fheroes2::Display::instance() ) override;
 
     static bool isspace( int );
     static int CharWidth( int, int ft );
     static int CharHeight( int ft );
 
 private:
-    std::vector<u16> message;
+    std::vector<uint16_t> message;
 };
 #endif
 
@@ -134,7 +134,7 @@ public:
     Text();
     Text( const std::string &, int ft = Font::BIG );
 #ifdef WITH_TTF
-    Text( const u16 *, size_t, int ft = Font::BIG );
+    Text( const uint16_t *, size_t, int ft = Font::BIG );
 #endif
     Text( const Text & );
     ~Text();
@@ -157,20 +157,20 @@ public:
         return static_cast<int>( gh );
     }
 
-    void Blit( s32, s32, fheroes2::Image & sf = fheroes2::Display::instance() ) const;
-    void Blit( s32, s32, int maxw, fheroes2::Image & sf = fheroes2::Display::instance() ) const;
+    void Blit( int32_t, int32_t, fheroes2::Image & sf = fheroes2::Display::instance() ) const;
+    void Blit( int32_t, int32_t, int maxw, fheroes2::Image & sf = fheroes2::Display::instance() ) const;
     void Blit( const Point &, fheroes2::Image & sf = fheroes2::Display::instance() ) const;
 
-    static u32 width( const std::string &, int ft, u32 start = 0, u32 count = 0 );
-    static u32 height( const std::string &, int ft, u32 width = 0 );
+    static uint32_t width( const std::string &, int ft, uint32_t start = 0, uint32_t count = 0 );
+    static uint32_t height( const std::string &, int ft, uint32_t width = 0 );
 
     // Use this method when you need to find the maximum width of of a string to be fit within given width
     static int32_t getFitWidth( const std::string & text, const int fontId, const int32_t width_ );
 
 protected:
     TextInterface * message;
-    u32 gw;
-    u32 gh;
+    uint32_t gw;
+    uint32_t gh;
 };
 
 class TextSprite : protected Text
@@ -178,9 +178,9 @@ class TextSprite : protected Text
 public:
     TextSprite();
     TextSprite( const std::string &, int ft, const Point & pt );
-    TextSprite( const std::string &, int ft, s32, s32 );
+    TextSprite( const std::string &, int ft, int32_t, int32_t );
 
-    void SetPos( s32, s32 );
+    void SetPos( int32_t, int32_t );
     void SetText( const std::string & );
     void SetText( const std::string &, int );
     void SetFont( int );
@@ -236,13 +236,13 @@ public:
         return messages.size();
     }
 
-    void Blit( s32, s32, fheroes2::Image & sf = fheroes2::Display::instance() );
+    void Blit( int32_t, int32_t, fheroes2::Image & sf = fheroes2::Display::instance() );
     void Blit( const fheroes2::Point &, fheroes2::Image & sf = fheroes2::Display::instance() );
 
 private:
-    void Append( const std::string &, int, u32 );
+    void Append( const std::string &, int, uint32_t );
 #ifdef WITH_TTF
-    void Append( const std::vector<u16> &, int, u32 );
+    void Append( const std::vector<uint16_t> &, int, uint32_t );
 #endif
 
     std::list<Text> messages;

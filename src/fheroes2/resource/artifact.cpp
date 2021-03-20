@@ -55,9 +55,9 @@ enum
 
 struct artifactstats_t
 {
-    u8 bits;
-    u8 extra;
-    u8 type;
+    uint8_t bits;
+    uint8_t extra;
+    uint8_t type;
     const char * name;
     const char * description;
 };
@@ -175,7 +175,7 @@ artifactstats_t artifacts[] = {
     {0, 0, TYPE0, "Unknown", "Unknown"},
 };
 
-const char * GetPluralDescription( const Artifact & art, u32 count )
+const char * GetPluralDescription( const Artifact & art, uint32_t count )
 {
     switch ( art() ) {
     case Artifact::ENCHANTED_HOURGLASS:
@@ -321,7 +321,7 @@ int Artifact::Type( void ) const
 
 std::string Artifact::GetDescription( void ) const
 {
-    u32 count = ExtraValue();
+    uint32_t count = ExtraValue();
     std::string str = GetPluralDescription( *this, count );
 
     StringReplace( str, "%{name}", GetName() );
@@ -334,7 +334,7 @@ std::string Artifact::GetDescription( void ) const
     return str;
 }
 
-u32 Artifact::ExtraValue( void ) const
+uint32_t Artifact::ExtraValue( void ) const
 {
     switch ( id ) {
     case GOLDEN_GOOSE:
@@ -572,17 +572,17 @@ int Artifact::getArtifactValue() const
 }
 
 /* return index sprite objnarti.icn */
-u32 Artifact::IndexSprite( void ) const
+uint32_t Artifact::IndexSprite( void ) const
 {
     return id < UNKNOWN ? id * 2 + 1 : 0;
 }
 
-u32 Artifact::IndexSprite32( void ) const
+uint32_t Artifact::IndexSprite32( void ) const
 {
     return id;
 }
 
-u32 Artifact::IndexSprite64( void ) const
+uint32_t Artifact::IndexSprite64( void ) const
 {
     return id + 1;
 }
@@ -634,13 +634,13 @@ int Artifact::Rand( level_t lvl )
     v.reserve( 25 );
 
     // if possibly: make unique on map
-    for ( u32 art = ULTIMATE_BOOK; art < UNKNOWN; ++art )
+    for ( uint32_t art = ULTIMATE_BOOK; art < UNKNOWN; ++art )
         if ( ( lvl & Artifact( art ).Level() ) && !( artifacts[art].bits & ART_DISABLED ) && !( artifacts[art].bits & ART_RNDUSED ) )
             v.push_back( art );
 
     //
     if ( v.empty() ) {
-        for ( u32 art = ULTIMATE_BOOK; art < UNKNOWN; ++art )
+        for ( uint32_t art = ULTIMATE_BOOK; art < UNKNOWN; ++art )
             if ( ( lvl & Artifact( art ).Level() ) && !( artifacts[art].bits & ART_DISABLED ) )
                 v.push_back( art );
     }
@@ -651,7 +651,7 @@ int Artifact::Rand( level_t lvl )
     return res;
 }
 
-Artifact Artifact::FromMP2IndexSprite( u32 index )
+Artifact Artifact::FromMP2IndexSprite( uint32_t index )
 {
     if ( 0xA2 > index )
         return Artifact( ( index - 1 ) / 2 );
@@ -810,7 +810,7 @@ bool BagArtifacts::MakeBattleGarb( void )
     return true;
 }
 
-u32 BagArtifacts::CountArtifacts( void ) const
+uint32_t BagArtifacts::CountArtifacts( void ) const
 {
     // no way that we have more than 4 billion artifacts so static_cast is totally valid
     return static_cast<uint32_t>( std::count_if( begin(), end(), []( const Artifact & art ) { return art.isValid(); } ) );
@@ -882,12 +882,12 @@ std::string BagArtifacts::String( void ) const
     return os.str();
 }
 
-u32 BagArtifacts::Count( const Artifact & art ) const
+uint32_t BagArtifacts::Count( const Artifact & art ) const
 {
     return static_cast<uint32_t>( std::count( begin(), end(), art ) ); // no way that we have more than 4 billion artifacts
 }
 
-u32 GoldInsteadArtifact( int obj )
+uint32_t GoldInsteadArtifact( int obj )
 {
     switch ( obj ) {
     case MP2::OBJ_SKELETON:
@@ -1027,7 +1027,7 @@ bool ArtifactsBar::ActionBarLeftMouseDoubleClick( Artifact & art )
         }
         else if ( _hero->CanLearnSpell( spell ) ) {
             payment_t cost = spell.GetCost();
-            u32 answer = 0;
+            uint32_t answer = 0;
             std::string text = _(
                 "Do you want to use your knowledge of magical secrets to transcribe the %{spell} Scroll into your Magic Book?\nThe Spell Scroll will be consumed.\n Cost in spell points: %{sp}" );
 

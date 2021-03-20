@@ -53,12 +53,12 @@ uint32_t Rand::GetWithSeed( uint32_t from, uint32_t to, uint32_t seed )
     return distrib( seededGen );
 }
 
-Rand::Queue::Queue( u32 size )
+Rand::Queue::Queue( uint32_t size )
 {
     reserve( size );
 }
 
-void Rand::Queue::Push( s32 value, u32 percent )
+void Rand::Queue::Push( int32_t value, uint32_t percent )
 {
     if ( percent > 0 )
         emplace_back( value, percent );
@@ -75,7 +75,7 @@ int32_t Rand::Queue::Get( const std::function<uint32_t( uint32_t )> & randomFunc
 
     // get max
     it = begin();
-    u32 max = 0;
+    uint32_t max = 0;
     for ( ; it != end(); ++it )
         max += ( *it ).second;
 

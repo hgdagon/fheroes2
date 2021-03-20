@@ -60,7 +60,7 @@ namespace
     }
 }
 
-void Battle::Arena::BattleProcess( Unit & attacker, Unit & defender, s32 dst, int dir )
+void Battle::Arena::BattleProcess( Unit & attacker, Unit & defender, int32_t dst, int dir )
 {
     if ( 0 > dst )
         dst = defender.GetHeadIndex();
@@ -293,7 +293,7 @@ void Battle::Arena::ApplyActionMove( Command & cmd )
 
     if ( b && b->isValid() && cell && cell->isPassable3( *b, false ) ) {
         Position pos1, pos2;
-        const s32 head = b->GetHeadIndex();
+        const int32_t head = b->GetHeadIndex();
         pos1 = Position::GetCorrect( *b, dst );
 
         DEBUG_LOG( DBG_BATTLE, DBG_TRACE,
@@ -360,8 +360,8 @@ void Battle::Arena::ApplyActionMove( Command & cmd )
             }
 
             if ( b->isWide() ) {
-                const s32 dst1 = path.back();
-                const s32 dst2 = 1 < path.size() ? path[path.size() - 2] : head;
+                const int32_t dst1 = path.back();
+                const int32_t dst2 = 1 < path.size() ? path[path.size() - 2] : head;
 
                 pos2.Set( dst1, b->isWide(), RIGHT_SIDE & Board::GetDirection( dst1, dst2 ) );
             }
@@ -532,7 +532,7 @@ void Battle::Arena::TargetsApplyDamage( Unit & attacker, const Unit & /*defender
     }
 }
 
-Battle::TargetsInfo Battle::Arena::GetTargetsForDamage( const Unit & attacker, Unit & defender, s32 dst )
+Battle::TargetsInfo Battle::Arena::GetTargetsForDamage( const Unit & attacker, Unit & defender, int32_t dst )
 {
     TargetsInfo targets;
     targets.reserve( 8 );
@@ -788,7 +788,7 @@ Battle::TargetsInfo Battle::Arena::GetTargetsForSpells( const HeroBase * hero, c
     if ( !ignoreMagicResistance ) {
         TargetsInfo::iterator it = targets.begin();
         while ( it != targets.end() ) {
-            const u32 resist = ( *it ).defender->GetMagicResist( spell, hero ? hero->GetPower() : 0 );
+            const uint32_t resist = ( *it ).defender->GetMagicResist( spell, hero ? hero->GetPower() : 0 );
 
             if ( 0 < resist && 100 > resist && resist >= Rand::Get( 1, 100 ) ) {
                 if ( showMessages && interface )
@@ -837,11 +837,11 @@ void Battle::Arena::ApplyActionTower( Command & cmd )
 void Battle::Arena::ApplyActionCatapult( Command & cmd )
 {
     if ( catapult ) {
-        u32 shots = cmd.GetValue();
+        uint32_t shots = cmd.GetValue();
 
         while ( shots-- ) {
-            u32 target = cmd.GetValue();
-            u32 damage = cmd.GetValue();
+            uint32_t target = cmd.GetValue();
+            uint32_t damage = cmd.GetValue();
 
             if ( target ) {
                 if ( interface )
@@ -967,7 +967,7 @@ void Battle::Arena::ApplyActionSpellMirrorImage( Command & cmd )
             = std::find_if( distances.begin(), distances.end(), [troop]( const int32_t v ) { return Battle::Board::isValidMirrorImageIndex( v, troop ); } );
         if ( it != distances.end() ) {
             const Position pos = Position::GetCorrect( *troop, *it );
-            const s32 dst = pos.GetHead()->GetIndex();
+            const int32_t dst = pos.GetHead()->GetIndex();
             DEBUG_LOG( DBG_BATTLE, DBG_TRACE, "set position: " << dst );
             if ( interface )
                 interface->RedrawActionMirrorImageSpell( *troop, pos );

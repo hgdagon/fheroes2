@@ -46,7 +46,7 @@ namespace Skill
            Secondary::WISDOM,      Secondary::MYSTICISM, Secondary::LUCK,      Secondary::BALLISTICS, Secondary::EAGLEEYE,  Secondary::NECROMANCY, Secondary::ESTATES};
 }
 
-u32 Skill::Secondary::GetValues( void ) const
+uint32_t Skill::Secondary::GetValues( void ) const
 {
     const values_t * val = GameStatic::GetSkillValues( Skill() );
 
@@ -443,7 +443,7 @@ std::string Skill::Secondary::GetNameWithBonus( const Heroes & hero ) const
 
 std::string Skill::Secondary::GetDescription( const Heroes & hero ) const
 {
-    u32 count = GetValues();
+    uint32_t count = GetValues();
     std::string str = "unknown";
 
     switch ( Skill() ) {
@@ -638,7 +638,7 @@ int Skill::SecSkills::GetLevel( int skill ) const
     return it == end() ? Level::NONE : ( *it ).Level();
 }
 
-u32 Skill::SecSkills::GetValues( int skill ) const
+uint32_t Skill::SecSkills::GetValues( int skill ) const
 {
     const_iterator it = std::find_if( begin(), end(), [skill]( const Secondary & v ) { return v.isSkill( skill ); } );
 
@@ -748,7 +748,7 @@ int Skill::SecondaryPriorityFromRace( int race, const std::vector<int> & exclude
 {
     Rand::Queue parts( MAXSECONDARYSKILL );
 
-    for ( u32 ii = 0; ii < ARRAY_COUNT( secskills ); ++ii )
+    for ( uint32_t ii = 0; ii < ARRAY_COUNT( secskills ); ++ii )
         if ( exclude.end() == std::find( exclude.begin(), exclude.end(), secskills[ii] ) )
             parts.Push( secskills[ii], SecondaryGetWeightSkillFromRace( race, secskills[ii] ) );
 
@@ -768,7 +768,7 @@ void Skill::SecSkills::FindSkillsForLevelUp( int race, uint32_t seedSkill1, uint
 
     // exclude is full, add other.
     if ( HEROESMAXSKILL <= Count() ) {
-        for ( u32 ii = 0; ii < ARRAY_COUNT( secskills ); ++ii )
+        for ( uint32_t ii = 0; ii < ARRAY_COUNT( secskills ); ++ii )
             if ( Level::NONE == GetLevel( secskills[ii] ) )
                 exclude_skills.push_back( secskills[ii] );
     }

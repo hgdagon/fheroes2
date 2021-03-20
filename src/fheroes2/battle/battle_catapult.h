@@ -49,16 +49,16 @@ namespace Battle
 
         static Point GetTargetPosition( int );
 
-        u32 GetShots( void ) const
+        uint32_t GetShots( void ) const
         {
             return catShots;
         }
-        int GetTarget( const std::vector<u32> & ) const;
-        u32 GetDamage() const;
+        int GetTarget( const std::vector<uint32_t> & ) const;
+        uint32_t GetDamage() const;
 
     private:
-        u32 catShots;
-        u32 doubleDamageChance;
+        uint32_t catShots;
+        uint32_t doubleDamageChance;
         bool canMiss;
     };
 }

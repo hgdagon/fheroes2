@@ -31,26 +31,26 @@
 
 struct chunk
 {
-    u32 offset;
-    u32 length;
+    uint32_t offset;
+    uint32_t length;
 
     chunk()
         : offset( 0 )
         , length( 0 )
     {}
-    chunk( u32 off, u32 len )
+    chunk( uint32_t off, uint32_t len )
         : offset( off )
         , length( len )
     {}
 };
 
-u32 crc32b( const char * msg )
+uint32_t crc32b( const char * msg )
 {
-    u32 crc = 0xFFFFFFFF;
-    u32 index = 0;
+    uint32_t crc = 0xFFFFFFFF;
+    uint32_t index = 0;
 
     while ( msg[index] ) {
-        crc ^= static_cast<u32>( msg[index] );
+        crc ^= static_cast<uint32_t>( msg[index] );
 
         for ( int bit = 0; bit < 8; ++bit ) {
             size_t mask = ~( crc & 1 );
@@ -65,12 +65,12 @@ u32 crc32b( const char * msg )
 
 struct mofile
 {
-    u32 count, offset_strings1, offset_strings2, hash_size, hash_offset;
+    uint32_t count, offset_strings1, offset_strings2, hash_size, hash_offset;
     StreamBuf buf;
-    std::map<u32, chunk> hash_offsets;
+    std::map<uint32_t, chunk> hash_offsets;
     std::string encoding;
     std::string plural_forms;
-    u32 nplurals;
+    uint32_t nplurals;
 
     mofile()
         : count( 0 )
@@ -83,12 +83,12 @@ struct mofile
 
     const char * ngettext( const char * str, size_t plural )
     {
-        std::map<u32, chunk>::const_iterator it = hash_offsets.find( crc32b( str ) );
+        std::map<uint32_t, chunk>::const_iterator it = hash_offsets.find( crc32b( str ) );
         if ( it == hash_offsets.end() )
             return str;
 
         buf.seek( ( *it ).second.offset );
-        const u8 * ptr = buf.data();
+        const uint8_t * ptr = buf.data();
 
         while ( plural > 0 ) {
             while ( *ptr )
@@ -118,8 +118,8 @@ struct mofile
         if ( !sf.open( file, "rb" ) )
             return false;
         else {
-            u32 size = sf.size();
-            u32 id = 0;
+            uint32_t size = sf.size();
+            uint32_t id = 0;
             sf >> id;
 
             if ( 0x950412de != id ) {
@@ -127,7 +127,7 @@ struct mofile
                 return false;
             }
             else {
-                u16 major, minor;
+                uint16_t major, minor;
                 sf >> major >> minor;
 
                 if ( 0 != major ) {
@@ -147,8 +147,8 @@ struct mofile
         // parse encoding and plural forms
         if ( count ) {
             buf.seek( offset_strings2 );
-            u32 length2 = buf.get32();
-            u32 offset2 = buf.get32();
+            uint32_t length2 = buf.get32();
+            uint32_t offset2 = buf.get32();
 
             const std::string tag1( "Content-Type" );
             const std::string sep1( "charset=" );
@@ -168,17 +168,17 @@ struct mofile
         }
 
         // generate hash table
-        for ( u32 index = 0; index < count; ++index ) {
+        for ( uint32_t index = 0; index < count; ++index ) {
             buf.seek( offset_strings1 + index * 8 /* length, offset */ );
-            u32 length1 = buf.get32();
-            u32 offset1 = buf.get32();
+            uint32_t length1 = buf.get32();
+            uint32_t offset1 = buf.get32();
             buf.seek( offset1 );
             const std::string msg1 = buf.toString( length1 );
-            u32 crc = crc32b( msg1.c_str() );
+            uint32_t crc = crc32b( msg1.c_str() );
             buf.seek( offset_strings2 + index * 8 /* length, offset */ );
-            u32 length2 = buf.get32();
-            u32 offset2 = buf.get32();
-            std::map<u32, chunk>::const_iterator it = hash_offsets.find( crc );
+            uint32_t length2 = buf.get32();
+            uint32_t offset2 = buf.get32();
+            std::map<uint32_t, chunk>::const_iterator it = hash_offsets.find( crc );
             if ( it == hash_offsets.end() )
                 hash_offsets[crc] = chunk( offset2, length2 );
             else {

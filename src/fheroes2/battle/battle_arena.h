@@ -53,13 +53,13 @@ namespace Battle
     class Actions : public std::list<Command>
     {
     public:
-        bool HaveCommand( u32 ) const;
+        bool HaveCommand( uint32_t ) const;
     };
 
     class Arena
     {
     public:
-        Arena( Army &, Army &, s32, bool );
+        Arena( Army &, Army &, int32_t, bool );
         ~Arena();
 
         void Turns( void );
@@ -69,7 +69,7 @@ namespace Battle
         bool CanBreakAutoBattle( void ) const;
         void BreakAutoBattle( void );
 
-        u32 GetCurrentTurn( void ) const;
+        uint32_t GetCurrentTurn( void ) const;
         Result & GetResult( void );
 
         const HeroBase * GetCommander( int color, bool invert = false ) const;
@@ -87,11 +87,11 @@ namespace Battle
         int GetCurrentColor( void ) const;
         int GetOppositeColor( int ) const;
 
-        Unit * GetTroopBoard( s32 );
-        const Unit * GetTroopBoard( s32 ) const;
+        Unit * GetTroopBoard( int32_t );
+        const Unit * GetTroopBoard( int32_t ) const;
 
-        Unit * GetTroopUID( u32 );
-        const Unit * GetTroopUID( u32 ) const;
+        Unit * GetTroopUID( uint32_t );
+        const Unit * GetTroopUID( uint32_t ) const;
 
         const Unit * GetEnemyMaxQuality( int ) const;
 
@@ -113,7 +113,7 @@ namespace Battle
 
         void ApplyAction( Command & );
 
-        TargetsInfo GetTargetsForDamage( const Unit &, Unit &, s32 );
+        TargetsInfo GetTargetsForDamage( const Unit &, Unit &, int32_t );
         void TargetsApplyDamage( Unit &, const Unit &, TargetsInfo & );
         TargetsInfo GetTargetsForSpells( const HeroBase * hero, const Spell & spell, int32_t dest, bool showMessages );
         void TargetsApplySpell( const HeroBase *, const Spell &, TargetsInfo & );
@@ -121,8 +121,8 @@ namespace Battle
         bool isSpellcastDisabled() const;
         bool isDisableCastSpell( const Spell &, std::string * msg );
 
-        bool GraveyardAllowResurrect( s32, const Spell & ) const;
-        const Unit * GraveyardLastTroop( s32 ) const;
+        bool GraveyardAllowResurrect( int32_t, const Spell & ) const;
+        const Unit * GraveyardLastTroop( int32_t ) const;
         std::vector<const Unit *> GetGraveyardTroops( const int32_t hexIndex ) const;
         Indexes GraveyardClosedCells( void ) const;
 
@@ -138,7 +138,7 @@ namespace Battle
         bool IsShootingPenalty( const Unit &, const Unit & ) const;
         int GetICNCovr( void ) const;
 
-        u32 GetCastleTargetValue( int ) const;
+        uint32_t GetCastleTargetValue( int ) const;
 
         static Board * GetBoard( void );
         static Tower * GetTower( int );
@@ -163,10 +163,10 @@ namespace Battle
         void TurnTroop( Unit * );
         void TowerAction( const Tower & );
 
-        void SetCastleTargetValue( int, u32 );
+        void SetCastleTargetValue( int, uint32_t );
         void CatapultAction( void );
 
-        s32 GetFreePositionNearHero( int ) const;
+        int32_t GetFreePositionNearHero( int ) const;
         std::vector<int> GetCastleTargets( void ) const;
         TargetsInfo TargetsForChainLightning( const HeroBase * hero, int32_t attackedTroopIndex );
         std::vector<Unit *> FindChainLightningTargetIndexes( const HeroBase * hero, Unit * firstUnit );
@@ -183,10 +183,10 @@ namespace Battle
         void ApplyActionCatapult( Command & );
         void ApplyActionAutoBattle( Command & );
 
-        void BattleProcess( Unit &, Unit & b2, s32 = -1, int = 0 );
+        void BattleProcess( Unit &, Unit & b2, int32_t = -1, int = 0 );
 
         Unit * CreateElemental( const Spell & );
-        Unit * CreateMirrorImage( Unit &, s32 );
+        Unit * CreateMirrorImage( Unit &, int32_t );
 
         Force * army1;
         Force * army2;
@@ -209,7 +209,7 @@ namespace Battle
         ArenaPathfinder _pathfinder;
         int icn_covr;
 
-        u32 current_turn;
+        uint32_t current_turn;
         int auto_battle;
 
         bool end_turn;

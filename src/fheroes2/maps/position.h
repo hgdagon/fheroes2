@@ -31,14 +31,14 @@ class MapPosition
 public:
     MapPosition( const Point & = Point( -1, -1 ) );
 
-    bool operator==( s32 ) const;
+    bool operator==( int32_t ) const;
 
     const Point & GetCenter() const
     {
         return center;
     }
 
-    s32 GetIndex( void ) const;
+    int32_t GetIndex( void ) const;
 
     void SetCenter( const Point & );
     void SetIndex( const int32_t index );

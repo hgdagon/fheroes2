@@ -139,7 +139,7 @@ Maps::FileInfo & Maps::FileInfo::operator=( const FileInfo & f )
     size_h = f.size_h;
     difficulty = f.difficulty;
 
-    for ( u32 ii = 0; ii < KINGDOMMAX; ++ii ) {
+    for ( uint32_t ii = 0; ii < KINGDOMMAX; ++ii ) {
         races[ii] = f.races[ii];
         unions[ii] = f.unions[ii];
     }
@@ -185,7 +185,7 @@ void Maps::FileInfo::Reset( void )
     localtime = 0;
     with_heroes = false;
 
-    for ( u32 ii = 0; ii < KINGDOMMAX; ++ii ) {
+    for ( uint32_t ii = 0; ii < KINGDOMMAX; ++ii ) {
         races[ii] = Race::NONE;
         unions[ii] = ByteToColor( ii );
     }
@@ -227,7 +227,7 @@ bool Maps::FileInfo::ReadMAP( const std::string & filename )
         xml = xml_header->FirstChildElement( "info" );
 
         if ( xml && xml->GetText() ) {
-            std::vector<u8> bytes = decodeBase64( xml->GetText() );
+            std::vector<uint8_t> bytes = decodeBase64( xml->GetText() );
             StreamBuf st( bytes );
 
             if ( bytes.size() >= 89 ) {
@@ -258,7 +258,7 @@ bool Maps::FileInfo::ReadMAP( const std::string & filename )
                 allow_human_colors = st.getLE32();
                 allow_comp_colors = st.getLE32();
 
-                for ( u32 col = 0; col < 6; ++col ) {
+                for ( uint32_t col = 0; col < 6; ++col ) {
                     int v = st.getLE32();
                     races[col] = 1 < CountBits( v ) ? Race::MULT : v;
 
@@ -291,10 +291,10 @@ bool Maps::FileInfo::ReadMAP( const std::string & filename )
 
                 int cond1[4], cond2[4];
 
-                for ( u32 it = 0; it < 4; ++it )
+                for ( uint32_t it = 0; it < 4; ++it )
                     cond1[it] = st.getLE32();
 
-                for ( u32 it = 0; it < 4; ++it )
+                for ( uint32_t it = 0; it < 4; ++it )
                     cond2[it] = st.getLE32();
 
                 comp_also_wins = cond1[0] & Editor::CompAlsoWins;
@@ -524,7 +524,7 @@ void Maps::FileInfo::FillUnions( void )
             side2 |= *it;
     }
 
-    for ( u32 ii = 0; ii < KINGDOMMAX; ++ii ) {
+    for ( uint32_t ii = 0; ii < KINGDOMMAX; ++ii ) {
         int cl = ByteToColor( ii );
 
         if ( side1 & cl )
@@ -632,7 +632,7 @@ bool Maps::FileInfo::WinsFindUltimateArtifact( void ) const
     return 0 == wins1;
 }
 
-u32 Maps::FileInfo::WinsAccumulateGold( void ) const
+uint32_t Maps::FileInfo::WinsAccumulateGold( void ) const
 {
     return wins1 * 1000;
 }
@@ -647,7 +647,7 @@ Point Maps::FileInfo::LossMapsPositionObject( void ) const
     return Point( loss1, loss2 );
 }
 
-u32 Maps::FileInfo::LossCountDays( void ) const
+uint32_t Maps::FileInfo::LossCountDays( void ) const
 {
     return loss1;
 }
@@ -776,9 +776,9 @@ bool PrepareMapsFileInfoList( MapsFileInfoList & lists, bool multi )
 
 StreamBase & Maps::operator<<( StreamBase & msg, const FileInfo & fi )
 {
-    msg << fi.file << fi.name << fi.description << fi.size_w << fi.size_h << fi.difficulty << static_cast<u8>( KINGDOMMAX );
+    msg << fi.file << fi.name << fi.description << fi.size_w << fi.size_h << fi.difficulty << static_cast<uint8_t>( KINGDOMMAX );
 
-    for ( u32 ii = 0; ii < KINGDOMMAX; ++ii )
+    for ( uint32_t ii = 0; ii < KINGDOMMAX; ++ii )
         msg << fi.races[ii] << fi.unions[ii];
 
     msg << fi.kingdom_colors << fi.allow_human_colors << fi.allow_comp_colors << fi.rnd_races << fi.conditions_wins << fi.comp_also_wins << fi.allow_normal_victory
@@ -789,11 +789,11 @@ StreamBase & Maps::operator<<( StreamBase & msg, const FileInfo & fi )
 
 StreamBase & Maps::operator>>( StreamBase & msg, FileInfo & fi )
 {
-    u8 kingdommax;
+    uint8_t kingdommax;
 
     msg >> fi.file >> fi.name >> fi.description >> fi.size_w >> fi.size_h >> fi.difficulty >> kingdommax;
 
-    for ( u32 ii = 0; ii < kingdommax; ++ii )
+    for ( uint32_t ii = 0; ii < kingdommax; ++ii )
         msg >> fi.races[ii] >> fi.unions[ii];
 
     msg >> fi.kingdom_colors >> fi.allow_human_colors >> fi.allow_comp_colors >> fi.rnd_races >> fi.conditions_wins >> fi.comp_also_wins >> fi.allow_normal_victory

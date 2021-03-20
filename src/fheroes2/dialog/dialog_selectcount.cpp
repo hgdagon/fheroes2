@@ -54,7 +54,7 @@ namespace
 class SelectValue : public Rect
 {
 public:
-    SelectValue( u32 min, u32 max, u32 cur, u32 st )
+    SelectValue( uint32_t min, uint32_t max, uint32_t cur, uint32_t st )
         : vmin( min )
         , vmax( max )
         , vcur( cur )
@@ -72,17 +72,17 @@ public:
         pos.height = 30;
     }
 
-    u32 Min( void )
+    uint32_t Min( void )
     {
         return vmin;
     }
 
-    u32 Max( void )
+    uint32_t Max( void )
     {
         return vmax;
     }
 
-    void SetCur( u32 v )
+    void SetCur( uint32_t v )
     {
         vcur = v;
     }
@@ -96,7 +96,7 @@ public:
         btnDn.setPosition( pt.x + 70, pt.y + 16 );
     }
 
-    u32 operator()( void ) const
+    uint32_t operator()( void ) const
     {
         return vcur;
     }
@@ -136,10 +136,10 @@ public:
     }
 
 protected:
-    u32 vmin;
-    u32 vmax;
-    u32 vcur;
-    u32 step;
+    uint32_t vmin;
+    uint32_t vmax;
+    uint32_t vcur;
+    uint32_t step;
 
     fheroes2::Rect pos;
 
@@ -147,7 +147,7 @@ protected:
     fheroes2::Button btnDn;
 };
 
-bool Dialog::SelectCount( const std::string & header, u32 min, u32 max, u32 & cur, int step )
+bool Dialog::SelectCount( const std::string & header, uint32_t min, uint32_t max, uint32_t & cur, int step )
 {
     fheroes2::Display & display = fheroes2::Display::instance();
 
@@ -324,7 +324,7 @@ int Dialog::ArmySplitTroop( const uint32_t freeSlots, const uint32_t redistribut
     Cursor & cursor = Cursor::Get();
     cursor.Hide();
 
-    const u32 min = 1;
+    const uint32_t min = 1;
     const int spacer = 10;
 
     const int defaultYPosition = 160;

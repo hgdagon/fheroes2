@@ -129,7 +129,7 @@ namespace Interface
             return posItem.first != items.end() ? &posItem.second : NULL;
         }
 
-        s32 GetIndex( const Point & pt )
+        int32_t GetIndex( const Point & pt )
         {
             ItemsIterator posItem = GetItemIter( pt );
             return posItem != items.end() ? std::distance( items.end(), posItem ) : -1;
@@ -387,7 +387,7 @@ namespace Interface
             return &curItemPos.second;
         }
 
-        s32 GetSelectedIndex( void )
+        int32_t GetSelectedIndex( void )
         {
             return std::distance( ItemsBar<Item>::GetBeginItemIter(), GetCurItemIter() );
         }

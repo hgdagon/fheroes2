@@ -28,9 +28,9 @@
 #include "logging.h"
 #include "zzlib.h"
 
-std::vector<u8> zlibDecompress( const u8 * src, size_t srcsz, size_t realsz )
+std::vector<uint8_t> zlibDecompress( const uint8_t * src, size_t srcsz, size_t realsz )
 {
-    std::vector<u8> res;
+    std::vector<uint8_t> res;
 
     if ( src && srcsz ) {
         if ( realsz )
@@ -57,9 +57,9 @@ std::vector<u8> zlibDecompress( const u8 * src, size_t srcsz, size_t realsz )
     return res;
 }
 
-std::vector<u8> zlibCompress( const u8 * src, size_t srcsz )
+std::vector<uint8_t> zlibCompress( const uint8_t * src, size_t srcsz )
 {
-    std::vector<u8> res;
+    std::vector<uint8_t> res;
 
     if ( src && srcsz ) {
         res.resize( compressBound( srcsz ) );
@@ -88,25 +88,25 @@ bool ZStreamFile::read( const std::string & fn, size_t offset )
         if ( offset )
             sf.seek( offset );
 #ifdef WITH_ZLIB
-        const u32 size0 = sf.get32(); // raw size
+        const uint32_t size0 = sf.get32(); // raw size
         if ( size0 == 0 ) {
             return false;
         }
-        const u32 size1 = sf.get32(); // zip size
+        const uint32_t size1 = sf.get32(); // zip size
         if ( size1 == 0 ) {
             return false;
         }
         sf.skip( 4 ); // old stream format
-        std::vector<u8> zip = sf.getRaw( size1 );
-        std::vector<u8> raw = zlibDecompress( &zip[0], zip.size(), size0 );
+        std::vector<uint8_t> zip = sf.getRaw( size1 );
+        std::vector<uint8_t> raw = zlibDecompress( &zip[0], zip.size(), size0 );
         putRaw( reinterpret_cast<char *>( &raw[0] ), raw.size() );
         seek( 0 );
 #else
-        const u32 size0 = sf.get32(); // raw size
+        const uint32_t size0 = sf.get32(); // raw size
         if ( size0 == 0 ) {
             return false;
         }
-        std::vector<u8> raw = sf.getRaw( size0 );
+        std::vector<uint8_t> raw = sf.getRaw( size0 );
         putRaw( &raw[0], raw.size() );
         seek( 0 );
 #endif
@@ -122,7 +122,7 @@ bool ZStreamFile::write( const std::string & fn, bool append ) const
 
     if ( sf.open( fn, append ? "ab" : "wb" ) ) {
 #ifdef WITH_ZLIB
-        std::vector<u8> zip = zlibCompress( data(), size() );
+        std::vector<uint8_t> zip = zlibCompress( data(), size() );
 
         if ( !zip.empty() ) {
             sf.put32( size() );

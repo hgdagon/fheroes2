@@ -77,16 +77,16 @@ public:
     virtual const Army & GetArmy( void ) const = 0;
     virtual Army & GetArmy( void ) = 0;
 
-    virtual u32 GetMaxSpellPoints( void ) const = 0;
+    virtual uint32_t GetMaxSpellPoints( void ) const = 0;
 
     virtual int GetLevelSkill( int skill ) const = 0;
-    virtual u32 GetSecondaryValues( int skill ) const = 0;
+    virtual uint32_t GetSecondaryValues( int skill ) const = 0;
 
     virtual void ActionAfterBattle( void ) = 0;
     virtual void ActionPreBattle( void ) = 0;
 
     virtual const Castle * inCastle( void ) const = 0;
-    virtual void PortraitRedraw( s32 px, s32 py, PortraitType type, fheroes2::Image & dstsf ) const = 0;
+    virtual void PortraitRedraw( int32_t px, int32_t py, PortraitType type, fheroes2::Image & dstsf ) const = 0;
 
     virtual int GetType( void ) const = 0;
 
@@ -100,7 +100,7 @@ public:
     int GetMoraleModificator( std::string * = NULL ) const;
     int GetLuckModificator( std::string * = NULL ) const;
 
-    u32 GetSpellPoints( void ) const;
+    uint32_t GetSpellPoints( void ) const;
     bool HaveSpellPoints( const Spell & ) const;
     bool CanCastSpell( const Spell &, std::string * = NULL ) const;
     bool CanTeachSpell( const Spell & ) const;
@@ -108,7 +108,7 @@ public:
     bool CanTranscribeScroll( const Artifact & ) const;
     void TranscribeScroll( const Artifact & );
     void SpellCasted( const Spell & );
-    void SetSpellPoints( u32 );
+    void SetSpellPoints( uint32_t );
 
     std::vector<Spell> GetSpells( int lvl = -1 ) const;
     void EditSpellBook( void );
@@ -121,7 +121,7 @@ public:
 
     BagArtifacts & GetBagArtifacts( void );
     const BagArtifacts & GetBagArtifacts( void ) const;
-    u32 HasArtifact( const Artifact & ) const;
+    uint32_t HasArtifact( const Artifact & ) const;
     bool PickupArtifact( const Artifact & );
 
     void LoadDefaults( int type, int race );
@@ -133,8 +133,8 @@ protected:
     friend TiXmlElement & operator>>( TiXmlElement &, HeroBase & );
 #endif
 
-    u32 magic_point;
-    u32 move_point;
+    uint32_t magic_point;
+    uint32_t move_point;
 
     SpellBook spell_book;
     BagArtifacts bag_artifacts;

@@ -111,7 +111,7 @@ public:
     Player( int col = Color::NONE );
     virtual ~Player() {}
 
-    bool isID( u32 ) const;
+    bool isID( uint32_t ) const;
     bool isColor( int ) const;
     bool isName( const std::string & ) const;
     bool isPlay( void ) const;
@@ -143,7 +143,7 @@ protected:
     int race;
     int friends;
     std::string name;
-    u32 id;
+    uint32_t id;
     Focus focus;
     std::shared_ptr<AI::Base> _ai;
 };

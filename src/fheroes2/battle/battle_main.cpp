@@ -46,10 +46,10 @@ namespace Battle
 {
     void PickupArtifactsAction( HeroBase &, HeroBase & );
     void EagleEyeSkillAction( HeroBase &, const SpellStorage &, bool );
-    void NecromancySkillAction( HeroBase &, u32, bool );
+    void NecromancySkillAction( HeroBase &, uint32_t, bool );
 }
 
-Battle::Result Battle::Loader( Army & army1, Army & army2, s32 mapsindex )
+Battle::Result Battle::Loader( Army & army1, Army & army2, int32_t mapsindex )
 {
     // Validate the arguments - check if battle should even load
     if ( !army1.isValid() || !army2.isValid() ) {
@@ -110,7 +110,7 @@ Battle::Result Battle::Loader( Army & army1, Army & army2, s32 mapsindex )
 
     HeroBase * hero_wins = ( result.army1 & RESULT_WINS ? army1.GetCommander() : ( result.army2 & RESULT_WINS ? army2.GetCommander() : NULL ) );
     HeroBase * hero_loss = ( result.army1 & RESULT_LOSS ? army1.GetCommander() : ( result.army2 & RESULT_LOSS ? army2.GetCommander() : NULL ) );
-    u32 loss_result = result.army1 & RESULT_LOSS ? result.army1 : result.army2;
+    uint32_t loss_result = result.army1 & RESULT_LOSS ? result.army1 : result.army2;
 
     bool isWinnerHuman = hero_wins && hero_wins->isControlHuman();
     bool transferArtifacts = ( hero_wins && hero_loss && !( ( RESULT_RETREAT | RESULT_SURRENDER ) & loss_result ) && hero_wins->isHeroes() && hero_loss->isHeroes() );
@@ -228,7 +228,7 @@ void Battle::PickupArtifactsAction( HeroBase & hero1, HeroBase & hero2 )
     BagArtifacts & bag1 = hero1.GetBagArtifacts();
     BagArtifacts & bag2 = hero2.GetBagArtifacts();
 
-    for ( u32 ii = 0; ii < bag2.size(); ++ii ) {
+    for ( uint32_t ii = 0; ii < bag2.size(); ++ii ) {
         Artifact & art = bag2[ii];
 
         if ( art.isUltimate() ) {
@@ -295,7 +295,7 @@ void Battle::EagleEyeSkillAction( HeroBase & hero, const SpellStorage & spells, 
     hero.AppendSpellsToBook( new_spells, true );
 }
 
-void Battle::NecromancySkillAction( HeroBase & hero, u32 killed, bool local )
+void Battle::NecromancySkillAction( HeroBase & hero, uint32_t killed, bool local )
 {
     Army & army = hero.GetArmy();
 
@@ -329,7 +329,7 @@ void Battle::NecromancySkillAction( HeroBase & hero, u32 killed, bool local )
     DEBUG_LOG( DBG_BATTLE, DBG_TRACE, "raise: " << count << mons.GetMultiName() );
 }
 
-u32 Battle::Result::AttackerResult( void ) const
+uint32_t Battle::Result::AttackerResult( void ) const
 {
     if ( RESULT_SURRENDER & army1 )
         return RESULT_SURRENDER;
@@ -343,7 +343,7 @@ u32 Battle::Result::AttackerResult( void ) const
     return 0;
 }
 
-u32 Battle::Result::DefenderResult( void ) const
+uint32_t Battle::Result::DefenderResult( void ) const
 {
     if ( RESULT_SURRENDER & army2 )
         return RESULT_SURRENDER;
@@ -357,12 +357,12 @@ u32 Battle::Result::DefenderResult( void ) const
     return 0;
 }
 
-u32 Battle::Result::GetExperienceAttacker( void ) const
+uint32_t Battle::Result::GetExperienceAttacker( void ) const
 {
     return exp1;
 }
 
-u32 Battle::Result::GetExperienceDefender( void ) const
+uint32_t Battle::Result::GetExperienceDefender( void ) const
 {
     return exp2;
 }

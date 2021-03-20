@@ -27,12 +27,12 @@ MapPosition::MapPosition( const Point & pt )
     : center( pt )
 {}
 
-bool MapPosition::operator==( s32 index ) const
+bool MapPosition::operator==( int32_t index ) const
 {
     return index == GetIndex();
 }
 
-s32 MapPosition::GetIndex( void ) const
+int32_t MapPosition::GetIndex( void ) const
 {
     return center.x < 0 && center.y < 0 ? -1 : Maps::GetIndexFromAbsPoint( center );
 }

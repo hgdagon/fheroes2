@@ -295,7 +295,7 @@ void Dialog::DrawSystemInfo( const std::vector<fheroes2::Rect> & rects )
 
     // hero move speed
     const int heroSpeed = conf.HeroesMoveSpeed();
-    const u32 is4 = heroSpeed ? ( heroSpeed < 4 ? 4 : 3 + heroSpeed / 2 ) : 9;
+    const uint32_t is4 = heroSpeed ? ( heroSpeed < 4 ? 4 : 3 + heroSpeed / 2 ) : 9;
     const fheroes2::Sprite & sprite4 = fheroes2::AGG::GetICN( ICN::SPANEL, is4 );
     const Rect & rect4 = rects[3];
     fheroes2::Blit( sprite4, display, rect4.x, rect4.y );
@@ -312,7 +312,7 @@ void Dialog::DrawSystemInfo( const std::vector<fheroes2::Rect> & rects )
 
     // ai move speed
     const int aiSpeed = conf.AIMoveSpeed();
-    const u32 is5 = aiSpeed ? ( aiSpeed < 4 ? 4 : 3 + aiSpeed / 2 ) : 9;
+    const uint32_t is5 = aiSpeed ? ( aiSpeed < 4 ? 4 : 3 + aiSpeed / 2 ) : 9;
     const fheroes2::Sprite & sprite5 = fheroes2::AGG::GetICN( ICN::SPANEL, is5 );
     const Rect & rect5 = rects[4];
     fheroes2::Blit( sprite5, display, rect5.x, rect5.y );
@@ -328,7 +328,7 @@ void Dialog::DrawSystemInfo( const std::vector<fheroes2::Rect> & rects )
     text.Blit( rect5.x + ( rect5.w - text.w() ) / 2, rect5.y + rect5.h + textOffset );
 
     // scroll speed
-    const u32 is6 = ( conf.ScrollSpeed() < SCROLL_FAST2 ? ( conf.ScrollSpeed() < SCROLL_FAST1 ? ( conf.ScrollSpeed() < SCROLL_NORMAL ? 4 : 5 ) : 6 ) : 7 );
+    const uint32_t is6 = ( conf.ScrollSpeed() < SCROLL_FAST2 ? ( conf.ScrollSpeed() < SCROLL_FAST1 ? ( conf.ScrollSpeed() < SCROLL_NORMAL ? 4 : 5 ) : 6 ) : 7 );
     const fheroes2::Sprite & sprite6 = fheroes2::AGG::GetICN( ICN::SPANEL, is6 );
     const Rect & rect6 = rects[5];
     fheroes2::Blit( sprite6, display, rect6.x, rect6.y );

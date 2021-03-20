@@ -103,12 +103,12 @@ int GetCovr( int ground )
 
 StreamBase & Battle::operator<<( StreamBase & msg, const TargetInfo & t )
 {
-    return msg << ( t.defender ? t.defender->GetUID() : static_cast<u32>( 0 ) ) << t.damage << t.killed << t.resist;
+    return msg << ( t.defender ? t.defender->GetUID() : static_cast<uint32_t>( 0 ) ) << t.damage << t.killed << t.resist;
 }
 
 StreamBase & Battle::operator>>( StreamBase & msg, TargetInfo & t )
 {
-    u32 uid = 0;
+    uint32_t uid = 0;
 
     msg >> uid >> t.damage >> t.killed >> t.resist;
 
@@ -119,7 +119,7 @@ StreamBase & Battle::operator>>( StreamBase & msg, TargetInfo & t )
 
 StreamBase & Battle::operator<<( StreamBase & msg, const TargetsInfo & ts )
 {
-    msg << static_cast<u32>( ts.size() );
+    msg << static_cast<uint32_t>( ts.size() );
 
     for ( TargetsInfo::const_iterator it = ts.begin(); it != ts.end(); ++it )
         msg << *it;
@@ -129,7 +129,7 @@ StreamBase & Battle::operator<<( StreamBase & msg, const TargetsInfo & ts )
 
 StreamBase & Battle::operator>>( StreamBase & msg, TargetsInfo & ts )
 {
-    u32 size = 0;
+    uint32_t size = 0;
 
     msg >> size;
     ts.resize( size );
@@ -190,7 +190,7 @@ Battle::Tower * Battle::Arena::GetTower( int type )
     return NULL;
 }
 
-Battle::Arena::Arena( Army & a1, Army & a2, s32 index, bool local )
+Battle::Arena::Arena( Army & a1, Army & a2, int32_t index, bool local )
     : army1( NULL )
     , army2( NULL )
     , armies_order( NULL )
@@ -536,8 +536,8 @@ void Battle::Arena::TowerAction( const Tower & twr )
 void Battle::Arena::CatapultAction( void )
 {
     if ( catapult ) {
-        u32 shots = catapult->GetShots();
-        std::vector<u32> values( CAT_MISS + 1, 0 );
+        uint32_t shots = catapult->GetShots();
+        std::vector<uint32_t> values( CAT_MISS + 1, 0 );
 
         values[CAT_WALL1] = GetCastleTargetValue( CAT_WALL1 );
         values[CAT_WALL2] = GetCastleTargetValue( CAT_WALL2 );
@@ -552,7 +552,7 @@ void Battle::Arena::CatapultAction( void )
 
         while ( shots-- ) {
             int target = catapult->GetTarget( values );
-            u32 damage = std::min( catapult->GetDamage(), values[target] );
+            uint32_t damage = std::min( catapult->GetDamage(), values[target] );
             cmd << damage << target;
             values[target] -= damage;
         }
@@ -568,7 +568,7 @@ Battle::Indexes Battle::Arena::GetPath( const Unit & b, const Position & dst )
 
     if ( !result.empty() && IS_DEBUG( DBG_BATTLE, DBG_TRACE ) ) {
         std::stringstream ss;
-        for ( u32 ii = 0; ii < result.size(); ++ii )
+        for ( uint32_t ii = 0; ii < result.size(); ++ii )
             ss << result[ii] << ", ";
         DEBUG_LOG( DBG_BATTLE, DBG_TRACE, ss.str() );
     }
@@ -623,12 +623,12 @@ Battle::Indexes Battle::Arena::getAllAvailableMoves( uint32_t moveRange ) const
     return _pathfinder.getAllAvailableMoves( moveRange );
 }
 
-Battle::Unit * Battle::Arena::GetTroopBoard( s32 index )
+Battle::Unit * Battle::Arena::GetTroopBoard( int32_t index )
 {
     return Board::isValidIndex( index ) ? board[index].GetUnit() : NULL;
 }
 
-const Battle::Unit * Battle::Arena::GetTroopBoard( s32 index ) const
+const Battle::Unit * Battle::Arena::GetTroopBoard( int32_t index ) const
 {
     return Board::isValidIndex( index ) ? board[index].GetUnit() : NULL;
 }
@@ -663,7 +663,7 @@ int Battle::Arena::GetOppositeColor( int col ) const
     return col == GetArmyColor1() ? GetArmyColor2() : GetArmyColor1();
 }
 
-Battle::Unit * Battle::Arena::GetTroopUID( u32 uid )
+Battle::Unit * Battle::Arena::GetTroopUID( uint32_t uid )
 {
     Units::iterator it = std::find_if( army1->begin(), army1->end(), [uid]( const Unit * unit ) { return unit->isUID( uid ); } );
 
@@ -675,7 +675,7 @@ Battle::Unit * Battle::Arena::GetTroopUID( u32 uid )
     return it != army2->end() ? *it : NULL;
 }
 
-const Battle::Unit * Battle::Arena::GetTroopUID( u32 uid ) const
+const Battle::Unit * Battle::Arena::GetTroopUID( uint32_t uid ) const
 {
     Units::const_iterator it = std::find_if( army1->begin(), army1->end(), [uid]( const Unit * unit ) { return unit->isUID( uid ); } );
 
@@ -690,7 +690,7 @@ const Battle::Unit * Battle::Arena::GetTroopUID( u32 uid ) const
 const Battle::Unit * Battle::Arena::GetEnemyMaxQuality( int my_color ) const
 {
     const Unit * res = NULL;
-    s32 quality = 0;
+    int32_t quality = 0;
 
     for ( Board::const_iterator it = board.begin(); it != board.end(); ++it ) {
         const Unit * enemy = ( *it ).GetUnit();
@@ -715,7 +715,7 @@ const SpellStorage & Battle::Arena::GetUsageSpells( void ) const
     return usage_spells;
 }
 
-s32 Battle::Arena::GetFreePositionNearHero( int color ) const
+int32_t Battle::Arena::GetFreePositionNearHero( int color ) const
 {
     const int cells1[] = {11, 22, 33};
     const int cells2[] = {21, 32, 43};
@@ -727,7 +727,7 @@ s32 Battle::Arena::GetFreePositionNearHero( int color ) const
         cells = cells2;
 
     if ( cells ) {
-        for ( u32 ii = 0; ii < 3; ++ii ) {
+        for ( uint32_t ii = 0; ii < 3; ++ii ) {
             if ( board[cells[ii]].isPassable1( true ) && NULL == board[cells[ii]].GetUnit() ) {
                 return cells[ii];
             }
@@ -845,7 +845,7 @@ bool Battle::Arena::isDisableCastSpell( const Spell & spell, std::string * msg )
     return false;
 }
 
-bool Battle::Arena::GraveyardAllowResurrect( s32 index, const Spell & spell ) const
+bool Battle::Arena::GraveyardAllowResurrect( int32_t index, const Spell & spell ) const
 {
     if ( !spell.isResurrect() )
         return false;
@@ -877,7 +877,7 @@ bool Battle::Arena::GraveyardAllowResurrect( s32 index, const Spell & spell ) co
     return true;
 }
 
-const Battle::Unit * Battle::Arena::GraveyardLastTroop( s32 index ) const
+const Battle::Unit * Battle::Arena::GraveyardLastTroop( int32_t index ) const
 {
     return GetTroopUID( graveyard.GetLastTroopUID( index ) );
 }
@@ -899,7 +899,7 @@ Battle::Indexes Battle::Arena::GraveyardClosedCells( void ) const
     return graveyard.GetClosedCells();
 }
 
-void Battle::Arena::SetCastleTargetValue( int target, u32 value )
+void Battle::Arena::SetCastleTargetValue( int target, uint32_t value )
 {
     switch ( target ) {
     case CAT_WALL1:
@@ -942,7 +942,7 @@ void Battle::Arena::SetCastleTargetValue( int target, u32 value )
     }
 }
 
-u32 Battle::Arena::GetCastleTargetValue( int target ) const
+uint32_t Battle::Arena::GetCastleTargetValue( int target ) const
 {
     switch ( target ) {
     case CAT_WALL1:
@@ -1060,7 +1060,7 @@ bool Battle::Arena::NetworkTurn( void )
 Battle::Unit * Battle::Arena::CreateElemental( const Spell & spell )
 {
     const HeroBase * hero = GetCurrentCommander();
-    const s32 pos = GetFreePositionNearHero( current_color );
+    const int32_t pos = GetFreePositionNearHero( current_color );
 
     if ( 0 > pos || !hero ) {
         DEBUG_LOG( DBG_BATTLE, DBG_WARN, "internal error" );
@@ -1106,8 +1106,8 @@ Battle::Unit * Battle::Arena::CreateElemental( const Spell & spell )
     }
 
     DEBUG_LOG( DBG_BATTLE, DBG_TRACE, mons.GetName() << ", position: " << pos );
-    u32 count = spell.ExtraValue() * hero->GetPower();
-    u32 acount = hero->HasArtifact( Artifact::BOOK_ELEMENTS );
+    uint32_t count = spell.ExtraValue() * hero->GetPower();
+    uint32_t acount = hero->HasArtifact( Artifact::BOOK_ELEMENTS );
     if ( acount )
         count *= acount * 2;
 
@@ -1125,7 +1125,7 @@ Battle::Unit * Battle::Arena::CreateElemental( const Spell & spell )
     return elem;
 }
 
-Battle::Unit * Battle::Arena::CreateMirrorImage( Unit & b, s32 pos )
+Battle::Unit * Battle::Arena::CreateMirrorImage( Unit & b, int32_t pos )
 {
     Unit * image = new Unit( b, pos, b.isReflect() );
 
@@ -1215,7 +1215,7 @@ int Battle::Arena::GetICNCovr( void ) const
     return icn_covr;
 }
 
-u32 Battle::Arena::GetCurrentTurn( void ) const
+uint32_t Battle::Arena::GetCurrentTurn( void ) const
 {
     return current_turn;
 }

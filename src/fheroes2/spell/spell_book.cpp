@@ -50,9 +50,9 @@ namespace
     }
 }
 
-void SpellBookRedrawLists( const SpellStorage &, Rects &, size_t, const fheroes2::Point &, u32, SpellBook::Filter only, const HeroBase & hero );
+void SpellBookRedrawLists( const SpellStorage &, Rects &, size_t, const fheroes2::Point &, uint32_t, SpellBook::Filter only, const HeroBase & hero );
 void SpellBookRedrawSpells( const SpellStorage & spells, Rects & coords, const size_t index, int32_t px, int32_t py, const HeroBase & hero, bool isRight = false );
-void SpellBookRedrawMP( const fheroes2::Point &, u32 );
+void SpellBookRedrawMP( const fheroes2::Point &, uint32_t );
 
 Spell SpellBook::Open( const HeroBase & hero, const Filter displayableSpells, bool canCastSpell,
                        std::function<void( const std::string & )> * statusCallback /*= nullptr*/ ) const
@@ -162,7 +162,7 @@ Spell SpellBook::Open( const HeroBase & hero, const Filter displayableSpells, bo
         else if ( le.MouseClickLeft( clos_rt ) || Game::HotKeyPressEvent( Game::EVENT_DEFAULT_EXIT ) )
             break;
         else if ( le.MouseClickLeft( pos ) ) {
-            const s32 index = coords.GetIndex( le.GetMouseCursor() );
+            const int32_t index = coords.GetIndex( le.GetMouseCursor() );
 
             if ( 0 <= index ) {
                 SpellStorage::const_iterator spell = displayedSpells.begin() + ( index + current_index );
@@ -236,7 +236,7 @@ Spell SpellBook::Open( const HeroBase & hero, const Filter displayableSpells, bo
         }
 
         if ( le.MousePressRight( pos ) ) {
-            const s32 index = coords.GetIndex( le.GetMouseCursor() );
+            const int32_t index = coords.GetIndex( le.GetMouseCursor() );
 
             if ( 0 <= index ) {
                 SpellStorage::const_iterator spell = displayedSpells.begin() + ( index + current_index );
@@ -315,7 +315,7 @@ void SpellBook::Edit( const HeroBase & hero )
         else if ( le.MouseClickLeft( clos_rt ) || Game::HotKeyPressEvent( Game::EVENT_DEFAULT_EXIT ) )
             break;
         else if ( le.MouseClickLeft( pos ) ) {
-            const s32 index = coords.GetIndex( le.GetMouseCursor() );
+            const int32_t index = coords.GetIndex( le.GetMouseCursor() );
 
             if ( 0 <= index ) {
                 SpellStorage::const_iterator spell = displayedSpells.begin() + ( index + current_index );
@@ -334,7 +334,7 @@ void SpellBook::Edit( const HeroBase & hero )
         }
 
         if ( le.MousePressRight( pos ) ) {
-            const s32 index = coords.GetIndex( le.GetMouseCursor() );
+            const int32_t index = coords.GetIndex( le.GetMouseCursor() );
 
             if ( 0 <= index ) {
                 SpellStorage::const_iterator spell = displayedSpells.begin() + ( index + current_index );
@@ -391,7 +391,7 @@ SpellStorage SpellBook::SetFilter( const Filter filter, const HeroBase * hero ) 
     return res;
 }
 
-void SpellBookRedrawMP( const fheroes2::Point & dst, u32 mp )
+void SpellBookRedrawMP( const fheroes2::Point & dst, uint32_t mp )
 {
     fheroes2::Point tp( dst.x + 11, dst.y + 9 );
     if ( mp > 999 ) {
@@ -410,7 +410,7 @@ void SpellBookRedrawMP( const fheroes2::Point & dst, u32 mp )
     text.Blit( tp.x - text.w() / 2, tp.y );
 }
 
-void SpellBookRedrawLists( const SpellStorage & spells, Rects & coords, const size_t index, const fheroes2::Point & pt, u32 sp, const SpellBook::Filter displayableSpells,
+void SpellBookRedrawLists( const SpellStorage & spells, Rects & coords, const size_t index, const fheroes2::Point & pt, uint32_t sp, const SpellBook::Filter displayableSpells,
                            const HeroBase & hero )
 {
     fheroes2::Display & display = fheroes2::Display::instance();

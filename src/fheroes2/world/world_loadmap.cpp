@@ -51,17 +51,17 @@ namespace
 
 namespace GameStatic
 {
-    extern u32 uniq;
+    extern uint32_t uniq;
 }
 
 #ifdef WITH_ZLIB
 #include "zzlib.h"
-std::vector<u8> DecodeBase64AndUncomress( const std::string & base64 )
+std::vector<uint8_t> DecodeBase64AndUncomress( const std::string & base64 )
 {
-    std::vector<u8> zdata = decodeBase64( base64 );
+    std::vector<uint8_t> zdata = decodeBase64( base64 );
     StreamBuf sb( zdata );
     sb.skip( 4 ); // editor: version
-    u32 realsz = sb.getLE32();
+    uint32_t realsz = sb.getLE32();
     sb.skip( 4 ); // qt uncompress size
     return zlibDecompress( sb.data(), sb.size(), realsz + 1 );
 }
@@ -184,7 +184,7 @@ TiXmlElement & operator>>( TiXmlElement & doc, Castle & town )
     // default building
     if ( 1 != custom3 && 1 != custom2 ) {
         town.building |= DWELLING_MONSTER1;
-        u32 dwelling2 = 0;
+        uint32_t dwelling2 = 0;
         switch ( Game::getDifficulty() ) {
         case Difficulty::EASY:
             dwelling2 = 80;
@@ -203,7 +203,7 @@ TiXmlElement & operator>>( TiXmlElement & doc, Castle & town )
     }
 
     if ( race == Race::RAND ) {
-        u32 kingdom_race = Players::GetPlayerRace( town.GetColor() );
+        uint32_t kingdom_race = Players::GetPlayerRace( town.GetColor() );
         race = Color::NONE != town.GetColor() && ( Race::ALL & kingdom_race ) ? kingdom_race : Race::Rand();
 
         Maps::UpdateCastleSprite( town.GetCenter(), race, town.isCastle(), true );
@@ -799,7 +799,7 @@ TiXmlElement & operator>>( TiXmlElement & doc, MapActions & objects )
         xml_actions->Attribute( "posy", &posy );
         xml_actions->Attribute( "uid", &uid );
 
-        s32 index = Maps::GetIndexFromAbsPoint( posx, posy );
+        int32_t index = Maps::GetIndexFromAbsPoint( posx, posy );
 
         if ( Maps::isValidAbsIndex( index ) ) {
             ListActions & list = objects[index];
@@ -898,7 +898,7 @@ bool World::LoadMapMAP( const std::string & filename )
             return true;
         }
         else if ( xml_data->GetText() ) {
-            std::vector<u8> raw_data = DecodeBase64AndUncomress( xml_data->GetText() );
+            std::vector<uint8_t> raw_data = DecodeBase64AndUncomress( xml_data->GetText() );
             raw_data.push_back( 0 );
             doc.Parse( reinterpret_cast<const char *>( &raw_data[0] ) );
             if ( doc.Error() ) {
@@ -1081,10 +1081,10 @@ bool World::LoadMapMP2( const std::string & filename )
 
     // cood castles
     // 72 x 3 byte (cx, cy, id)
-    for ( u32 ii = 0; ii < 72; ++ii ) {
-        u32 cx = fs.get();
-        u32 cy = fs.get();
-        u32 id = fs.get();
+    for ( uint32_t ii = 0; ii < 72; ++ii ) {
+        uint32_t cx = fs.get();
+        uint32_t cy = fs.get();
+        uint32_t id = fs.get();
 
         // empty block
         if ( 0xFF == cx && 0xFF == cy )
@@ -1141,10 +1141,10 @@ bool World::LoadMapMP2( const std::string & filename )
 
     // cood resource kingdoms
     // 144 x 3 byte (cx, cy, id)
-    for ( u32 ii = 0; ii < 144; ++ii ) {
-        u32 cx = fs.get();
-        u32 cy = fs.get();
-        u32 id = fs.get();
+    for ( uint32_t ii = 0; ii < 144; ++ii ) {
+        uint32_t cx = fs.get();
+        uint32_t cy = fs.get();
+        uint32_t id = fs.get();
 
         // empty block
         if ( 0xFF == cx && 0xFF == cy )
@@ -1198,10 +1198,10 @@ bool World::LoadMapMP2( const std::string & filename )
     fs.skip( 1 );
 
     // count final mp2 blocks
-    u32 countblock = 0;
+    uint32_t countblock = 0;
     while ( 1 ) {
-        u32 l = fs.get();
-        u32 h = fs.get();
+        uint32_t l = fs.get();
+        uint32_t h = fs.get();
 
         // VERBOSE_LOG("dump block: 0x" << std::setw(2) << std::setfill('0') << std::hex << l <<
         //	std::setw(2) << std::setfill('0') << std::hex << h);
@@ -1214,18 +1214,18 @@ bool World::LoadMapMP2( const std::string & filename )
     }
 
     // castle or heroes or (events, rumors, etc)
-    for ( u32 ii = 0; ii < countblock; ++ii ) {
-        s32 findobject = -1;
+    for ( uint32_t ii = 0; ii < countblock; ++ii ) {
+        int32_t findobject = -1;
 
         // read block
         size_t sizeblock = fs.getLE16();
-        std::vector<u8> pblock = fs.getRaw( sizeblock );
+        std::vector<uint8_t> pblock = fs.getRaw( sizeblock );
 
         for ( MapsIndexes::const_iterator it_index = vec_object.begin(); it_index != vec_object.end() && findobject < 0; ++it_index ) {
             const Maps::Tiles & tile = vec_tiles[*it_index];
 
             // orders(quantity2, quantity1)
-            u32 orders = ( tile.GetQuantity2() ? tile.GetQuantity2() : 0 );
+            uint32_t orders = ( tile.GetQuantity2() ? tile.GetQuantity2() : 0 );
             orders <<= 8;
             orders |= tile.GetQuantity1();
 

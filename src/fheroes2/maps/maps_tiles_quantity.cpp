@@ -193,13 +193,13 @@ void Maps::Tiles::QuantitySetArtifact( int art )
     quantity1 = art;
 }
 
-void Maps::Tiles::QuantitySetResource( int res, u32 count )
+void Maps::Tiles::QuantitySetResource( int res, uint32_t count )
 {
     quantity1 = res;
     quantity2 = res == Resource::GOLD ? count / 100 : count;
 }
 
-u32 Maps::Tiles::QuantityGold( void ) const
+uint32_t Maps::Tiles::QuantityGold( void ) const
 {
     switch ( GetObject( false ) ) {
     case MP2::OBJ_ARTIFACT:
@@ -531,7 +531,7 @@ void Maps::Tiles::QuantityUpdate( bool isFirstLoad )
 
     case MP2::OBJ_RESOURCE: {
         const int res = Resource::FromIndexSprite( objectIndex );
-        u32 count = 0;
+        uint32_t count = 0;
 
         switch ( res ) {
         case Resource::GOLD:
@@ -637,7 +637,7 @@ void Maps::Tiles::QuantityUpdate( bool isFirstLoad )
         percents.Push( 2, 10 );
 
         int art = Artifact::UNKNOWN;
-        u32 gold = 0;
+        uint32_t gold = 0;
 
         // variant
         switch ( percents.Get() ) {
@@ -673,7 +673,7 @@ void Maps::Tiles::QuantityUpdate( bool isFirstLoad )
             percents.Push( 4, 5 );
 
             int art = Artifact::UNKNOWN;
-            u32 gold = 0;
+            uint32_t gold = 0;
 
             // variant
             switch ( percents.Get() ) {
@@ -938,18 +938,18 @@ bool Maps::Tiles::MonsterJoinConditionForce( void ) const
     return Monster::JOIN_CONDITION_FORCE == MonsterJoinCondition();
 }
 
-u32 Maps::Tiles::MonsterCount( void ) const
+uint32_t Maps::Tiles::MonsterCount( void ) const
 {
-    return ( static_cast<u32>( quantity1 ) << 8 ) | quantity2;
+    return ( static_cast<uint32_t>( quantity1 ) << 8 ) | quantity2;
 }
 
-void Maps::Tiles::MonsterSetCount( u32 count )
+void Maps::Tiles::MonsterSetCount( uint32_t count )
 {
     quantity1 = count >> 8;
     quantity2 = 0x00FF & count;
 }
 
-void Maps::Tiles::PlaceMonsterOnTile( Tiles & tile, const Monster & mons, u32 count )
+void Maps::Tiles::PlaceMonsterOnTile( Tiles & tile, const Monster & mons, uint32_t count )
 {
     tile.SetObject( MP2::OBJ_MONSTER );
 
@@ -1021,7 +1021,7 @@ void Maps::Tiles::UpdateMonsterInfo( Tiles & tile )
         tile.objectIndex = mons.GetID() - 1; // ICN::MONS32 start from PEASANT
     }
 
-    u32 count = 0;
+    uint32_t count = 0;
 
     // update count (mp2 format)
     if ( tile.quantity1 || tile.quantity2 ) {

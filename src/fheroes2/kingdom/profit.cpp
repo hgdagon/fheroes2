@@ -88,7 +88,7 @@ void ProfitConditions::UpdateCosts( const std::string & spec )
 #endif
 }
 
-payment_t ProfitConditions::FromBuilding( u32 building, int race )
+payment_t ProfitConditions::FromBuilding( uint32_t building, int race )
 {
     payment_t result;
     const char * id = NULL;

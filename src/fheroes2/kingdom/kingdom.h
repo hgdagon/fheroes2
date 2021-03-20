@@ -46,7 +46,7 @@ struct LastLoseHero
         , date( 0 )
     {}
     int id;
-    u32 date;
+    uint32_t date;
 };
 
 struct KingdomCastles : public VecCastles
@@ -105,13 +105,13 @@ public:
     void AddFundsResource( const Funds & );
     void OddFundsResource( const Funds & );
 
-    u32 GetCountCastle( void ) const;
-    u32 GetCountTown( void ) const;
-    u32 GetCountMarketplace( void ) const;
-    u32 GetCountCapital( void ) const;
-    u32 GetLostTownDays( void ) const;
-    u32 GetCountNecromancyShrineBuild( void ) const;
-    u32 GetCountBuilding( u32 ) const;
+    uint32_t GetCountCastle( void ) const;
+    uint32_t GetCountTown( void ) const;
+    uint32_t GetCountMarketplace( void ) const;
+    uint32_t GetCountCapital( void ) const;
+    uint32_t GetLostTownDays( void ) const;
+    uint32_t GetCountNecromancyShrineBuild( void ) const;
+    uint32_t GetCountBuilding( uint32_t ) const;
     uint32_t GetCountThievesGuild() const;
 
     uint32_t GetCountArtifacts() const;
@@ -149,11 +149,11 @@ public:
     void ActionNewWeek( void );
     void ActionNewMonth( void );
 
-    void SetVisited( s32 index, int object = MP2::OBJ_ZERO );
-    u32 CountVisitedObjects( int object ) const;
+    void SetVisited( int32_t index, int object = MP2::OBJ_ZERO );
+    uint32_t CountVisitedObjects( int object ) const;
     bool isVisited( int object ) const;
     bool isVisited( const Maps::Tiles & ) const;
-    bool isVisited( s32, int obj ) const;
+    bool isVisited( int32_t, int obj ) const;
 
     bool isValidKingdomObject( const Maps::Tiles & tile, int objectID ) const;
 
@@ -170,7 +170,7 @@ public:
 
     bool IsTileVisibleFromCrystalBall( const int32_t dest ) const;
 
-    static u32 GetMaxHeroes( void );
+    static uint32_t GetMaxHeroes( void );
     static cost_t GetKingdomStartingResources( int difficulty, bool isAIKingdom );
 
 private:
@@ -180,7 +180,7 @@ private:
     int color;
     Funds resource;
 
-    u32 lost_town_days;
+    uint32_t lost_town_days;
 
     KingdomCastles castles;
     KingdomHeroes heroes;
@@ -191,7 +191,7 @@ private:
     std::list<IndexObject> visit_object;
 
     Puzzle puzzle_maps;
-    u32 visited_tents_colors;
+    uint32_t visited_tents_colors;
 
     KingdomHeroes heroes_cond_loss;
 };
@@ -221,9 +221,9 @@ public:
     void AddCastles( const AllCastles & );
 
     void AddCondLossHeroes( const AllHeroes & );
-    void AddTributeEvents( CapturedObjects &, u32 day, int obj );
+    void AddTributeEvents( CapturedObjects &, uint32_t day, int obj );
 
-    u32 size( void ) const;
+    uint32_t size( void ) const;
 
 private:
     friend StreamBase & operator<<( StreamBase &, const Kingdoms & );

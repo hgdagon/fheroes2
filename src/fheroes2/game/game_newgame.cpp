@@ -72,7 +72,7 @@ int Game::NewHotSeat( void )
     }
     else {
         conf.SetGameType( Game::TYPE_HOTSEAT );
-        const u32 select = SelectCountPlayers();
+        const uint32_t select = SelectCountPlayers();
         if ( select ) {
             conf.SetPreferablyCountPlayers( select );
             return Game::SELECTSCENARIO;
@@ -348,7 +348,7 @@ int Game::NewMulti( void )
     return QUITGAME;
 }
 
-u32 Game::SelectCountPlayers( void )
+uint32_t Game::SelectCountPlayers( void )
 {
     // cursor
     Cursor & cursor = Cursor::Get();

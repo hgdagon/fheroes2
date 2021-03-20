@@ -200,11 +200,11 @@ void DrawFlags( const std::vector<ValueColors> & v, const fheroes2::Point & pos,
 {
     const uint32_t chunk = static_cast<uint32_t>( width / count );
 
-    for ( u32 ii = 0; ii < count; ++ii ) {
+    for ( uint32_t ii = 0; ii < count; ++ii ) {
         if ( ii < v.size() ) {
             const Colors colors( v[ii].second );
-            const u32 sw = fheroes2::AGG::GetICN( ICN::FLAG32, 1 ).width();
-            s32 px = pos.x + chunk / 2 + ii * chunk - ( colors.size() * sw ) / 2;
+            const uint32_t sw = fheroes2::AGG::GetICN( ICN::FLAG32, 1 ).width();
+            int32_t px = pos.x + chunk / 2 + ii * chunk - ( colors.size() * sw ) / 2;
 
             for ( Colors::const_iterator color = colors.begin(); color != colors.end(); ++color ) {
                 const fheroes2::Sprite & flag = fheroes2::AGG::GetICN( ICN::FLAG32, Color::GetIndex( *color ) * 2 + 1 );
@@ -215,16 +215,16 @@ void DrawFlags( const std::vector<ValueColors> & v, const fheroes2::Point & pos,
     }
 }
 
-void DrawHeroIcons( const std::vector<ValueColors> & v, const fheroes2::Point & pos, u32 width )
+void DrawHeroIcons( const std::vector<ValueColors> & v, const fheroes2::Point & pos, uint32_t width )
 {
     if ( v.size() ) {
         fheroes2::Display & display = fheroes2::Display::instance();
         const int chunk = width / v.size();
 
-        for ( u32 ii = 0; ii < v.size(); ++ii ) {
+        for ( uint32_t ii = 0; ii < v.size(); ++ii ) {
             const Heroes * hero = world.GetHeroes( v[ii].first );
             if ( hero ) {
-                s32 px = pos.x + chunk / 2 + ii * chunk;
+                int32_t px = pos.x + chunk / 2 + ii * chunk;
                 const fheroes2::Sprite & window = fheroes2::AGG::GetICN( ICN::LOCATORS, 22 );
                 fheroes2::Blit( window, display, px - window.width() / 2, pos.y - 4 );
 
@@ -253,7 +253,7 @@ void Dialog::ThievesGuild( bool oracle )
 
     fheroes2::Point dst_pt( cur_pt.x, cur_pt.y );
 
-    const u32 count = oracle ? 0xFF : world.GetKingdom( Settings::Get().CurrentColor() ).GetCountBuilding( BUILD_THIEVESGUILD );
+    const uint32_t count = oracle ? 0xFF : world.GetKingdom( Settings::Get().CurrentColor() ).GetCountBuilding( BUILD_THIEVESGUILD );
 
     std::vector<ValueColors> v;
     v.reserve( KINGDOMMAX );
@@ -264,7 +264,7 @@ void Dialog::ThievesGuild( bool oracle )
     Text text;
 
     // head 1
-    u32 ii = 0;
+    uint32_t ii = 0;
     for ( ii = 0; ii < colors.size(); ++ii ) {
         switch ( ii + 1 ) {
         case 1:

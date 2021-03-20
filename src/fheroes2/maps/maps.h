@@ -29,7 +29,7 @@
 
 struct Point;
 
-class MapsIndexes : public std::vector<s32>
+class MapsIndexes : public std::vector<int32_t>
 {};
 
 namespace Maps
@@ -49,37 +49,37 @@ namespace Maps
     const char * GetMinesName( int res );
 
     int GetDirection( int from, int to );
-    s32 GetDirectionIndex( s32, int direct );
-    bool isValidDirection( s32, int direct );
+    int32_t GetDirectionIndex( int32_t, int direct );
+    bool isValidDirection( int32_t, int direct );
 
-    bool isValidAbsIndex( s32 );
+    bool isValidAbsIndex( int32_t );
     bool isValidAbsPoint( const Point & pt );
-    bool isValidAbsPoint( s32 x, s32 y );
+    bool isValidAbsPoint( int32_t x, int32_t y );
 
-    Point GetPoint( s32 );
+    Point GetPoint( int32_t );
 
-    s32 GetIndexFromAbsPoint( const Point & mp );
-    s32 GetIndexFromAbsPoint( s32 px, s32 py );
+    int32_t GetIndexFromAbsPoint( const Point & mp );
+    int32_t GetIndexFromAbsPoint( int32_t px, int32_t py );
 
-    Indexes GetAroundIndexes( s32 );
-    Indexes GetAroundIndexes( s32, int dist, bool sort = false ); // sorting distance
-    Indexes GetDistanceIndexes( s32 center, int dist );
+    Indexes GetAroundIndexes( int32_t );
+    Indexes GetAroundIndexes( int32_t, int dist, bool sort = false ); // sorting distance
+    Indexes GetDistanceIndexes( int32_t center, int dist );
 
-    Indexes ScanAroundObject( s32, int obj );
-    Indexes ScanAroundObject( s32, u32 dist, int obj );
+    Indexes ScanAroundObject( int32_t, int obj );
+    Indexes ScanAroundObject( int32_t, uint32_t dist, int obj );
 
-    Indexes GetTilesUnderProtection( s32 );
-    bool TileIsUnderProtection( s32 );
-    bool IsNearTiles( s32, s32 );
+    Indexes GetTilesUnderProtection( int32_t );
+    bool TileIsUnderProtection( int32_t );
+    bool IsNearTiles( int32_t, int32_t );
 
     Indexes GetObjectPositions( int obj, bool ignoreHeroes );
-    Indexes GetObjectPositions( s32, int obj, bool ignoreHeroes );
-    Indexes GetObjectsPositions( const std::vector<u8> & objs );
+    Indexes GetObjectPositions( int32_t, int obj, bool ignoreHeroes );
+    Indexes GetObjectsPositions( const std::vector<uint8_t> & objs );
 
-    int TileIsCoast( s32, int direct = DIRECTION_ALL );
+    int TileIsCoast( int32_t, int direct = DIRECTION_ALL );
 
-    void ClearFog( s32, int scoute, int color );
-    u32 GetApproximateDistance( s32, s32 );
+    void ClearFog( int32_t, int scoute, int color );
+    uint32_t GetApproximateDistance( int32_t, int32_t );
 
     void UpdateCastleSprite( const Point & center, int race, bool isCastle = false, bool isRandom = false );
     void MinimizeAreaForCastle( const Point & );

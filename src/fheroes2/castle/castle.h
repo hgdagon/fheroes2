@@ -39,13 +39,13 @@ class Heroes;
 class MeetingButton : public fheroes2::ButtonSprite
 {
 public:
-    MeetingButton( s32, s32 );
+    MeetingButton( int32_t, int32_t );
 };
 
 class SwapButton : public fheroes2::ButtonSprite
 {
 public:
-    SwapButton( s32, s32 );
+    SwapButton( int32_t, int32_t );
 };
 
 enum building_t
@@ -114,7 +114,7 @@ public:
     };
 
     Castle();
-    Castle( s32, s32, int rs );
+    Castle( int32_t, int32_t, int rs );
     virtual ~Castle() {}
     void LoadFromMP2( StreamBuf );
 
@@ -129,7 +129,7 @@ public:
     bool isPosition( const Point & ) const;
     bool isNecromancyShrineBuild( void ) const;
 
-    u32 CountBuildings( void ) const;
+    uint32_t CountBuildings( void ) const;
 
     Heroes * RecruitHero( Heroes * );
     CastleHeroes GetHeroes( void ) const;
@@ -149,8 +149,8 @@ public:
     const Army & GetActualArmy( void ) const;
     Army & GetActualArmy( void );
     double GetGarrisonStrength() const;
-    u32 getMonstersInDwelling( u32 ) const;
-    u32 GetActualDwelling( u32 ) const;
+    uint32_t getMonstersInDwelling( uint32_t ) const;
+    uint32_t GetActualDwelling( uint32_t ) const;
 
     bool RecruitMonsterFromDwelling( uint32_t dw, uint32_t count, bool force = false );
     bool RecruitMonster( const Troop & troop, bool showDialog = true );
@@ -180,41 +180,41 @@ public:
     int GetLuckModificator( std::string * ) const;
 
     bool AllowBuild( void ) const;
-    bool AllowBuyBuilding( u32 ) const;
-    bool isBuild( u32 bd ) const;
-    bool BuyBuilding( u32 );
+    bool AllowBuyBuilding( uint32_t ) const;
+    bool isBuild( uint32_t bd ) const;
+    bool BuyBuilding( uint32_t );
     bool AllowBuyBoat( void ) const;
     bool BuyBoat( void );
-    u32 GetBuildingRequirement( u32 ) const;
+    uint32_t GetBuildingRequirement( uint32_t ) const;
 
-    int CheckBuyBuilding( u32 ) const;
+    int CheckBuyBuilding( uint32_t ) const;
     static int GetAllBuildingStatus( const Castle & );
 
     void Scoute( void ) const;
 
-    std::string GetStringBuilding( u32 ) const;
-    std::string GetDescriptionBuilding( u32 ) const;
+    std::string GetStringBuilding( uint32_t ) const;
+    std::string GetDescriptionBuilding( uint32_t ) const;
 
     // Returns message displayed in the status bar on the castle view
     // when hover over the building
     std::string buildingStatusMessage( const uint32_t buildingId ) const;
 
-    static const char * GetStringBuilding( u32, int race );
-    static const char * GetDescriptionBuilding( u32, int race );
+    static const char * GetStringBuilding( uint32_t, int race );
+    static const char * GetDescriptionBuilding( uint32_t, int race );
 
-    static int GetICNBuilding( u32, int race );
+    static int GetICNBuilding( uint32_t, int race );
     static int GetICNBoat( int race );
-    u32 GetUpgradeBuilding( u32 ) const;
+    uint32_t GetUpgradeBuilding( uint32_t ) const;
 
     static bool PredicateIsCastle( const Castle * );
     static bool PredicateIsTown( const Castle * );
     static bool PredicateIsCapital( const Castle * );
     static bool PredicateIsBuildBuilding( const Castle * castle, const uint32_t building );
 
-    static u32 GetGrownWell( void );
-    static u32 GetGrownWel2( void );
-    static u32 GetGrownWeekOf( const Monster & );
-    static u32 GetGrownMonthOf( void );
+    static uint32_t GetGrownWell( void );
+    static uint32_t GetGrownWel2( void );
+    static uint32_t GetGrownWeekOf( const Monster & );
+    static uint32_t GetGrownMonthOf( void );
 
     std::string String( void ) const;
 
@@ -224,10 +224,10 @@ public:
     void SwapCastleHeroes( CastleHeroes & );
 
 private:
-    u32 * GetDwelling( u32 dw );
+    uint32_t * GetDwelling( uint32_t dw );
     void EducateHeroes( void );
     Rect RedrawResourcePanel( const Point & ) const;
-    u32 OpenTown( void );
+    uint32_t OpenTown( void );
     void OpenTavern( void );
     void OpenWell( void );
     void OpenMageGuild( const CastleHeroes & heroes );
@@ -243,13 +243,13 @@ private:
 #endif
 
     int race;
-    u32 building;
+    uint32_t building;
     Captain captain;
 
     std::string name;
 
     MageGuild mageguild;
-    u32 dwelling[CASTLEMAXMONSTER];
+    uint32_t dwelling[CASTLEMAXMONSTER];
     Army army;
 };
 
@@ -296,7 +296,7 @@ namespace CastleDialog
             : id( b )
             , coord( r ){};
 
-        bool operator==( u32 b ) const
+        bool operator==( uint32_t b ) const
         {
             return b == static_cast<uint32_t>( id );
         }
@@ -312,10 +312,10 @@ namespace CastleDialog
     };
 
     void RedrawAllBuilding( const Castle & castle, const Point & dst_pt, const CacheBuildings & orders, const CastleDialog::FadeBuilding & alphaBuilding );
-    void RedrawBuildingSpriteToArea( const fheroes2::Sprite &, s32, s32, const Rect &, uint8_t alpha = 255 );
+    void RedrawBuildingSpriteToArea( const fheroes2::Sprite &, int32_t, int32_t, const Rect &, uint8_t alpha = 255 );
 
-    void CastleRedrawBuilding( const Castle &, const Point &, u32 build, u32 frame, uint8_t alpha = 255 );
-    void CastleRedrawBuildingExtended( const Castle &, const Point &, u32 build, u32 frame, uint8_t alpha = 255 );
+    void CastleRedrawBuilding( const Castle &, const Point &, uint32_t build, uint32_t frame, uint8_t alpha = 255 );
+    void CastleRedrawBuildingExtended( const Castle &, const Point &, uint32_t build, uint32_t frame, uint8_t alpha = 255 );
 
     bool RoadConnectionNeeded( const Castle & castle, const uint32_t buildId, const bool constructionInProgress );
     void RedrawRoadConnection( const Castle & castle, const Point & position, const uint32_t buildId, const uint8_t alpha = 255 );

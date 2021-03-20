@@ -55,7 +55,7 @@ namespace Battle
         Rect GetArea( void ) const;
         void SetArea( const Rect & );
 
-        s32 GetIndexAbsPosition( const Point & ) const;
+        int32_t GetIndexAbsPosition( const Point & ) const;
         Indexes GetPassableQualityPositions( const Unit & b );
         std::vector<Unit *> GetNearestTroops( const Unit * startUnit, const std::vector<Unit *> & blackList );
         Indexes GetAStarPath( const Unit & unit, const Position & destination, const bool debug = true ) const;
@@ -69,30 +69,30 @@ namespace Battle
 
         static std::string GetMoatInfo( void );
 
-        static Cell * GetCell( s32, int = CENTER );
-        static bool isNearIndexes( s32, s32 );
-        static bool isValidIndex( s32 );
-        static bool isCastleIndex( s32 );
-        static bool isMoatIndex( s32, int );
-        static bool isBridgeIndex( s32, int );
-        static bool isImpassableIndex( s32 );
-        static bool isOutOfWallsIndex( s32 );
+        static Cell * GetCell( int32_t, int = CENTER );
+        static bool isNearIndexes( int32_t, int32_t );
+        static bool isValidIndex( int32_t );
+        static bool isCastleIndex( int32_t );
+        static bool isMoatIndex( int32_t, int );
+        static bool isBridgeIndex( int32_t, int );
+        static bool isImpassableIndex( int32_t );
+        static bool isOutOfWallsIndex( int32_t );
         static bool isReflectDirection( int );
         static bool IsLeftDirection( const int32_t startCellId, const int32_t endCellId, const bool prevLeftDirection );
-        static bool isNegativeDistance( s32 index1, s32 index2 );
+        static bool isNegativeDistance( int32_t index1, int32_t index2 );
         static int GetReflectDirection( int );
-        static int GetDirection( s32, s32 );
+        static int GetDirection( int32_t, int32_t );
         static int32_t DoubleCellAttackValue( const Unit & attacker, const Unit & target, const int32_t from, const int32_t targetCell );
         static int32_t OptimalAttackTarget( const Unit & attacker, const Unit & target, const int32_t from );
         static int32_t OptimalAttackValue( const Unit & attacker, const Unit & target, const int32_t from );
-        static uint32_t GetDistance( s32, s32 );
-        static bool isValidDirection( s32, int );
-        static s32 GetIndexDirection( s32, int );
-        static Indexes GetDistanceIndexes( s32, u32 );
-        static Indexes GetAroundIndexes( s32 center, s32 ignore = -1 );
+        static uint32_t GetDistance( int32_t, int32_t );
+        static bool isValidDirection( int32_t, int );
+        static int32_t GetIndexDirection( int32_t, int );
+        static Indexes GetDistanceIndexes( int32_t, uint32_t );
+        static Indexes GetAroundIndexes( int32_t center, int32_t ignore = -1 );
         static Indexes GetAroundIndexes( const Unit & );
-        static Indexes GetMoveWideIndexes( s32, bool reflect );
-        static bool isValidMirrorImageIndex( s32, const Unit * );
+        static Indexes GetMoveWideIndexes( int32_t, bool reflect );
+        static bool isValidMirrorImageIndex( int32_t, const Unit * );
 
         static Indexes GetAdjacentEnemies( const Unit & unit );
 

@@ -65,10 +65,10 @@ namespace Maps
         bool WinsAllowNormalVictory( void ) const;
         int WinsFindArtifactID( void ) const;
         bool WinsFindUltimateArtifact( void ) const;
-        u32 WinsAccumulateGold( void ) const;
+        uint32_t WinsAccumulateGold( void ) const;
         Point WinsMapsPositionObject( void ) const;
         Point LossMapsPositionObject( void ) const;
-        u32 LossCountDays( void ) const;
+        uint32_t LossCountDays( void ) const;
 
         std::string String( void ) const;
         void Reset( void );
@@ -78,27 +78,27 @@ namespace Maps
         std::string name;
         std::string description;
 
-        u16 size_w;
-        u16 size_h;
-        u8 difficulty;
-        u8 races[KINGDOMMAX];
-        u8 unions[KINGDOMMAX];
+        uint16_t size_w;
+        uint16_t size_h;
+        uint8_t difficulty;
+        uint8_t races[KINGDOMMAX];
+        uint8_t unions[KINGDOMMAX];
 
-        u8 kingdom_colors;
-        u8 allow_human_colors;
-        u8 allow_comp_colors;
-        u8 rnd_races;
+        uint8_t kingdom_colors;
+        uint8_t allow_human_colors;
+        uint8_t allow_comp_colors;
+        uint8_t rnd_races;
 
-        u8 conditions_wins; // 0: wins def, 1: town, 2: hero, 3: artifact, 4: side, 5: gold
+        uint8_t conditions_wins; // 0: wins def, 1: town, 2: hero, 3: artifact, 4: side, 5: gold
         bool comp_also_wins;
         bool allow_normal_victory;
-        u16 wins1;
-        u16 wins2;
-        u8 conditions_loss; // 0: loss def, 1: town, 2: hero, 3: out time
-        u16 loss1;
-        u16 loss2;
+        uint16_t wins1;
+        uint16_t wins2;
+        uint8_t conditions_loss; // 0: loss def, 1: town, 2: hero, 3: out time
+        uint16_t loss1;
+        uint16_t loss2;
 
-        u32 localtime;
+        uint32_t localtime;
 
         bool with_heroes;
     };

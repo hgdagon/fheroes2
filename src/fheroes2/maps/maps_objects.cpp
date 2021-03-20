@@ -48,7 +48,7 @@ MapEvent::MapEvent()
     , colors( 0 )
 {}
 
-void MapEvent::LoadFromMP2( s32 index, StreamBuf st )
+void MapEvent::LoadFromMP2( int32_t index, StreamBuf st )
 {
     // id
     if ( 1 == st.get() ) {
@@ -124,7 +124,7 @@ MapSphinx::MapSphinx()
     , valid( false )
 {}
 
-void MapSphinx::LoadFromMP2( s32 index, StreamBuf st )
+void MapSphinx::LoadFromMP2( int32_t index, StreamBuf st )
 {
     // id
     if ( 0 == st.get() ) {
@@ -144,10 +144,10 @@ void MapSphinx::LoadFromMP2( s32 index, StreamBuf st )
         artifact = st.getLE16();
 
         // count answers
-        u32 count = st.get();
+        uint32_t count = st.get();
 
         // answers
-        for ( u32 i = 0; i < 8; ++i ) {
+        for ( uint32_t i = 0; i < 8; ++i ) {
             std::string answer = Game::GetEncodeString( st.toString( 13 ) );
 
             if ( count-- && answer.size() )
@@ -203,14 +203,14 @@ MapSign::MapSign()
     : MapObjectSimple( MP2::OBJ_SIGN )
 {}
 
-MapSign::MapSign( s32 index, const std::string & msg )
+MapSign::MapSign( int32_t index, const std::string & msg )
     : MapObjectSimple( MP2::OBJ_SIGN )
 {
     SetIndex( index );
     message = msg;
 }
 
-void MapSign::LoadFromMP2( s32 index, StreamBuf st )
+void MapSign::LoadFromMP2( int32_t index, StreamBuf st )
 {
     st.skip( 9 );
     message = st.toString();

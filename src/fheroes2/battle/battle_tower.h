@@ -44,9 +44,9 @@ namespace Battle
 
         bool isValid( void ) const;
         int GetColor( void ) const;
-        u32 GetType( void ) const;
-        u32 GetBonus( void ) const;
-        u32 GetAttack( void ) const;
+        uint32_t GetType( void ) const;
+        uint32_t GetBonus( void ) const;
+        uint32_t GetAttack( void ) const;
 
         const char * GetName( void ) const;
 
@@ -58,7 +58,7 @@ namespace Battle
     private:
         int type;
         int color;
-        u32 bonus;
+        uint32_t bonus;
         bool valid;
     };
 }

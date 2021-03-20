@@ -36,13 +36,13 @@ public:
     Puzzle();
     Puzzle & operator=( const char * );
 
-    void Update( u32 open, u32 total );
+    void Update( uint32_t open, uint32_t total );
     void ShowMapsDialog( void ) const;
 
-    u8 zone1_order[24];
-    u8 zone2_order[16];
-    u8 zone3_order[4];
-    u8 zone4_order[4];
+    uint8_t zone1_order[24];
+    uint8_t zone2_order[16];
+    uint8_t zone3_order[4];
+    uint8_t zone4_order[4];
 };
 
 StreamBase & operator<<( StreamBase &, const Puzzle & );

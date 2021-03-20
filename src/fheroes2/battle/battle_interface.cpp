@@ -160,7 +160,7 @@ namespace Battle
 {
     int GetIndexIndicator( const Unit & );
     int GetSwordCursorDirection( int );
-    int GetDirectionFromCursorSword( u32 );
+    int GetDirectionFromCursorSword( uint32_t );
     int GetCursorFromSpell( int );
 
     struct CursorPosition
@@ -180,7 +180,7 @@ namespace Battle
             : openlog( false )
         {}
 
-        void SetPosition( u32 px, u32 py )
+        void SetPosition( uint32_t px, uint32_t py )
         {
             const uint32_t mx = 6;
             const uint32_t sw = fheroes2::Display::DEFAULT_WIDTH;
@@ -338,7 +338,7 @@ namespace Battle
     }
 }
 
-bool CursorAttack( u32 theme )
+bool CursorAttack( uint32_t theme )
 {
     switch ( theme ) {
     case Cursor::WAR_ARROW:
@@ -517,7 +517,7 @@ int Battle::GetSwordCursorDirection( int dir )
     return 0;
 }
 
-int Battle::GetDirectionFromCursorSword( u32 sword )
+int Battle::GetDirectionFromCursorSword( uint32_t sword )
 {
     switch ( sword ) {
     case Cursor::SWORD_TOPLEFT:
@@ -720,7 +720,7 @@ Battle::Status::Status()
     bar2.Set( Font::BIG );
 }
 
-void Battle::Status::SetPosition( s32 cx, s32 cy )
+void Battle::Status::SetPosition( int32_t cx, int32_t cy )
 {
     Rect::x = cx;
     Rect::y = cy;
@@ -836,10 +836,10 @@ void Battle::ArmiesOrder::RedrawUnit( const Rect & pos, const Battle::Unit & uni
 void Battle::ArmiesOrder::Redraw( const Unit * current, fheroes2::Image & output )
 {
     if ( orders ) {
-        const u32 ow = ARMYORDERW + 2;
+        const uint32_t ow = ARMYORDERW + 2;
 
-        u32 ox = area.x + ( area.w - ow * std::count_if( orders->begin(), orders->end(), []( const Unit * unit ) { return unit->isValid(); } ) ) / 2;
-        u32 oy = area.y;
+        uint32_t ox = area.x + ( area.w - ow * std::count_if( orders->begin(), orders->end(), []( const Unit * unit ) { return unit->isValid(); } ) ) / 2;
+        uint32_t oy = area.y;
 
         Rect::x = ox;
         Rect::y = oy;
@@ -857,7 +857,7 @@ void Battle::ArmiesOrder::Redraw( const Unit * current, fheroes2::Image & output
     }
 }
 
-Battle::Interface::Interface( Arena & a, s32 center )
+Battle::Interface::Interface( Arena & a, int32_t center )
     : arena( a )
     , _surfaceInnerArea( 0, 0, fheroes2::Display::DEFAULT_WIDTH, fheroes2::Display::DEFAULT_HEIGHT )
     , _mainSurface( fheroes2::Display::DEFAULT_WIDTH, fheroes2::Display::DEFAULT_HEIGHT )
@@ -1447,7 +1447,7 @@ void Battle::Interface::RedrawTroopSprite( const Unit & b )
         // move offset
         if ( _movingUnit == &b ) {
             const fheroes2::Sprite & spmon0 = fheroes2::AGG::GetICN( msi.icn_file, _movingUnit->animation.firstFrame() );
-            const s32 ox = spmon1.x() - spmon0.x();
+            const int32_t ox = spmon1.x() - spmon0.x();
 
             if ( _movingUnit->animation.animationLength() ) {
                 const int32_t cx = _movingPos.x - rt.x;
@@ -1495,8 +1495,8 @@ void Battle::Interface::RedrawTroopCount( const Unit & unit )
     const int tileInFront = Board::GetIndexDirection( monsterIndex, isReflected ? Battle::LEFT : Battle::RIGHT );
     const bool isValidFrontMonster = ( monsterIndex / ARENAW ) == ( tileInFront == ARENAW );
 
-    s32 sx = rt.x + ( isReflected ? -7 : rt.w - 13 );
-    const s32 sy = rt.y + rt.h - bar.height() - ( isReflected ? 21 : 9 );
+    int32_t sx = rt.x + ( isReflected ? -7 : rt.w - 13 );
+    const int32_t sy = rt.y + rt.h - bar.height() - ( isReflected ? 21 : 9 );
 
     int xOffset = unit.animation.getTroopCountOffset( isReflected );
     // check if has unit standing in front
@@ -1811,7 +1811,7 @@ void Battle::Interface::RedrawCastleMainTower( const Castle & castle )
     fheroes2::Blit( sprite, _mainSurface, sprite.x(), sprite.y() );
 }
 
-void Battle::Interface::RedrawLowObjects( s32 cell_index )
+void Battle::Interface::RedrawLowObjects( int32_t cell_index )
 {
     const Cell * cell = Board::GetCell( cell_index );
     if ( cell == NULL )
@@ -1845,7 +1845,7 @@ void Battle::Interface::RedrawLowObjects( s32 cell_index )
     }
 }
 
-void Battle::Interface::RedrawHighObjects( s32 cell_index )
+void Battle::Interface::RedrawHighObjects( int32_t cell_index )
 {
     const Cell * cell = Board::GetCell( cell_index );
     if ( cell == NULL )
@@ -1991,7 +1991,7 @@ int Battle::Interface::GetBattleCursor( std::string & statusMsg ) const
                     const int cursor = GetSwordCursorDirection( dir );
 
                     if ( cursor && Board::isValidDirection( index_pos, dir ) ) {
-                        const s32 from = Board::GetIndexDirection( index_pos, dir );
+                        const int32_t from = Board::GetIndexDirection( index_pos, dir );
 
                         // if free cell or it is b_current
                         if ( UNKNOWN != Board::GetCell( from )->GetDirection() || from == _currentUnit->GetHeadIndex()
@@ -2517,7 +2517,7 @@ void Battle::Interface::ButtonSkipAction( Actions & a )
     }
 }
 
-int Battle::Interface::GetAllowSwordDirection( u32 index )
+int Battle::Interface::GetAllowSwordDirection( uint32_t index )
 {
     int res = 0;
 
@@ -2525,7 +2525,7 @@ int Battle::Interface::GetAllowSwordDirection( u32 index )
         const Indexes around = Board::GetAroundIndexes( index );
 
         for ( Indexes::const_iterator it = around.begin(); it != around.end(); ++it ) {
-            const s32 from = *it;
+            const int32_t from = *it;
 
             if ( UNKNOWN != Board::GetCell( from )->GetDirection() || from == _currentUnit->GetHeadIndex()
                  || ( _currentUnit->isWide() && from == _currentUnit->GetTailIndex() ) ) {
@@ -2537,7 +2537,7 @@ int Battle::Interface::GetAllowSwordDirection( u32 index )
     return res;
 }
 
-void Battle::Interface::MousePressRightBoardAction( u32 /*themes*/, const Cell & cell )
+void Battle::Interface::MousePressRightBoardAction( uint32_t /*themes*/, const Cell & cell )
 {
     const Unit * b = cell.GetUnit();
 
@@ -2546,7 +2546,7 @@ void Battle::Interface::MousePressRightBoardAction( u32 /*themes*/, const Cell &
     }
 }
 
-void Battle::Interface::MouseLeftClickBoardAction( u32 themes, const Cell & cell, Actions & a )
+void Battle::Interface::MouseLeftClickBoardAction( uint32_t themes, const Cell & cell, Actions & a )
 {
     const int32_t index = cell.GetIndex();
     const Unit * b = cell.GetUnit();
@@ -2570,7 +2570,7 @@ void Battle::Interface::MouseLeftClickBoardAction( u32 themes, const Cell & cell
             const int dir = GetDirectionFromCursorSword( themes );
 
             if ( enemy && Board::isValidDirection( index, dir ) ) {
-                const s32 move = Board::GetIndexDirection( index, dir );
+                const int32_t move = Board::GetIndexDirection( index, dir );
 
                 if ( _currentUnit->GetHeadIndex() != move )
                     a.push_back( Command( MSG_BATTLE_MOVE, _currentUnit->GetUID(), move ) );
@@ -2826,8 +2826,8 @@ void Battle::Interface::RedrawActionAttackPart2( Unit & attacker, TargetsInfo & 
         StringReplace( msg, "%{attacker}", attacker.GetName() );
 
         if ( 1 < targets.size() ) {
-            u32 killed = 0;
-            u32 damage = 0;
+            uint32_t killed = 0;
+            uint32_t damage = 0;
 
             for ( TargetsInfo::const_iterator it = targets.begin(); it != targets.end(); ++it ) {
                 if ( !it->defender->isModes( CAP_MIRRORIMAGE ) ) {
@@ -3154,7 +3154,7 @@ void Battle::Interface::RedrawActionResistSpell( const Unit & target, bool playS
     status.SetMessage( "", false );
 }
 
-void Battle::Interface::RedrawActionSpellCastPart1( const Spell & spell, s32 dst, const HeroBase * caster, const std::string & name, const TargetsInfo & targets )
+void Battle::Interface::RedrawActionSpellCastPart1( const Spell & spell, int32_t dst, const HeroBase * caster, const std::string & name, const TargetsInfo & targets )
 {
     std::string msg;
     Unit * target = targets.size() ? targets.front().defender : NULL;
@@ -3696,7 +3696,7 @@ void Battle::Interface::RedrawActionArrowSpell( const Unit & target )
     }
 }
 
-void Battle::Interface::RedrawActionTeleportSpell( Unit & target, s32 dst )
+void Battle::Interface::RedrawActionTeleportSpell( Unit & target, int32_t dst )
 {
     LocalEvent & le = LocalEvent::Get();
 
@@ -4151,7 +4151,7 @@ void Battle::Interface::RedrawActionDeathWaveSpell( const TargetsInfo & targets,
     RedrawTargetsWithFrameAnimation( targets, ICN::REDDEATH, M82::UNKNOWN, true );
 }
 
-void Battle::Interface::RedrawActionColdRingSpell( s32 dst, const TargetsInfo & targets )
+void Battle::Interface::RedrawActionColdRingSpell( int32_t dst, const TargetsInfo & targets )
 {
     LocalEvent & le = LocalEvent::Get();
 
@@ -4311,7 +4311,7 @@ void Battle::Interface::RedrawActionArmageddonSpell()
 
     _currentUnit = NULL;
     AGG::PlaySound( M82::ARMGEDN );
-    u32 alpha = 10;
+    uint32_t alpha = 10;
 
     while ( le.HandleEvents() && alpha < 100 ) {
         CheckGlobalEvents( le );
@@ -4811,7 +4811,7 @@ void Battle::Interface::ProcessingHeroDialogResult( int res, Actions & a )
             const HeroBase * enemy = arena.GetCommander( arena.GetCurrentColor(), true );
 
             if ( enemy ) {
-                const s32 cost = arena.GetCurrentForce().GetSurrenderCost();
+                const int32_t cost = arena.GetCurrentForce().GetSurrenderCost();
                 const Kingdom & kingdom = world.GetKingdom( arena.GetCurrentColor() );
 
                 if ( !kingdom.AllowPayment( Funds( Resource::GOLD, cost ) ) )

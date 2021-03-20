@@ -140,7 +140,7 @@ bool Game::Save( const std::string & fn )
         return false;
     }
 
-    u16 loadver = GetLoadVersion();
+    uint16_t loadver = GetLoadVersion();
     if ( !autosave )
         Game::SetLastSavename( fn );
 
@@ -180,7 +180,7 @@ bool Game::Load( const std::string & fn )
 
     char major, minor;
     fs >> major >> minor;
-    const u16 savid = ( static_cast<u16>( major ) << 8 ) | static_cast<u16>( minor );
+    const uint16_t savid = ( static_cast<uint16_t>( major ) << 8 ) | static_cast<uint16_t>( minor );
 
     // check version sav file
     if ( savid != SAV2ID2 && savid != SAV2ID3 ) {
@@ -189,7 +189,7 @@ bool Game::Load( const std::string & fn )
     }
 
     std::string strver;
-    u16 binver = 0;
+    uint16_t binver = 0;
 
     // read raw info
     fs >> strver >> binver;
@@ -238,7 +238,7 @@ bool Game::Load( const std::string & fn )
     if ( ( header.status & HeaderSAV::IS_LOYALTY ) && !conf.PriceLoyaltyVersion() )
         Dialog::Message( "Warning", _( "This file is saved in the \"Price Loyalty\" version.\nSome items may be unavailable." ), Font::BIG, Dialog::OK );
 
-    // SaveMemToFile(std::vector<u8>(fz.data(), fz.data() + fz.size()), "gdata.bin");
+    // SaveMemToFile(std::vector<uint8_t>(fz.data(), fz.data() + fz.size()), "gdata.bin");
     fz >> binver;
 
     // check version: false
@@ -253,7 +253,7 @@ bool Game::Load( const std::string & fn )
 
     DEBUG_LOG( DBG_GAME, DBG_TRACE, "load version: " << binver );
     SetLoadVersion( binver );
-    u16 end_check = 0;
+    uint16_t end_check = 0;
 
     fz >> World::Get() >> conf;
     if ( ( conf.GameType() & Game::TYPE_CAMPAIGN ) != 0 && Game::GetLoadVersion() == FORMAT_VERSION_084_RELEASE ) {
@@ -299,7 +299,7 @@ bool Game::LoadSAV2FileInfo( const std::string & fn, Maps::FileInfo & finfo )
 
     char major, minor;
     fs >> major >> minor;
-    const u16 savid = ( static_cast<u16>( major ) << 8 ) | static_cast<u16>( minor );
+    const uint16_t savid = ( static_cast<uint16_t>( major ) << 8 ) | static_cast<uint16_t>( minor );
 
     // check version sav file
     if ( savid != SAV2ID2 && savid != SAV2ID3 ) {
@@ -308,7 +308,7 @@ bool Game::LoadSAV2FileInfo( const std::string & fn, Maps::FileInfo & finfo )
     }
 
     std::string strver;
-    u16 binver = 0;
+    uint16_t binver = 0;
 
     // read raw info
     fs >> strver >> binver;

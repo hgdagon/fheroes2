@@ -27,10 +27,10 @@
 #include "mp2.h"
 #include "objdsrt.h"
 
-int ObjDsrt::GetPassable( u32 index )
+int ObjDsrt::GetPassable( uint32_t index )
 {
-    const u8 disabled[] = {61, 89, 90, 91, 92, 93, 125, 126};
-    const u8 restricted[] = {3,  6,  9,  12, 14, 15, 17, 18, 20, 21, 22, 24, 26, 28,  30,  31,  32,  34,  36,  39,  40,  42, 45,
+    const uint8_t disabled[] = {61, 89, 90, 91, 92, 93, 125, 126};
+    const uint8_t restricted[] = {3,  6,  9,  12, 14, 15, 17, 18, 20, 21, 22, 24, 26, 28,  30,  31,  32,  34,  36,  39,  40,  42, 45,
                              48, 49, 51, 53, 72, 76, 81, 83, 94, 95, 97, 98, 99, 100, 110, 111, 112, 116, 121, 127, 128, 130};
 
     if ( isShadow( index ) )
@@ -41,18 +41,18 @@ int ObjDsrt::GetPassable( u32 index )
     return ARRAY_COUNT_END( restricted ) != std::find( restricted, ARRAY_COUNT_END( restricted ), index ) ? DIRECTION_CENTER_ROW | DIRECTION_BOTTOM_ROW : DIRECTION_ALL;
 }
 
-bool ObjDsrt::isAction( u32 index )
+bool ObjDsrt::isAction( uint32_t index )
 {
     return MP2::OBJ_ZERO != GetActionObject( index );
 }
 
-bool ObjDsrt::isShadow( u32 index )
+bool ObjDsrt::isShadow( uint32_t index )
 {
-    const u8 shadows[] = {11, 13, 16, 19, 23, 25, 27, 29, 33, 35, 38, 41, 44, 46, 47, 50, 52, 54, 71, 75, 77, 80, 86, 103, 115, 118};
+    const uint8_t shadows[] = {11, 13, 16, 19, 23, 25, 27, 29, 33, 35, 38, 41, 44, 46, 47, 50, 52, 54, 71, 75, 77, 80, 86, 103, 115, 118};
     return ARRAY_COUNT_END( shadows ) != std::find( shadows, ARRAY_COUNT_END( shadows ), index );
 }
 
-int ObjDsrt::GetActionObject( u32 index )
+int ObjDsrt::GetActionObject( uint32_t index )
 {
     switch ( index ) {
     case 73:

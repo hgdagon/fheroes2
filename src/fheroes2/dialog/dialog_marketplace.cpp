@@ -122,7 +122,7 @@ namespace
 void RedrawFromResource( const fheroes2::Point &, const Funds & );
 void RedrawToResource( const fheroes2::Point &, bool showcost, bool tradingPost, int from_resource = 0 );
 std::string GetStringTradeCosts( int rs_from, int rs_to, bool tradingPost );
-u32 GetTradeCosts( int rs_from, int rs_to, bool tradingPost );
+uint32_t GetTradeCosts( int rs_from, int rs_to, bool tradingPost );
 
 class TradeWindowGUI
 {
@@ -171,8 +171,8 @@ public:
         _singlePlayer = playerCount == 1;
     };
 
-    void RedrawInfoBuySell( u32 count_sell, u32 count_buy, u32 max_sell, u32 orig_buy );
-    void ShowTradeArea( int resourceFrom, int resourceTo, u32 max_buy, u32 max_sell, u32 count_buy, u32 count_sell, bool fromTradingPost );
+    void RedrawInfoBuySell( uint32_t count_sell, uint32_t count_buy, uint32_t max_sell, uint32_t orig_buy );
+    void ShowTradeArea( int resourceFrom, int resourceTo, uint32_t max_buy, uint32_t max_sell, uint32_t count_buy, uint32_t count_sell, bool fromTradingPost );
 
     fheroes2::Rect buttonMax;
     fheroes2::Rect buttonMin;
@@ -192,7 +192,7 @@ private:
     bool _singlePlayer;
 };
 
-void TradeWindowGUI::ShowTradeArea( int resourceFrom, int resourceTo, u32 max_buy, u32 max_sell, u32 count_buy, u32 count_sell, bool fromTradingPost )
+void TradeWindowGUI::ShowTradeArea( int resourceFrom, int resourceTo, uint32_t max_buy, uint32_t max_sell, uint32_t count_buy, uint32_t count_sell, bool fromTradingPost )
 {
     fheroes2::Display & display = fheroes2::Display::instance();
     Cursor & cursor = Cursor::Get();
@@ -283,7 +283,7 @@ void TradeWindowGUI::ShowTradeArea( int resourceFrom, int resourceTo, u32 max_bu
     display.render();
 }
 
-void TradeWindowGUI::RedrawInfoBuySell( u32 count_sell, u32 count_buy, u32 max_sell, u32 orig_buy )
+void TradeWindowGUI::RedrawInfoBuySell( uint32_t count_sell, uint32_t count_buy, uint32_t max_sell, uint32_t orig_buy )
 {
     fheroes2::Point dst_pt;
 
@@ -376,11 +376,11 @@ void Dialog::Marketplace( bool fromTradingPost )
     text.Blit( dst_pt.x, dst_pt.y );
     RedrawToResource( pt2, false, fromTradingPost );
 
-    u32 count_sell = 0;
-    u32 count_buy = 0;
+    uint32_t count_sell = 0;
+    uint32_t count_buy = 0;
 
-    u32 max_sell = 0;
-    u32 max_buy = 0;
+    uint32_t max_sell = 0;
+    uint32_t max_buy = 0;
 
     const fheroes2::Rect & buttonMax = gui.buttonMax;
     const fheroes2::Rect & buttonMin = gui.buttonMin;
@@ -429,7 +429,7 @@ void Dialog::Marketplace( bool fromTradingPost )
         }
 
         // click from
-        for ( u32 ii = 0; ii < rectsFrom.size(); ++ii ) {
+        for ( uint32_t ii = 0; ii < rectsFrom.size(); ++ii ) {
             const fheroes2::Rect & rect_from = rectsFrom[ii];
 
             if ( le.MouseClickLeft( rect_from ) ) {
@@ -463,7 +463,7 @@ void Dialog::Marketplace( bool fromTradingPost )
         }
 
         // click to
-        for ( u32 ii = 0; ii < rectsTo.size(); ++ii ) {
+        for ( uint32_t ii = 0; ii < rectsTo.size(); ++ii ) {
             const Rect & rect_to = rectsTo[ii];
 
             if ( le.MouseClickLeft( rect_to ) ) {
@@ -577,7 +577,7 @@ void Dialog::Marketplace( bool fromTradingPost )
     }
 }
 
-void RedrawResourceSprite( const fheroes2::Image & sf, s32 px, s32 py, s32 value )
+void RedrawResourceSprite( const fheroes2::Image & sf, int32_t px, int32_t py, int32_t value )
 {
     Text text;
     fheroes2::Point dst_pt( px, py );
@@ -609,7 +609,7 @@ void RedrawFromResource( const fheroes2::Point & pt, const Funds & rs )
     RedrawResourceSprite( fheroes2::AGG::GetICN( tradpost, 13 ), pt.x + 37, pt.y + 74, rs.gold );
 }
 
-void RedrawResourceSprite2( const fheroes2::Image & sf, s32 px, s32 py, bool show, int from, int res, bool trading )
+void RedrawResourceSprite2( const fheroes2::Image & sf, int32_t px, int32_t py, bool show, int from, int res, bool trading )
 {
     fheroes2::Point dst_pt( px, py );
 
@@ -658,9 +658,9 @@ std::string GetStringTradeCosts( int rs_from, int rs_to, bool tradingPost )
     return res;
 }
 
-u32 GetTradeCosts( int rs_from, int rs_to, bool tradingPost )
+uint32_t GetTradeCosts( int rs_from, int rs_to, bool tradingPost )
 {
-    const u32 markets = tradingPost ? 3 : world.GetKingdom( Settings::Get().CurrentColor() ).GetCountMarketplace();
+    const uint32_t markets = tradingPost ? 3 : world.GetKingdom( Settings::Get().CurrentColor() ).GetCountMarketplace();
 
     if ( rs_from == rs_to )
         return 0;

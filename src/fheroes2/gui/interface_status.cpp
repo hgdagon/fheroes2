@@ -61,7 +61,7 @@ void Interface::StatusWindow::Reset()
     ResetTimer();
 }
 
-u32 Interface::StatusWindow::ResetResourceStatus( u32 /*tick*/, void * ptr )
+uint32_t Interface::StatusWindow::ResetResourceStatus( uint32_t /*tick*/, void * ptr )
 {
     if ( ptr ) {
         Interface::StatusWindow * status = reinterpret_cast<Interface::StatusWindow *>( ptr );
@@ -87,10 +87,10 @@ void Interface::StatusWindow::SetRedraw( void ) const
     interface.SetRedraw( REDRAW_STATUS );
 }
 
-void Interface::StatusWindow::SetPos( s32 ox, s32 oy )
+void Interface::StatusWindow::SetPos( int32_t ox, int32_t oy )
 {
-    u32 ow = 144;
-    u32 oh = 72;
+    uint32_t ow = 144;
+    uint32_t oh = 72;
 
     if ( !Settings::Get().ExtGameHideInterface() ) {
         oh = fheroes2::Display::instance().height() - oy - BORDERWIDTH;
@@ -281,7 +281,7 @@ void Interface::StatusWindow::DrawDayInfo( int oh ) const
     text.Blit( pos.x + ( pos.w - text.w() ) / 2, pos.y + 46 + oh );
 }
 
-void Interface::StatusWindow::SetResource( int res, u32 count )
+void Interface::StatusWindow::SetResource( int res, uint32_t count )
 {
     lastResource = res;
     countLastResource = count;
@@ -349,8 +349,8 @@ void Interface::StatusWindow::DrawAITurns( void ) const
         const fheroes2::Sprite & glass = fheroes2::AGG::GetICN( ICN::HOURGLAS, 0 );
         const Rect & pos = GetArea();
 
-        s32 dst_x = pos.x + ( pos.w - glass.width() ) / 2;
-        s32 dst_y = pos.y + ( pos.h - glass.height() ) / 2;
+        int32_t dst_x = pos.x + ( pos.w - glass.width() ) / 2;
+        int32_t dst_y = pos.y + ( pos.h - glass.height() ) / 2;
 
         fheroes2::Blit( glass, display, dst_x, dst_y );
 
@@ -460,7 +460,7 @@ void Interface::StatusWindow::QueueEventProcessing( void )
     }
 }
 
-void Interface::StatusWindow::RedrawTurnProgress( u32 v )
+void Interface::StatusWindow::RedrawTurnProgress( uint32_t v )
 {
     turn_progress = v;
     SetRedraw();

@@ -26,7 +26,7 @@
 #include "battle_command.h"
 #include "spell.h"
 
-bool Battle::Actions::HaveCommand( u32 cmd ) const
+bool Battle::Actions::HaveCommand( uint32_t cmd ) const
 {
     return end() != std::find_if( begin(), end(), [cmd]( const Battle::Command & v ) { return v.isType( cmd ); } );
 }

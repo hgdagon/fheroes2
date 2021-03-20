@@ -414,7 +414,7 @@ KeySym GetKeySym( int key )
     return KEY_NONE;
 }
 
-bool PressIntKey( u32 max, u32 & result )
+bool PressIntKey( uint32_t max, uint32_t & result )
 {
     const LocalEvent & le = LocalEvent::Get();
 
@@ -493,7 +493,7 @@ bool PressIntKey( u32 max, u32 & result )
     return false;
 }
 
-char CharFromKeySym( KeySym sym, u16 mod )
+char CharFromKeySym( KeySym sym, uint16_t mod )
 {
     switch ( sym ) {
     case KEY_1:
@@ -675,7 +675,7 @@ char CharFromKeySym( KeySym sym, u16 mod )
     return 0;
 }
 
-size_t InsertKeySym( std::string & res, size_t pos, KeySym sym, u16 mod )
+size_t InsertKeySym( std::string & res, size_t pos, KeySym sym, uint16_t mod )
 {
     switch ( sym ) {
     case KEY_BACKSPACE: {
@@ -1584,7 +1584,7 @@ bool LocalEvent::MousePressLeft( const Rect & rt ) const
     return MousePressLeft() && ( rt & mouse_pl );
 }
 
-bool LocalEvent::MousePressLeft( const Point & pt, u32 w, u32 h ) const
+bool LocalEvent::MousePressLeft( const Point & pt, uint32_t w, uint32_t h ) const
 {
     return MousePressLeft() && ( Rect( pt.x, pt.y, w, h ) & mouse_pl );
 }
@@ -1685,7 +1685,7 @@ bool LocalEvent::KeyPress( KeySym key ) const
     return key == key_value && ( modes & KEY_PRESSED );
 }
 
-void LocalEvent::SetGlobalFilterMouseEvents( void ( *pf )( s32, s32 ) )
+void LocalEvent::SetGlobalFilterMouseEvents( void ( *pf )( int32_t, int32_t ) )
 {
     redraw_cursor_func = pf;
 }
@@ -1726,12 +1726,12 @@ int LocalEvent::GlobalFilterEvents( const SDL_Event * event )
     return 1;
 }
 
-void LocalEvent::SetState( u32 type, bool enable )
+void LocalEvent::SetState( uint32_t type, bool enable )
 {
     SDL_EventState( type, enable ? SDL_ENABLE : SDL_IGNORE );
 }
 
-int LocalEvent::GetState( u32 type )
+int LocalEvent::GetState( uint32_t type )
 {
     return SDL_EventState( type, SDL_QUERY );
 }

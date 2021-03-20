@@ -57,7 +57,7 @@
 
 namespace Game
 {
-    u32 GetMixerChannelFromObject( const Maps::Tiles & );
+    uint32_t GetMixerChannelFromObject( const Maps::Tiles & );
     void AnimateDelaysInitialize( void );
     void KeyboardGlobalFilter( int, int );
     void UpdateGlobalDefines( const std::string & );
@@ -68,8 +68,8 @@ namespace Game
 
     bool disable_change_music = false;
     int current_music = MUS::UNKNOWN;
-    u32 castle_animation_frame = 0;
-    u32 maps_animation_frame = 0;
+    uint32_t castle_animation_frame = 0;
+    uint32_t maps_animation_frame = 0;
     std::string last_name;
     int save_version = CURRENT_FORMAT_VERSION;
     std::vector<int> reserved_vols( LOOPXX_COUNT, 0 );
@@ -278,12 +278,12 @@ Game::ObjectFadeAnimation::FadeTask & Game::ObjectFadeAnimation::GetFadeTask()
     return fadeTask;
 }
 
-u32 & Game::MapsAnimationFrame( void )
+uint32_t & Game::MapsAnimationFrame( void )
 {
     return maps_animation_frame;
 }
 
-u32 & Game::CastleAnimationFrame( void )
+uint32_t & Game::CastleAnimationFrame( void )
 {
     return castle_animation_frame;
 }
@@ -299,10 +299,10 @@ void Game::EnvironmentSoundMixer( void )
     std::fill( reserved_vols.begin(), reserved_vols.end(), 0 );
 
     // scan 4x4 square from focus
-    for ( s32 yy = abs_pt.y - 3; yy <= abs_pt.y + 3; ++yy ) {
-        for ( s32 xx = abs_pt.x - 3; xx <= abs_pt.x + 3; ++xx ) {
+    for ( int32_t yy = abs_pt.y - 3; yy <= abs_pt.y + 3; ++yy ) {
+        for ( int32_t xx = abs_pt.x - 3; xx <= abs_pt.x + 3; ++xx ) {
             if ( Maps::isValidAbsPoint( xx, yy ) ) {
-                const u32 channel = GetMixerChannelFromObject( world.GetTiles( xx, yy ) );
+                const uint32_t channel = GetMixerChannelFromObject( world.GetTiles( xx, yy ) );
                 if ( channel < reserved_vols.size() ) {
                     // calculation volume
                     const int length = std::max( std::abs( xx - abs_pt.x ), std::abs( yy - abs_pt.y ) );
@@ -318,7 +318,7 @@ void Game::EnvironmentSoundMixer( void )
     AGG::LoadLOOPXXSounds( reserved_vols, true );
 }
 
-u32 Game::GetMixerChannelFromObject( const Maps::Tiles & tile )
+uint32_t Game::GetMixerChannelFromObject( const Maps::Tiles & tile )
 {
     // force: check stream
     if ( tile.isStream() )
@@ -327,10 +327,10 @@ u32 Game::GetMixerChannelFromObject( const Maps::Tiles & tile )
     return M82::GetIndexLOOP00XXFromObject( tile.GetObject( false ) );
 }
 
-u32 Game::GetRating( void )
+uint32_t Game::GetRating( void )
 {
     const Settings & conf = Settings::Get();
-    u32 rating = 50;
+    uint32_t rating = 50;
 
     switch ( conf.MapsDifficulty() ) {
     case Difficulty::NORMAL:
@@ -367,11 +367,11 @@ u32 Game::GetRating( void )
     return rating;
 }
 
-u32 Game::GetGameOverScores( void )
+uint32_t Game::GetGameOverScores( void )
 {
     const Settings & conf = Settings::Get();
 
-    u32 k_size = 0;
+    uint32_t k_size = 0;
 
     switch ( conf.MapsSize().w ) {
     case Maps::SMALL:
@@ -390,11 +390,11 @@ u32 Game::GetGameOverScores( void )
         break;
     }
 
-    u32 flag = 0;
-    u32 nk = 0;
-    u32 end_days = world.CountDay();
+    uint32_t flag = 0;
+    uint32_t nk = 0;
+    uint32_t end_days = world.CountDay();
 
-    for ( u32 ii = 1; ii <= end_days; ++ii ) {
+    for ( uint32_t ii = 1; ii <= end_days; ++ii ) {
         nk = ii * k_size / 100;
 
         if ( 0 == flag && nk > 60 ) {
@@ -422,12 +422,12 @@ void Game::ShowMapLoadingText( void )
     display.render();
 }
 
-u32 Game::GetLostTownDays( void )
+uint32_t Game::GetLostTownDays( void )
 {
     return GameStatic::GetGameOverLostDays();
 }
 
-u32 Game::GetViewDistance( u32 d )
+uint32_t Game::GetViewDistance( uint32_t d )
 {
     return GameStatic::GetOverViewDistance( d );
 }
@@ -464,7 +464,7 @@ void Game::UpdateGlobalDefines( const std::string & spec )
 #endif
 }
 
-u32 Game::GetWhirlpoolPercent( void )
+uint32_t Game::GetWhirlpoolPercent( void )
 {
     return GameStatic::GetLostOnWhirlpoolPercent();
 }

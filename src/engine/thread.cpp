@@ -76,7 +76,7 @@ bool Thread::IsRun( void ) const
     return GetID();
 }
 
-u32 Thread::GetID( void ) const
+uint32_t Thread::GetID( void ) const
 {
     return thread ? SDL_GetThreadID( thread ) : 0;
 }
@@ -85,7 +85,7 @@ Timer::Timer()
     : id( 0 )
 {}
 
-void Timer::Run( u32 interval, u32 ( *fn )( u32, void * ), void * param )
+void Timer::Run( uint32_t interval, uint32_t ( *fn )( uint32_t, void * ), void * param )
 {
     if ( id )
         Remove();

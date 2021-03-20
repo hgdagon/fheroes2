@@ -52,21 +52,21 @@ bool Interface::IconsBar::IsVisible( void )
     return !conf.ExtGameHideInterface() || conf.ShowIcons();
 }
 
-u32 Interface::IconsBar::GetItemWidth( void )
+uint32_t Interface::IconsBar::GetItemWidth( void )
 {
     return ICONS_WIDTH;
 }
 
-u32 Interface::IconsBar::GetItemHeight( void )
+uint32_t Interface::IconsBar::GetItemHeight( void )
 {
     return ICONS_HEIGHT;
 }
 
-void Interface::RedrawCastleIcon( const Castle & castle, s32 sx, s32 sy )
+void Interface::RedrawCastleIcon( const Castle & castle, int32_t sx, int32_t sy )
 {
     fheroes2::Display & display = fheroes2::Display::instance();
     const bool evil = Settings::Get().ExtGameEvilInterface();
-    u32 index_sprite = 1;
+    uint32_t index_sprite = 1;
 
     switch ( castle.GetRace() ) {
     case Race::KNGT:
@@ -116,7 +116,7 @@ void Interface::RedrawCastleIcon( const Castle & castle, s32 sx, s32 sy )
     }
 }
 
-void Interface::RedrawHeroesIcon( const Heroes & hero, s32 sx, s32 sy )
+void Interface::RedrawHeroesIcon( const Heroes & hero, int32_t sx, int32_t sy )
 {
     hero.PortraitRedraw( sx, sy, PORT_SMALL, fheroes2::Display::instance() );
 }
@@ -148,12 +148,12 @@ void Interface::IconsBar::RedrawBackground( const Point & pos )
     srcrt.height = 32;
     fheroes2::Blit( icnadv, srcrt.x, srcrt.y, display, dstpt.x, dstpt.y, srcrt.width, srcrt.height );
 
-    for ( u32 ii = 0; ii < iconsCount; ++ii )
+    for ( uint32_t ii = 0; ii < iconsCount; ++ii )
         fheroes2::Blit( back, display, pos.x + 5, pos.y + 5 + ii * ( IconsBar::GetItemHeight() + 10 ) );
 }
 
 /* Interface::CastleIcons */
-void Interface::CastleIcons::RedrawItem( const CASTLE & item, s32 ox, s32 oy, bool current )
+void Interface::CastleIcons::RedrawItem( const CASTLE & item, int32_t ox, int32_t oy, bool current )
 {
     if ( item && show ) {
         RedrawCastleIcon( *item, ox + 5, oy + 5 );
@@ -216,7 +216,7 @@ void Interface::CastleIcons::SetShow( bool f )
     }
 }
 
-void Interface::CastleIcons::SetPos( s32 px, s32 py )
+void Interface::CastleIcons::SetPos( int32_t px, int32_t py )
 {
     const int icnscroll = Settings::Get().ExtGameEvilInterface() ? ICN::SCROLLE : ICN::SCROLL;
 
@@ -234,7 +234,7 @@ void Interface::CastleIcons::SetPos( s32 px, s32 py )
 }
 
 /* Interface::HeroesIcons */
-void Interface::HeroesIcons::RedrawItem( const HEROES & item, s32 ox, s32 oy, bool current )
+void Interface::HeroesIcons::RedrawItem( const HEROES & item, int32_t ox, int32_t oy, bool current )
 {
     if ( item && show ) {
         RedrawHeroesIcon( *item, ox + 5, oy + 5 );
@@ -304,7 +304,7 @@ void Interface::HeroesIcons::SetShow( bool f )
     }
 }
 
-void Interface::HeroesIcons::SetPos( s32 px, s32 py )
+void Interface::HeroesIcons::SetPos( int32_t px, int32_t py )
 {
     const int icnscroll = Settings::Get().ExtGameEvilInterface() ? ICN::SCROLLE : ICN::SCROLL;
 
@@ -333,7 +333,7 @@ Interface::IconsPanel::IconsPanel( Basic & basic )
     fheroes2::DrawBorder( sfMarker, fheroes2::GetColorId( 0xA0, 0xE0, 0xE0 ) );
 }
 
-u32 Interface::IconsPanel::CountIcons( void ) const
+uint32_t Interface::IconsPanel::CountIcons( void ) const
 {
     return castleIcons.CountIcons();
 }
@@ -367,15 +367,15 @@ void Interface::IconsPanel::SetRedraw( void ) const
     SetRedraw( ICON_ANY );
 }
 
-void Interface::IconsPanel::SetPos( s32 ox, s32 oy )
+void Interface::IconsPanel::SetPos( int32_t ox, int32_t oy )
 {
-    u32 iconsCount = 0;
+    uint32_t iconsCount = 0;
 
     if ( Settings::Get().ExtGameHideInterface() ) {
         iconsCount = 2;
     }
     else {
-        const u32 count_h = ( fheroes2::Display::instance().height() - fheroes2::Display::DEFAULT_HEIGHT ) / TILEWIDTH;
+        const uint32_t count_h = ( fheroes2::Display::instance().height() - fheroes2::Display::DEFAULT_HEIGHT ) / TILEWIDTH;
         iconsCount = count_h > 3 ? 8 : ( count_h < 3 ? 4 : 7 );
     }
 

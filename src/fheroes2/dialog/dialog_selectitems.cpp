@@ -53,7 +53,7 @@ public:
         fheroes2::Display & display = fheroes2::Display::instance();
         fheroes2::Blit( fheroes2::AGG::GetICN( ICN::LISTBOX, 7 ), display, dst.x + area.w - 24, dst.y + 45 );
 
-        for ( u32 ii = 1; ii < 9; ++ii )
+        for ( uint32_t ii = 1; ii < 9; ++ii )
             fheroes2::Blit( fheroes2::AGG::GetICN( ICN::LISTBOX, 8 ), display, dst.x + area.w - 24, dst.y + 44 + ( ii * 19 ) );
 
         fheroes2::Blit( fheroes2::AGG::GetICN( ICN::LISTBOX, 9 ), display, dst.x + area.w - 24, dst.y + area.h - 74 );
@@ -64,7 +64,7 @@ public:
         ok = true;
     }
 
-    virtual void RedrawItem( const int &, s32, s32, bool ) override {}
+    virtual void RedrawItem( const int &, int32_t, int32_t, bool ) override {}
     virtual void ActionCurrentUp( void ) override {}
     virtual void ActionCurrentDn( void ) override {}
     virtual void ActionListSingleClick( int & ) override {}
@@ -80,7 +80,7 @@ public:
     SelectEnumMonster( const Rect & rt )
         : SelectEnum( rt ){};
 
-    virtual void RedrawItem( const int & index, s32 dstx, s32 dsty, bool current ) override
+    virtual void RedrawItem( const int & index, int32_t dstx, int32_t dsty, bool current ) override
     {
         Monster mons( index );
         fheroes2::Blit( fheroes2::AGG::GetICN( ICN::MONS32, mons.GetSpriteIndex() ), fheroes2::Display::instance(), dstx + 5, dsty + 3 );
@@ -113,7 +113,7 @@ public:
         SetAreaMaxItems( 6 );
     }
 
-    virtual void RedrawItem( const int & index, s32 dstx, s32 dsty, bool current ) override
+    virtual void RedrawItem( const int & index, int32_t dstx, int32_t dsty, bool current ) override
     {
         const fheroes2::Sprite & port = Heroes::GetPortrait( index, PORT_SMALL );
 
@@ -140,7 +140,7 @@ public:
         : SelectEnum( rt )
     {}
 
-    virtual void RedrawItem( const int & index, s32 dstx, s32 dsty, bool current ) override
+    virtual void RedrawItem( const int & index, int32_t dstx, int32_t dsty, bool current ) override
     {
         Artifact art( index );
         fheroes2::Blit( fheroes2::AGG::GetICN( ICN::ARTFX, art.IndexSprite32() ), fheroes2::Display::instance(), dstx + 5, dsty + 3 );
@@ -167,7 +167,7 @@ public:
         SetAreaMaxItems( 4 );
     }
 
-    virtual void RedrawItem( const int & index, s32 dstx, s32 dsty, bool current ) override
+    virtual void RedrawItem( const int & index, int32_t dstx, int32_t dsty, bool current ) override
     {
         Spell spell( index );
         fheroes2::Blit( fheroes2::AGG::GetICN( ICN::SPELLS, spell.IndexSprite() ), fheroes2::Display::instance(), dstx + 5, dsty + 3 );
@@ -194,7 +194,7 @@ public:
         SetAreaMaxItems( 5 );
     }
 
-    virtual void RedrawItem( const int & index, s32 dstx, s32 dsty, bool current ) override
+    virtual void RedrawItem( const int & index, int32_t dstx, int32_t dsty, bool current ) override
     {
         Skill::Secondary skill( 1 + index / 3, 1 + ( index % 3 ) );
         fheroes2::Blit( fheroes2::AGG::GetICN( ICN::MINISS, skill.GetIndexSprite2() ), fheroes2::Display::instance(), dstx + 5, dsty + 3 );

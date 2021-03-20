@@ -51,7 +51,7 @@ Dialog::FrameBorder::FrameBorder( const fheroes2::Size & sz )
     RenderRegular( GetRect() );
 }
 
-Dialog::FrameBorder::FrameBorder( s32 posx, s32 posy, u32 encw, u32 ench )
+Dialog::FrameBorder::FrameBorder( int32_t posx, int32_t posy, uint32_t encw, uint32_t ench )
     : restorer( fheroes2::Display::instance(), 0, 0, 0, 0 )
     , border( BORDERWIDTH )
 {

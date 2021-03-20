@@ -35,17 +35,17 @@
 #include "translations.h"
 #include "world.h"
 
-int ArtifactsModifiersResult( int type, const u8 * arts, u32 size, const HeroBase & base, std::string * strs )
+int ArtifactsModifiersResult( int type, const uint8_t * arts, uint32_t size, const HeroBase & base, std::string * strs )
 {
     int result = 0;
 
-    for ( u32 ii = 0; ii < size; ++ii ) {
+    for ( uint32_t ii = 0; ii < size; ++ii ) {
         const Artifact art( arts[ii] );
 
         if ( art.isValid() ) {
             int acount = base.HasArtifact( art );
             if ( acount ) {
-                s32 mod = art.ExtraValue();
+                int32_t mod = art.ExtraValue();
 
                 switch ( art() ) {
                 case Artifact::SWORD_BREAKER:
@@ -69,7 +69,7 @@ int ArtifactsModifiersResult( int type, const u8 * arts, u32 size, const HeroBas
                 // morale
                 case Artifact::FIZBIN_MISFORTUNE:
                     if ( type == MDF_MORALE )
-                        mod = -static_cast<s32>( art.ExtraValue() );
+                        mod = -static_cast<int32_t>( art.ExtraValue() );
                     break;
                 default:
                     break;
@@ -91,7 +91,7 @@ int ArtifactsModifiersResult( int type, const u8 * arts, u32 size, const HeroBas
 
 int ArtifactsModifiersAttack( const HeroBase & base, std::string * strs )
 {
-    const u8 arts[] = {Artifact::SPIKED_HELM,   Artifact::THUNDER_MACE,      Artifact::GIANT_FLAIL,     Artifact::SWORD_BREAKER,  Artifact::SPIKED_SHIELD,
+    const uint8_t arts[] = {Artifact::SPIKED_HELM,   Artifact::THUNDER_MACE,      Artifact::GIANT_FLAIL,     Artifact::SWORD_BREAKER,  Artifact::SPIKED_SHIELD,
                        Artifact::POWER_AXE,     Artifact::LEGENDARY_SCEPTER, Artifact::DRAGON_SWORD,    Artifact::ULTIMATE_CROWN, Artifact::BATTLE_GARB,
                        Artifact::SWORD_ANDURAN, Artifact::HOLY_HAMMER,       Artifact::ULTIMATE_SHIELD, Artifact::ULTIMATE_SWORD};
 
@@ -100,7 +100,7 @@ int ArtifactsModifiersAttack( const HeroBase & base, std::string * strs )
 
 int ArtifactsModifiersDefense( const HeroBase & base, std::string * strs )
 {
-    const u8 arts[] = {Artifact::SPIKED_HELM,       Artifact::ARMORED_GAUNTLETS,  Artifact::DEFENDER_HELM,  Artifact::SPIKED_SHIELD, Artifact::STEALTH_SHIELD,
+    const uint8_t arts[] = {Artifact::SPIKED_HELM,       Artifact::ARMORED_GAUNTLETS,  Artifact::DEFENDER_HELM,  Artifact::SPIKED_SHIELD, Artifact::STEALTH_SHIELD,
                        Artifact::LEGENDARY_SCEPTER, Artifact::DIVINE_BREASTPLATE, Artifact::ULTIMATE_CROWN, Artifact::SWORD_BREAKER, Artifact::BREASTPLATE_ANDURAN,
                        Artifact::BATTLE_GARB,       Artifact::ULTIMATE_SHIELD,    Artifact::ULTIMATE_CLOAK};
 
@@ -109,7 +109,7 @@ int ArtifactsModifiersDefense( const HeroBase & base, std::string * strs )
 
 int ArtifactsModifiersPower( const HeroBase & base, std::string * strs )
 {
-    const u8 arts[] = {Artifact::WHITE_PEARL,    Artifact::BLACK_PEARL,    Artifact::CASTER_BRACELET, Artifact::MAGE_RING,       Artifact::LEGENDARY_SCEPTER,
+    const uint8_t arts[] = {Artifact::WHITE_PEARL,    Artifact::BLACK_PEARL,    Artifact::CASTER_BRACELET, Artifact::MAGE_RING,       Artifact::LEGENDARY_SCEPTER,
                        Artifact::WITCHES_BROACH, Artifact::ARM_MARTYR,     Artifact::ULTIMATE_CROWN,  Artifact::ARCANE_NECKLACE, Artifact::BATTLE_GARB,
                        Artifact::STAFF_WIZARDRY, Artifact::HELMET_ANDURAN, Artifact::ULTIMATE_STAFF,  Artifact::ULTIMATE_WAND,   Artifact::BROACH_SHIELDING};
 
@@ -118,7 +118,7 @@ int ArtifactsModifiersPower( const HeroBase & base, std::string * strs )
 
 int ArtifactsModifiersKnowledge( const HeroBase & base, std::string * strs )
 {
-    const u8 arts[] = {Artifact::WHITE_PEARL,     Artifact::BLACK_PEARL,       Artifact::MINOR_SCROLL,   Artifact::MAJOR_SCROLL,   Artifact::SUPERIOR_SCROLL,
+    const uint8_t arts[] = {Artifact::WHITE_PEARL,     Artifact::BLACK_PEARL,       Artifact::MINOR_SCROLL,   Artifact::MAJOR_SCROLL,   Artifact::SUPERIOR_SCROLL,
                        Artifact::FOREMOST_SCROLL, Artifact::LEGENDARY_SCEPTER, Artifact::ULTIMATE_CROWN, Artifact::ULTIMATE_STAFF, Artifact::ULTIMATE_BOOK};
 
     return ArtifactsModifiersResult( MDF_KNOWLEDGE, arts, ARRAY_COUNT( arts ), base, strs );
@@ -126,7 +126,7 @@ int ArtifactsModifiersKnowledge( const HeroBase & base, std::string * strs )
 
 int ArtifactsModifiersMorale( const HeroBase & base, std::string * strs )
 {
-    const u8 arts[] = {Artifact::MEDAL_VALOR, Artifact::MEDAL_COURAGE, Artifact::MEDAL_HONOR,      Artifact::MEDAL_DISTINCTION,
+    const uint8_t arts[] = {Artifact::MEDAL_VALOR, Artifact::MEDAL_COURAGE, Artifact::MEDAL_HONOR,      Artifact::MEDAL_DISTINCTION,
                        Artifact::BATTLE_GARB, Artifact::MASTHEAD,      Artifact::FIZBIN_MISFORTUNE};
 
     return ArtifactsModifiersResult( MDF_MORALE, arts, ARRAY_COUNT( arts ), base, strs );
@@ -134,7 +134,7 @@ int ArtifactsModifiersMorale( const HeroBase & base, std::string * strs )
 
 int ArtifactsModifiersLuck( const HeroBase & base, std::string * strs )
 {
-    const u8 arts[]
+    const uint8_t arts[]
         = {Artifact::RABBIT_FOOT, Artifact::GOLDEN_HORSESHOE, Artifact::GAMBLER_LUCKY_COIN, Artifact::FOUR_LEAF_CLOVER, Artifact::BATTLE_GARB, Artifact::MASTHEAD};
 
     return ArtifactsModifiersResult( MDF_LUCK, arts, ARRAY_COUNT( arts ), base, strs );
@@ -196,12 +196,12 @@ bool HeroBase::isHeroes( void ) const
     return GetType() == HEROES;
 }
 
-u32 HeroBase::GetSpellPoints( void ) const
+uint32_t HeroBase::GetSpellPoints( void ) const
 {
     return magic_point;
 }
 
-void HeroBase::SetSpellPoints( u32 points )
+void HeroBase::SetSpellPoints( uint32_t points )
 {
     magic_point = points;
 }
@@ -263,7 +263,7 @@ BagArtifacts & HeroBase::GetBagArtifacts( void )
     return bag_artifacts;
 }
 
-u32 HeroBase::HasArtifact( const Artifact & art ) const
+uint32_t HeroBase::HasArtifact( const Artifact & art ) const
 {
     bool unique = true;
 

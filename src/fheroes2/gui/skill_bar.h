@@ -28,7 +28,7 @@ class PrimarySkillsBar : public Interface::ItemsBar<int>
 public:
     PrimarySkillsBar( const Heroes * hero, bool mini );
 
-    void SetTextOff( s32, s32 );
+    void SetTextOff( int32_t, int32_t );
     virtual void RedrawBackground( const Rect &, fheroes2::Image & ) override;
     virtual void RedrawItem( int &, const Rect &, fheroes2::Image & ) override;
 

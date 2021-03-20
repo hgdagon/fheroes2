@@ -165,7 +165,7 @@ public:
 
     Monster( int = UNKNOWN );
     Monster( const Spell & );
-    Monster( int race, u32 dw );
+    Monster( int race, uint32_t dw );
     virtual ~Monster() {}
 
     bool operator<( const Monster & ) const;
@@ -181,26 +181,26 @@ public:
     Monster GetUpgrade( void ) const;
     Monster GetDowngrade( void ) const;
 
-    virtual u32 GetAttack( void ) const;
-    virtual u32 GetDefense( void ) const;
+    virtual uint32_t GetAttack( void ) const;
+    virtual uint32_t GetDefense( void ) const;
     virtual int GetColor( void ) const;
     virtual int GetMorale( void ) const;
     virtual int GetLuck( void ) const;
     virtual int GetRace( void ) const;
 
-    u32 GetDamageMin( void ) const;
-    u32 GetDamageMax( void ) const;
-    u32 GetShots( void ) const;
-    u32 GetHitPoints( void ) const;
-    u32 GetSpeed( void ) const;
-    u32 GetGrown( void ) const;
+    uint32_t GetDamageMin( void ) const;
+    uint32_t GetDamageMax( void ) const;
+    uint32_t GetShots( void ) const;
+    uint32_t GetHitPoints( void ) const;
+    uint32_t GetSpeed( void ) const;
+    uint32_t GetGrown( void ) const;
     int GetMonsterLevel() const;
     int GetRandomUnitLevel( void ) const;
-    u32 GetRNDSize( bool skip ) const;
+    uint32_t GetRNDSize( bool skip ) const;
 
     const char * GetName( void ) const;
     const char * GetMultiName( void ) const;
-    const char * GetPluralName( u32 ) const;
+    const char * GetPluralName( uint32_t ) const;
 
     bool isValid( void ) const;
     bool isElemental( void ) const;
@@ -223,18 +223,18 @@ public:
     double GetMonsterStrength( int attack = -1, int defense = -1 ) const;
     int ICNMonh( void ) const;
 
-    u32 GetSpriteIndex( void ) const;
+    uint32_t GetSpriteIndex( void ) const;
     payment_t GetCost( void ) const;
     payment_t GetUpgradeCost( void ) const;
-    u32 GetDwelling( void ) const;
+    uint32_t GetDwelling( void ) const;
 
     const monstersprite_t & GetMonsterSprite() const;
 
     static Monster Rand( level_t = LEVEL0 );
-    static u32 Rand4WeekOf( void );
-    static u32 Rand4MonthOf( void );
+    static uint32_t Rand4WeekOf( void );
+    static uint32_t Rand4MonthOf( void );
 
-    static u32 GetCountFromHitPoints( const Monster &, u32 );
+    static uint32_t GetCountFromHitPoints( const Monster &, uint32_t );
 
     static void UpdateStats( const std::string & );
 
@@ -242,7 +242,7 @@ public:
     static uint32_t GetMissileICN( uint32_t monsterID );
 
 protected:
-    static Monster FromDwelling( int race, u32 dw );
+    static Monster FromDwelling( int race, uint32_t dw );
 
     int id;
 };

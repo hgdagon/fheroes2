@@ -267,7 +267,7 @@ int Game::ScenarioInfo( void )
             break;
         }
         else if ( le.MouseClickLeft( rectPanel ) ) {
-            const s32 index = coordDifficulty.GetIndex( le.GetMouseCursor() );
+            const int32_t index = coordDifficulty.GetIndex( le.GetMouseCursor() );
 
             // select difficulty
             if ( 0 <= index ) {
@@ -356,7 +356,7 @@ int Game::ScenarioInfo( void )
     return result;
 }
 
-u32 Game::GetStep4Player( u32 current, u32 width, u32 count )
+uint32_t Game::GetStep4Player( uint32_t current, uint32_t width, uint32_t count )
 {
     return current * width * KINGDOMMAX / count + ( width * ( KINGDOMMAX - count ) / ( 2 * count ) );
 }
@@ -403,7 +403,7 @@ void RedrawDifficultyInfo( const Point & dst )
     const uint32_t width = 65;
     const uint32_t height = 69;
 
-    for ( u32 current = Difficulty::EASY; current <= Difficulty::IMPOSSIBLE; ++current ) {
+    for ( uint32_t current = Difficulty::EASY; current <= Difficulty::IMPOSSIBLE; ++current ) {
         const uint32_t offset = current * ( width + 12 );
         Text text( Difficulty::String( current ), Font::SMALL );
         text.Blit( dst.x + offset + ( width - text.w() ) / 2, dst.y + height );

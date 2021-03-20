@@ -35,7 +35,7 @@ namespace Network
 {
     bool Init( void );
     void Quit( void );
-    bool ResolveHost( IPaddress &, const char *, u16 );
+    bool ResolveHost( IPaddress &, const char *, uint16_t );
     const char * GetError( void );
 
     class Socket
@@ -52,14 +52,14 @@ namespace Network
         bool Recv( char *, int );
         bool Send( const char *, int );
 
-        bool Recv32( u32 & );
+        bool Recv32( uint32_t & );
         bool Send32( const uint32_t );
 
-        bool Recv16( u16 & );
+        bool Recv16( uint16_t & );
         bool Send16( const uint16_t );
 
-        u32 Host( void ) const;
-        u16 Port( void ) const;
+        uint32_t Host( void ) const;
+        uint16_t Port( void ) const;
 
         bool Open( IPaddress & );
         bool isValid( void ) const;

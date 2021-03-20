@@ -149,7 +149,7 @@ namespace
 
 namespace Battle
 {
-    void GetSummaryParams( int res1, int res2, const HeroBase & hero, u32 exp, LoopedAnimationSequence & sequence, std::string & title, std::string & msg );
+    void GetSummaryParams( int res1, int res2, const HeroBase & hero, uint32_t exp, LoopedAnimationSequence & sequence, std::string & title, std::string & msg );
     void RedrawBattleSettings( const std::vector<fheroes2::Rect> & areas );
     void RedrawOnOffSetting( const Rect & area, const std::string & name, uint32_t index, bool isSet );
 }
@@ -286,7 +286,7 @@ void Battle::DialogBattleSettings( void )
     }
 }
 
-void Battle::GetSummaryParams( int res1, int res2, const HeroBase & hero, u32 exp, LoopedAnimationSequence & sequence, std::string & title, std::string & msg )
+void Battle::GetSummaryParams( int res1, int res2, const HeroBase & hero, uint32_t exp, LoopedAnimationSequence & sequence, std::string & title, std::string & msg )
 {
     if ( res1 & RESULT_WINS ) {
         sequence.push( ICN::WINCMBT, true );
@@ -699,7 +699,7 @@ int Battle::Arena::DialogBattleHero( const HeroBase & hero, bool buttons ) const
     return result;
 }
 
-bool Battle::DialogBattleSurrender( const HeroBase & hero, u32 cost, const Kingdom & kingdom )
+bool Battle::DialogBattleSurrender( const HeroBase & hero, uint32_t cost, const Kingdom & kingdom )
 {
     if ( kingdom.GetColor() == hero.GetColor() ) // this is weird. You're surrending to yourself!
         return false;

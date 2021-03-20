@@ -112,7 +112,7 @@ namespace Interface
             _prevIndexPos = -1;
         }
 
-        void SetAreaPosition( s32, s32, u32, u32 );
+        void SetAreaPosition( int32_t, int32_t, uint32_t, uint32_t );
 
     private:
         Basic & interface;

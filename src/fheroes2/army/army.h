@@ -55,7 +55,7 @@ public:
     void Assign( const Troop *, const Troop * );
     void Assign( const Troops & );
     void Insert( const Troops & );
-    void PushBack( const Monster &, u32 );
+    void PushBack( const Monster &, uint32_t );
     void PopBack( void );
 
     size_t Size( void ) const;
@@ -64,18 +64,18 @@ public:
     const Troop * GetTroop( size_t ) const;
 
     void UpgradeMonsters( const Monster & );
-    u32 GetCountMonsters( const Monster & ) const;
+    uint32_t GetCountMonsters( const Monster & ) const;
 
-    u32 GetCount( void ) const;
+    uint32_t GetCount( void ) const;
     bool isValid( void ) const;
     bool HasMonster( const Monster & ) const;
 
     bool AllTroopsIsRace( int ) const;
     bool AllTroopsAreUndead() const;
-    u32 GetUniqueCount( void ) const;
+    uint32_t GetUniqueCount( void ) const;
 
     bool JoinTroop( const Troop & );
-    bool JoinTroop( const Monster &, u32 );
+    bool JoinTroop( const Monster &, uint32_t );
     bool CanJoinTroop( const Monster & ) const;
 
     void JoinTroops( Troops & );
@@ -84,13 +84,13 @@ public:
     void MergeTroops();
     Troops GetOptimized( void ) const;
 
-    virtual u32 GetAttack( void ) const;
-    virtual u32 GetDefense( void ) const;
+    virtual uint32_t GetAttack( void ) const;
+    virtual uint32_t GetDefense( void ) const;
     virtual double GetStrength() const;
 
-    u32 GetHitPoints( void ) const;
-    u32 GetDamageMin( void ) const;
-    u32 GetDamageMax( void ) const;
+    uint32_t GetHitPoints( void ) const;
+    uint32_t GetDamageMin( void ) const;
+    uint32_t GetDamageMax( void ) const;
 
     void Clean( void );
     void UpgradeTroops( const Castle & );
@@ -119,20 +119,20 @@ enum
     JOIN_FLEE
 };
 
-struct JoinCount : std::pair<int, u32>
+struct JoinCount : std::pair<int, uint32_t>
 {
     JoinCount()
-        : std::pair<int, u32>( JOIN_NONE, 0 )
+        : std::pair<int, uint32_t>( JOIN_NONE, 0 )
     {}
-    JoinCount( int reason, u32 count )
-        : std::pair<int, u32>( reason, count )
+    JoinCount( int reason, uint32_t count )
+        : std::pair<int, uint32_t>( reason, count )
     {}
 };
 
 class Army : public Troops, public Control
 {
 public:
-    static std::string SizeString( u32 );
+    static std::string SizeString( uint32_t );
     static std::string TroopSizeString( const Troop & );
 
     // compare
@@ -146,7 +146,7 @@ public:
     static JoinCount GetJoinSolution( const Heroes &, const Maps::Tiles &, const Troop & );
     static bool ArmyStrongerThanEnemy( const Army &, const Army & );
 
-    static void DrawMons32Line( const Troops &, s32, s32, u32, u32 = 0, u32 = 0 );
+    static void DrawMons32Line( const Troops &, int32_t, int32_t, uint32_t, uint32_t = 0, uint32_t = 0 );
     static void DrawMonsterLines( const Troops & troops, int32_t posX, int32_t posY, uint32_t lineWidth, uint32_t drawPower, bool compact = true,
                                   bool isScouteView = true );
 
@@ -164,8 +164,8 @@ public:
     int GetRace( void ) const;
     int GetColor( void ) const;
     int GetControl( void ) const;
-    u32 GetAttack( void ) const;
-    u32 GetDefense( void ) const;
+    uint32_t GetAttack( void ) const;
+    uint32_t GetDefense( void ) const;
 
     double GetStrength() const;
     double getReinforcementValue( const Troops & reinforcement ) const;
@@ -177,7 +177,7 @@ public:
     int GetLuck( void ) const;
     int GetMoraleModificator( std::string * ) const;
     int GetLuckModificator( const std::string * ) const;
-    u32 ActionToSirens( void );
+    uint32_t ActionToSirens( void );
 
     const HeroBase * GetCommander( void ) const;
     HeroBase * GetCommander( void );

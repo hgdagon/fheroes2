@@ -73,7 +73,7 @@ void Interface::GameArea::Build( void )
         SetAreaPosition( BORDERWIDTH, BORDERWIDTH, display.width() - RADARWIDTH - 3 * BORDERWIDTH, display.height() - 2 * BORDERWIDTH );
 }
 
-void Interface::GameArea::SetAreaPosition( s32 x, s32 y, u32 w, u32 h )
+void Interface::GameArea::SetAreaPosition( int32_t x, int32_t y, uint32_t w, uint32_t h )
 {
     _windowROI = Rect( x, y, w, h );
     const Size worldSize = Size( world.w() * TILEWIDTH, world.h() * TILEWIDTH );

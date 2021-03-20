@@ -98,11 +98,11 @@ std::string GetHexString( int value, int width )
     return stream.str();
 }
 
-int CountBits( u32 val )
+int CountBits( uint32_t val )
 {
     int res = 0;
 
-    for ( u32 itr = 0x00000001; itr; itr <<= 1 )
+    for ( uint32_t itr = 0x00000001; itr; itr <<= 1 )
         if ( val & itr )
             ++res;
 
@@ -204,37 +204,37 @@ std::string InsertString( const std::string & src, size_t pos, const char * c )
 }
 
 // from SDL_ttf
-std::vector<u16> StringUTF8_to_UNICODE( const std::string & utf8 )
+std::vector<uint16_t> StringUTF8_to_UNICODE( const std::string & utf8 )
 {
-    std::vector<u16> unicode;
+    std::vector<uint16_t> unicode;
     unicode.reserve( utf8.size() );
 
     for ( std::string::const_iterator it = utf8.begin(); it < utf8.end(); ++it ) {
-        u16 ch = static_cast<u8>( *it );
+        uint16_t ch = static_cast<uint8_t>( *it );
 
         if ( ch >= 0xF0 ) {
             if ( utf8.end() - it > 3 ) {
-                ch = static_cast<u16>( *it++ & 0x07 ) << 18;
-                ch |= static_cast<u16>( *it++ & 0x3F ) << 12;
-                ch |= static_cast<u16>( *it++ & 0x3F ) << 6;
-                ch |= static_cast<u16>( *it & 0x3F );
+                ch = static_cast<uint16_t>( *it++ & 0x07 ) << 18;
+                ch |= static_cast<uint16_t>( *it++ & 0x3F ) << 12;
+                ch |= static_cast<uint16_t>( *it++ & 0x3F ) << 6;
+                ch |= static_cast<uint16_t>( *it & 0x3F );
             }
             else
                 break;
         }
         else if ( ch >= 0xE0 ) {
             if ( utf8.end() - it > 2 ) {
-                ch = static_cast<u16>( *it++ & 0x0F ) << 12;
-                ch |= static_cast<u16>( *it++ & 0x3F ) << 6;
-                ch |= static_cast<u16>( *it & 0x3F );
+                ch = static_cast<uint16_t>( *it++ & 0x0F ) << 12;
+                ch |= static_cast<uint16_t>( *it++ & 0x3F ) << 6;
+                ch |= static_cast<uint16_t>( *it & 0x3F );
             }
             else
                 break;
         }
         else if ( ch >= 0xC0 ) {
             if ( utf8.end() - it > 1 ) {
-                ch = static_cast<u16>( *it++ & 0x1F ) << 6;
-                ch |= static_cast<u16>( *it & 0x3F );
+                ch = static_cast<uint16_t>( *it++ & 0x1F ) << 6;
+                ch |= static_cast<uint16_t>( *it & 0x3F );
             }
             else
                 break;
@@ -246,12 +246,12 @@ std::vector<u16> StringUTF8_to_UNICODE( const std::string & utf8 )
     return unicode;
 }
 
-std::string StringUNICODE_to_UTF8( const std::vector<u16> & unicode )
+std::string StringUNICODE_to_UTF8( const std::vector<uint16_t> & unicode )
 {
     std::string utf8;
     utf8.reserve( 2 * unicode.size() );
 
-    for ( std::vector<u16>::const_iterator it = unicode.begin(); it != unicode.end(); ++it ) {
+    for ( std::vector<uint16_t>::const_iterator it = unicode.begin(); it != unicode.end(); ++it ) {
         if ( *it < 128 ) {
             utf8.append( 1, static_cast<char>( *it ) );
         }
@@ -274,7 +274,7 @@ int Sign( int s )
     return ( s < 0 ? -1 : ( s > 0 ? 1 : 0 ) );
 }
 
-bool SaveMemToFile( const std::vector<u8> & data, const std::string & file )
+bool SaveMemToFile( const std::vector<uint8_t> & data, const std::string & file )
 {
     SDL_RWops * rw = SDL_RWFromFile( file.c_str(), "wb" );
 
@@ -288,9 +288,9 @@ bool SaveMemToFile( const std::vector<u8> & data, const std::string & file )
     return true;
 }
 
-std::vector<u8> LoadFileToMem( const std::string & file )
+std::vector<uint8_t> LoadFileToMem( const std::string & file )
 {
-    std::vector<u8> data;
+    std::vector<uint8_t> data;
     SDL_RWops * rw = SDL_RWFromFile( file.c_str(), "rb" );
     if ( rw == NULL )
         ERROR_LOG( SDL_GetError() );
@@ -340,7 +340,7 @@ std::string EncodeString( const std::string & str, const char * charset )
 #else
 std::string cp1251_to_utf8( const std::string & in )
 {
-    const u32 table_1251[]
+    const uint32_t table_1251[]
         = {0x82D0, 0x83D0,   0x9A80E2, 0x93D1,   0x9E80E2, 0xA680E2, 0xA080E2, 0xA180E2, 0xAC82E2, 0xB080E2, 0x89D0, 0xB980E2, 0x8AD0, 0x8CD0, 0x8BD0, 0x8FD0,
            0x92D1, 0x9880E2, 0x9980E2, 0x9C80E2, 0x9D80E2, 0xA280E2, 0x9380E2, 0x9480E2, 0,        0xA284E2, 0x99D1, 0xBA80E2, 0x9AD1, 0x9CD1, 0x9BD1, 0x9FD1,
            0xA0C2, 0x8ED0,   0x9ED1,   0x88D0,   0xA4C2,   0x90D2,   0xA6C2,   0xA7C2,   0x81D0,   0xA9C2,   0x84D0, 0xABC2,   0xACC2, 0xADC2, 0xAEC2, 0x87D0,
@@ -395,7 +395,7 @@ double GetAngle( const Point & start, const Point & target )
     return angle;
 }
 
-Points GetEuclideanLine( const Point & pt1, const Point & pt2, u16 step )
+Points GetEuclideanLine( const Point & pt1, const Point & pt2, uint16_t step )
 {
     const int dx = pt2.x - pt1.x;
     const int dy = pt2.y - pt1.y;
@@ -415,18 +415,18 @@ Points GetEuclideanLine( const Point & pt1, const Point & pt2, u16 step )
     return line;
 }
 
-Points GetLinePoints( const Point & pt1, const Point & pt2, u16 step )
+Points GetLinePoints( const Point & pt1, const Point & pt2, uint16_t step )
 {
     Points res;
     res.reserve( 10 );
 
-    const u16 dx = std::abs( pt2.x - pt1.x );
-    const u16 dy = std::abs( pt2.y - pt1.y );
+    const uint16_t dx = std::abs( pt2.x - pt1.x );
+    const uint16_t dy = std::abs( pt2.y - pt1.y );
 
     int16_t ns = std::div( ( dx > dy ? dx : dy ), 2 ).quot;
     Point pt( pt1 );
 
-    for ( u16 i = 0; i <= ( dx > dy ? dx : dy ); ++i ) {
+    for ( uint16_t i = 0; i <= ( dx > dy ? dx : dy ); ++i ) {
         if ( dx > dy ) {
             pt.x < pt2.x ? ++pt.x : --pt.x;
             ns -= dy;
@@ -454,7 +454,7 @@ Points GetLinePoints( const Point & pt1, const Point & pt2, u16 step )
     return res;
 }
 
-Points GetArcPoints( const Point & from, const Point & to, const Point & max, u16 step )
+Points GetArcPoints( const Point & from, const Point & to, const Point & max, uint16_t step )
 {
     Points res;
     Point pt1, pt2;
@@ -482,7 +482,7 @@ Points GetArcPoints( const Point & from, const Point & to, const Point & max, u1
     return res;
 }
 
-u32 decodeChar( int v )
+uint32_t decodeChar( int v )
 {
     if ( 'A' <= v && v <= 'Z' )
         return v - 'A';
@@ -502,12 +502,12 @@ u32 decodeChar( int v )
     return 0;
 }
 
-std::vector<u8> decodeBase64( const std::string & src )
+std::vector<uint8_t> decodeBase64( const std::string & src )
 {
-    std::vector<u8> res;
+    std::vector<uint8_t> res;
 
     if ( src.size() % 4 == 0 ) {
-        u32 size = 3 * src.size() / 4;
+        uint32_t size = 3 * src.size() / 4;
 
         if ( src[src.size() - 1] == '=' )
             --size;
@@ -516,13 +516,13 @@ std::vector<u8> decodeBase64( const std::string & src )
 
         res.reserve( size );
 
-        for ( u32 ii = 0; ii < src.size(); ii += 4 ) {
-            u32 sextet_a = decodeChar( src[ii] );
-            u32 sextet_b = decodeChar( src[ii + 1] );
-            u32 sextet_c = decodeChar( src[ii + 2] );
-            u32 sextet_d = decodeChar( src[ii + 3] );
+        for ( uint32_t ii = 0; ii < src.size(); ii += 4 ) {
+            uint32_t sextet_a = decodeChar( src[ii] );
+            uint32_t sextet_b = decodeChar( src[ii + 1] );
+            uint32_t sextet_c = decodeChar( src[ii + 2] );
+            uint32_t sextet_d = decodeChar( src[ii + 3] );
 
-            u32 triple = ( sextet_a << 18 ) + ( sextet_b << 12 ) + ( sextet_c << 6 ) + sextet_d;
+            uint32_t triple = ( sextet_a << 18 ) + ( sextet_b << 12 ) + ( sextet_c << 6 ) + sextet_d;
 
             if ( res.size() < size )
                 res.push_back( ( triple >> 16 ) & 0xFF );
@@ -536,16 +536,16 @@ std::vector<u8> decodeBase64( const std::string & src )
     return res;
 }
 
-int CheckSum( const std::vector<u8> & v )
+int CheckSum( const std::vector<uint8_t> & v )
 {
-    u32 ret = 0;
-    std::vector<u8>::const_iterator it = v.begin();
+    uint32_t ret = 0;
+    std::vector<uint8_t>::const_iterator it = v.begin();
 
     do {
-        u32 b1 = it < v.end() ? *it++ : 0;
-        u32 b2 = it < v.end() ? *it++ : 0;
-        u32 b3 = it < v.end() ? *it++ : 0;
-        u32 b4 = it < v.end() ? *it++ : 0;
+        uint32_t b1 = it < v.end() ? *it++ : 0;
+        uint32_t b2 = it < v.end() ? *it++ : 0;
+        uint32_t b3 = it < v.end() ? *it++ : 0;
+        uint32_t b4 = it < v.end() ? *it++ : 0;
 
         ret += ( b1 << 24 ) | ( b2 << 16 ) | ( b3 << 8 ) | b4;
     } while ( it != v.end() );
@@ -555,5 +555,5 @@ int CheckSum( const std::vector<u8> & v )
 
 int CheckSum( const std::string & str )
 {
-    return CheckSum( std::vector<u8>( str.begin(), str.end() ) );
+    return CheckSum( std::vector<uint8_t>( str.begin(), str.end() ) );
 }

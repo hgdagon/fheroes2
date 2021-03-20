@@ -40,14 +40,14 @@
 
 struct monstats_t
 {
-    u8 attack;
-    u8 defense;
-    u8 damageMin;
-    u8 damageMax;
-    u16 hp;
-    u8 speed;
-    u8 grown;
-    u8 shots;
+    uint8_t attack;
+    uint8_t defense;
+    uint8_t damageMin;
+    uint8_t damageMax;
+    uint16_t hp;
+    uint8_t speed;
+    uint8_t grown;
+    uint8_t shots;
     const char * name;
     const char * multiname;
     cost_t cost;
@@ -327,19 +327,19 @@ StreamBase & operator>>( StreamBase & msg, monstats_t & obj )
 
 StreamBase & operator<<( StreamBase & msg, const MonsterStaticData & /*obj*/ )
 {
-    u32 monsters_size = ARRAY_COUNT( monsters );
+    uint32_t monsters_size = ARRAY_COUNT( monsters );
     msg << monsters_size;
-    for ( u32 ii = 0; ii < monsters_size; ++ii )
+    for ( uint32_t ii = 0; ii < monsters_size; ++ii )
         msg << monsters[ii];
     return msg;
 }
 
 StreamBase & operator>>( StreamBase & msg, const MonsterStaticData & /*obj*/ )
 {
-    u32 monsters_size;
+    uint32_t monsters_size;
     msg >> monsters_size;
 
-    for ( u32 ii = 0; ii < monsters_size; ++ii )
+    for ( uint32_t ii = 0; ii < monsters_size; ++ii )
         msg >> monsters[ii];
     return msg;
 }
@@ -507,7 +507,7 @@ Monster::Monster( const Spell & sp )
     }
 }
 
-Monster::Monster( int race, u32 dw )
+Monster::Monster( int race, uint32_t dw )
     : id( UNKNOWN )
 {
     id = FromDwelling( race, dw ).id;
@@ -538,12 +538,12 @@ void Monster::Upgrade( void )
     id = GetUpgrade().id;
 }
 
-u32 Monster::GetAttack( void ) const
+uint32_t Monster::GetAttack( void ) const
 {
     return monsters[id].attack;
 }
 
-u32 Monster::GetDefense( void ) const
+uint32_t Monster::GetDefense( void ) const
 {
     return monsters[id].defense;
 }
@@ -583,32 +583,32 @@ int Monster::GetRace( void ) const
     return Race::NONE;
 }
 
-u32 Monster::GetDamageMin( void ) const
+uint32_t Monster::GetDamageMin( void ) const
 {
     return monsters[id].damageMin;
 }
 
-u32 Monster::GetDamageMax( void ) const
+uint32_t Monster::GetDamageMax( void ) const
 {
     return monsters[id].damageMax;
 }
 
-u32 Monster::GetShots( void ) const
+uint32_t Monster::GetShots( void ) const
 {
     return monsters[id].shots;
 }
 
-u32 Monster::GetHitPoints( void ) const
+uint32_t Monster::GetHitPoints( void ) const
 {
     return monsters[id].hp;
 }
 
-u32 Monster::GetSpeed( void ) const
+uint32_t Monster::GetSpeed( void ) const
 {
     return monsters[id].speed;
 }
 
-u32 Monster::GetGrown( void ) const
+uint32_t Monster::GetGrown( void ) const
 {
     return monsters[id].grown;
 }
@@ -679,7 +679,7 @@ double Monster::GetMonsterStrength( int attack, int defense ) const
     return sqrt( damagePotential * effectiveHP ) * attackDefense * monsterSpecial;
 }
 
-u32 Monster::GetRNDSize( bool skip_factor ) const
+uint32_t Monster::GetRNDSize( bool skip_factor ) const
 {
     if ( !isValid() )
         return 0;
@@ -1090,7 +1090,7 @@ Monster Monster::GetUpgrade( void ) const
     return Monster( id );
 }
 
-Monster Monster::FromDwelling( int race, u32 dwelling )
+Monster Monster::FromDwelling( int race, uint32_t dwelling )
 {
     switch ( dwelling ) {
     case DWELLING_MONSTER1:
@@ -1336,7 +1336,7 @@ Monster Monster::Rand( level_t level )
         return Monster( Rand::Get( PEASANT, WATER_ELEMENT ) );
     static std::vector<Monster> monstersVec[LEVEL4 - LEVEL0];
     if ( monstersVec[0].empty() ) {
-        for ( u32 i = PEASANT; i <= WATER_ELEMENT; ++i ) {
+        for ( uint32_t i = PEASANT; i <= WATER_ELEMENT; ++i ) {
             const Monster monster( i );
             if ( monster.GetRandomUnitLevel() > LEVEL0 )
                 monstersVec[monster.GetRandomUnitLevel() - LEVEL0 - 1].push_back( monster );
@@ -1345,7 +1345,7 @@ Monster Monster::Rand( level_t level )
     return Rand::Get( monstersVec[level - LEVEL0 - 1] );
 }
 
-u32 Monster::Rand4WeekOf( void )
+uint32_t Monster::Rand4WeekOf( void )
 {
     switch ( Rand::Get( 1, 47 ) ) {
     case 1:
@@ -1448,7 +1448,7 @@ u32 Monster::Rand4WeekOf( void )
     return UNKNOWN;
 }
 
-u32 Monster::Rand4MonthOf( void )
+uint32_t Monster::Rand4MonthOf( void )
 {
     switch ( Rand::Get( 1, 30 ) ) {
     case 1:
@@ -1706,7 +1706,7 @@ int Monster::GetRandomUnitLevel( void ) const
     return LEVEL0;
 }
 
-u32 Monster::GetDwelling( void ) const
+uint32_t Monster::GetDwelling( void ) const
 {
     switch ( id ) {
     case PEASANT:
@@ -1807,7 +1807,7 @@ const char * Monster::GetMultiName( void ) const
     return _( monsters[id].multiname );
 }
 
-const char * Monster::GetPluralName( u32 count ) const
+const char * Monster::GetPluralName( uint32_t count ) const
 {
     switch ( id ) {
     case PEASANT:
@@ -1956,7 +1956,7 @@ const char * Monster::GetPluralName( u32 count ) const
     return 1 == count ? GetName() : GetMultiName();
 }
 
-u32 Monster::GetSpriteIndex( void ) const
+uint32_t Monster::GetSpriteIndex( void ) const
 {
     return UNKNOWN < id ? id - 1 : 0;
 }
@@ -1991,11 +1991,11 @@ payment_t Monster::GetUpgradeCost( void ) const
     return pay;
 }
 
-u32 Monster::GetCountFromHitPoints( const Monster & mons, u32 hp )
+uint32_t Monster::GetCountFromHitPoints( const Monster & mons, uint32_t hp )
 {
     if ( hp ) {
-        const u32 hp1 = mons.GetHitPoints();
-        const u32 count = hp / hp1;
+        const uint32_t hp1 = mons.GetHitPoints();
+        const uint32_t count = hp / hp1;
         return ( count * hp1 ) < hp ? count + 1 : count;
     }
 
@@ -2040,8 +2040,8 @@ void RandomMonsterAnimation::increment()
         const int moveId = Rand::Get( _validMoves );
 
         if ( moveId == Monster_Info::STATIC ) {
-            const u32 counter = Rand::Get( 10, 20 );
-            for ( u32 i = 0; i < counter; ++i )
+            const uint32_t counter = Rand::Get( 10, 20 );
+            for ( uint32_t i = 0; i < counter; ++i )
                 _pushFrames( Monster_Info::STATIC );
         }
         else if ( moveId == Monster_Info::IDLE ) {
@@ -2050,8 +2050,8 @@ void RandomMonsterAnimation::increment()
         else if ( moveId == Monster_Info::MOVING ) {
             _pushFrames( ( _isFlyer ) ? Monster_Info::FLY_UP : Monster_Info::MOVE_START );
 
-            const u32 counter = Rand::Get( 3, 5 );
-            for ( u32 j = 0; j < counter; ++j )
+            const uint32_t counter = Rand::Get( 3, 5 );
+            for ( uint32_t j = 0; j < counter; ++j )
                 _pushFrames( Monster_Info::MOVING );
 
             _pushFrames( ( _isFlyer ) ? Monster_Info::FLY_LAND : Monster_Info::MOVE_END );

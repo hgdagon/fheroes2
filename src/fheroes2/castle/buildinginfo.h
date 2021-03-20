@@ -33,8 +33,8 @@ class BuildingInfo
 public:
     BuildingInfo( const Castle &, building_t );
 
-    u32 operator()( void ) const;
-    void SetPos( s32, s32 );
+    uint32_t operator()( void ) const;
+    void SetPos( int32_t, int32_t );
     const fheroes2::Rect & GetArea( void ) const;
     const char * GetName( void ) const;
     const std::string & GetDescription( void ) const;
@@ -45,14 +45,14 @@ public:
     bool DialogBuyBuilding( bool buttons ) const;
 
     static void UpdateCosts( const std::string & );
-    static payment_t GetCost( u32, int );
+    static payment_t GetCost( uint32_t, int );
 
 private:
     void RedrawCaptain( void );
     std::string GetConditionDescription( void ) const;
 
     const Castle & castle;
-    u32 building;
+    uint32_t building;
     std::string description;
     fheroes2::Rect area;
     int bcond;
@@ -60,9 +60,9 @@ private:
 
 struct DwellingItem
 {
-    DwellingItem( const Castle &, u32 dw );
+    DwellingItem( const Castle &, uint32_t dw );
 
-    u32 type;
+    uint32_t type;
     Monster mons;
 };
 

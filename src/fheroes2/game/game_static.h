@@ -44,24 +44,24 @@ namespace GameStatic
     StreamBase & operator<<( StreamBase &, const Data & );
     StreamBase & operator>>( StreamBase &, const Data & );
 
-    u32 GetLostOnWhirlpoolPercent( void );
-    u32 GetGameOverLostDays( void );
-    u32 GetOverViewDistance( u32 );
+    uint32_t GetLostOnWhirlpoolPercent( void );
+    uint32_t GetGameOverLostDays( void );
+    uint32_t GetOverViewDistance( uint32_t );
 
-    u32 GetKingdomMaxHeroes( void );
+    uint32_t GetKingdomMaxHeroes( void );
 
-    u32 GetCastleGrownWell( void );
-    u32 GetCastleGrownWel2( void );
-    u32 GetCastleGrownWeekOf( void );
-    u32 GetCastleGrownMonthOf( void );
+    uint32_t GetCastleGrownWell( void );
+    uint32_t GetCastleGrownWel2( void );
+    uint32_t GetCastleGrownWeekOf( void );
+    uint32_t GetCastleGrownMonthOf( void );
 
-    u32 GetHeroesRestoreSpellPointsPerDay( void );
-    u32 GetMageGuildRestoreSpellPointsPercentDay( int level );
+    uint32_t GetHeroesRestoreSpellPointsPerDay( void );
+    uint32_t GetMageGuildRestoreSpellPointsPercentDay( int level );
 
     bool isCustomMonsterUpgradeOption();
     float GetMonsterUpgradeRatio();
 
-    s32 ObjectVisitedModifiers( int obj );
+    int32_t ObjectVisitedModifiers( int obj );
 
     int GetBattleMoatReduceDefense( void );
 
@@ -69,9 +69,9 @@ namespace GameStatic
     const Skill::values_t * GetSkillValues( int skill );
     const Skill::secondary_t * GetSkillForWitchsHut( void );
 
-    u32 Spell_DD_Distance( void );
-    u32 Spell_DD_SP( void );
-    u32 Spell_DD_HP( void );
+    uint32_t Spell_DD_Distance( void );
+    uint32_t Spell_DD_SP( void );
+    uint32_t Spell_DD_HP( void );
 
     void SetSpell_DD_Distance( int );
     void SetSpell_DD_SP( int );

@@ -69,7 +69,7 @@ void Castle::OpenTavern( void )
     const fheroes2::Sprite & tavernSprite = fheroes2::AGG::GetICN( tavwin, 1 );
     fheroes2::Blit( tavernSprite, display, dst_pt.x, dst_pt.y );
 
-    if ( const u32 index = ICN::AnimationFrame( tavwin, 0, 0 ) ) {
+    if ( const uint32_t index = ICN::AnimationFrame( tavwin, 0, 0 ) ) {
         const fheroes2::Sprite & animation = fheroes2::AGG::GetICN( tavwin, index );
         fheroes2::Blit( animation, display, dst_pt.x + animation.x(), dst_pt.y + animation.y() );
     }
@@ -87,7 +87,7 @@ void Castle::OpenTavern( void )
     display.render();
 
     LocalEvent & le = LocalEvent::Get();
-    u32 frame = 0;
+    uint32_t frame = 0;
 
     // message loop
     while ( le.HandleEvents() ) {
@@ -100,7 +100,7 @@ void Castle::OpenTavern( void )
             cursor.Hide();
             fheroes2::Blit( tavernSprite, display, dst_pt.x, dst_pt.y );
 
-            if ( const u32 index = ICN::AnimationFrame( tavwin, 0, frame ) ) {
+            if ( const uint32_t index = ICN::AnimationFrame( tavwin, 0, frame ) ) {
                 const fheroes2::Sprite & s22 = fheroes2::AGG::GetICN( tavwin, index );
                 fheroes2::Blit( s22, display, dst_pt.x + s22.x(), dst_pt.y + s22.y() );
             }

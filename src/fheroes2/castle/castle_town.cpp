@@ -56,7 +56,7 @@ int Castle::DialogBuyHero( const Heroes * hero )
 
     TextBox recruitHeroText( _( "Recruit Hero" ), Font::YELLOW_BIG, BOXAREA_WIDTH );
 
-    u32 count = hero->GetCountArtifacts();
+    uint32_t count = hero->GetCountArtifacts();
     if ( hero->HasArtifact( Artifact::MAGIC_BOOK ) )
         count--;
 
@@ -143,7 +143,7 @@ int Castle::DialogBuyCastle( bool buttons ) const
     return info.DialogBuyBuilding( buttons ) ? Dialog::OK : Dialog::CANCEL;
 }
 
-u32 Castle::OpenTown( void )
+uint32_t Castle::OpenTown( void )
 {
     fheroes2::Display & display = fheroes2::Display::instance();
     Cursor & cursor = Cursor::Get();

@@ -86,7 +86,7 @@ int main( int argc, char ** argv )
 
     fs << "<?xml version=\"1.0\" ?>" << std::endl << "<icn name=\"" << shortname << ".icn\" count=\"" << count_sprite << "\">" << std::endl;
 
-    u32 save_pos = sf.tell();
+    uint32_t save_pos = sf.tell();
 
     std::vector<fheroes2::ICNHeader> headers( count_sprite );
     for ( int ii = 0; ii < count_sprite; ++ii )
@@ -95,10 +95,10 @@ int main( int argc, char ** argv )
     for ( int ii = 0; ii < count_sprite; ++ii ) {
         const fheroes2::ICNHeader & head = headers[ii];
 
-        u32 data_size = ( ii + 1 != count_sprite ? headers[ii + 1].offsetData - head.offsetData : total_size - head.offsetData );
+        uint32_t data_size = ( ii + 1 != count_sprite ? headers[ii + 1].offsetData - head.offsetData : total_size - head.offsetData );
         sf.seek( save_pos + head.offsetData );
         std::cerr << data_size << std::endl;
-        std::vector<u8> buf = sf.getRaw( data_size );
+        std::vector<uint8_t> buf = sf.getRaw( data_size );
 
         if ( buf.size() ) {
             const fheroes2::Sprite image = fheroes2::decodeICNSprite( &buf[0], data_size, head.width, head.height, head.offsetX, head.offsetY );

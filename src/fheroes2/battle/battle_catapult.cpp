@@ -59,7 +59,7 @@ Battle::Catapult::Catapult( const HeroBase & hero )
         catShots += Artifact( Artifact::BALLISTA ).ExtraValue();
 }
 
-u32 Battle::Catapult::GetDamage() const
+uint32_t Battle::Catapult::GetDamage() const
 {
     if ( doubleDamageChance == 100 || doubleDamageChance >= Rand::Get( 1, 100 ) ) {
         DEBUG_LOG( DBG_BATTLE, DBG_TRACE, "Catapult dealt double damage! (" << doubleDamageChance << "% chance)" );
@@ -109,9 +109,9 @@ Point Battle::Catapult::GetTargetPosition( int target )
     return res;
 }
 
-int Battle::Catapult::GetTarget( const std::vector<u32> & values ) const
+int Battle::Catapult::GetTarget( const std::vector<uint32_t> & values ) const
 {
-    std::vector<u32> targets;
+    std::vector<uint32_t> targets;
     targets.reserve( 4 );
 
     // check walls

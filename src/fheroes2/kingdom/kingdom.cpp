@@ -297,28 +297,28 @@ void Kingdom::RemoveCastle( const Castle * castle )
         LossPostActions();
 }
 
-u32 Kingdom::GetCountCastle( void ) const
+uint32_t Kingdom::GetCountCastle( void ) const
 {
     return static_cast<uint32_t>( std::count_if( castles.begin(), castles.end(), Castle::PredicateIsCastle ) );
 }
 
-u32 Kingdom::GetCountTown( void ) const
+uint32_t Kingdom::GetCountTown( void ) const
 {
     return static_cast<uint32_t>( std::count_if( castles.begin(), castles.end(), Castle::PredicateIsTown ) );
 }
 
-u32 Kingdom::GetCountMarketplace( void ) const
+uint32_t Kingdom::GetCountMarketplace( void ) const
 {
     return static_cast<uint32_t>(
         std::count_if( castles.begin(), castles.end(), []( const Castle * castle ) { return Castle::PredicateIsBuildBuilding( castle, BUILD_MARKETPLACE ); } ) );
 }
 
-u32 Kingdom::GetCountNecromancyShrineBuild( void ) const
+uint32_t Kingdom::GetCountNecromancyShrineBuild( void ) const
 {
     return static_cast<uint32_t>( std::count_if( castles.begin(), castles.end(), []( const Castle * castle ) { return castle->isNecromancyShrineBuild(); } ) );
 }
 
-u32 Kingdom::GetCountBuilding( u32 build ) const
+uint32_t Kingdom::GetCountBuilding( uint32_t build ) const
 {
     return static_cast<uint32_t>( std::count_if( castles.begin(), castles.end(), [build]( const Castle * castle ) { return castle->isBuild( build ); } ) );
 }
@@ -351,7 +351,7 @@ bool Kingdom::isVisited( const Maps::Tiles & tile ) const
     return isVisited( tile.GetIndex(), tile.GetObject() );
 }
 
-bool Kingdom::isVisited( s32 index, int object ) const
+bool Kingdom::isVisited( int32_t index, int object ) const
 {
     std::list<IndexObject>::const_iterator it = std::find_if( visit_object.begin(), visit_object.end(), [index]( const IndexObject & v ) { return v.isIndex( index ); } );
     return visit_object.end() != it && ( *it ).isObject( object );
@@ -363,13 +363,13 @@ bool Kingdom::isVisited( int object ) const
     return visit_object.end() != std::find_if( visit_object.begin(), visit_object.end(), [object]( const IndexObject & v ) { return v.isObject( object ); } );
 }
 
-u32 Kingdom::CountVisitedObjects( int object ) const
+uint32_t Kingdom::CountVisitedObjects( int object ) const
 {
     return std::count_if( visit_object.begin(), visit_object.end(), [object]( const IndexObject & v ) { return v.isObject( object ); } );
 }
 
 /* set visited cell */
-void Kingdom::SetVisited( s32 index, int object )
+void Kingdom::SetVisited( int32_t index, int object )
 {
     if ( !isVisited( index, object ) && object != MP2::OBJ_ZERO )
         visit_object.push_front( IndexObject( index, object ) );
@@ -413,7 +413,7 @@ bool Kingdom::HeroesMayStillMove( void ) const
     return heroes.end() != std::find_if( heroes.begin(), heroes.end(), []( const Heroes * hero ) { return hero->MayStillMove(); } );
 }
 
-u32 Kingdom::GetCountCapital( void ) const
+uint32_t Kingdom::GetCountCapital( void ) const
 {
     return static_cast<uint32_t>( std::count_if( castles.begin(), castles.end(), Castle::PredicateIsCapital ) );
 }
@@ -430,7 +430,7 @@ void Kingdom::OddFundsResource( const Funds & funds )
     resource.Trim();
 }
 
-u32 Kingdom::GetLostTownDays( void ) const
+uint32_t Kingdom::GetLostTownDays( void ) const
 {
     return lost_town_days;
 }
@@ -534,7 +534,7 @@ void Kingdom::ApplyPlayWithStartingHero( void )
     }
 }
 
-u32 Kingdom::GetMaxHeroes( void )
+uint32_t Kingdom::GetMaxHeroes( void )
 {
     return GameStatic::GetKingdomMaxHeroes();
 }
@@ -555,7 +555,7 @@ Funds Kingdom::GetIncome( int type /* INCOME_ALL */ ) const
         const int resources[]
             = {Resource::WOOD, Resource::ORE, Resource::MERCURY, Resource::SULFUR, Resource::CRYSTAL, Resource::GEMS, Resource::GOLD, Resource::UNKNOWN};
 
-        for ( u32 index = 0; resources[index] != Resource::UNKNOWN; ++index )
+        for ( uint32_t index = 0; resources[index] != Resource::UNKNOWN; ++index )
             totalIncome += ProfitConditions::FromMine( resources[index] ) * world.CountCapturedMines( resources[index], GetColor() );
     }
 
@@ -591,7 +591,7 @@ Funds Kingdom::GetIncome( int type /* INCOME_ALL */ ) const
                                  Artifact::ENDLESS_POUCH_CRYSTAL,
                                  Artifact::UNKNOWN};
 
-        for ( u32 index = 0; artifacts[index] != Artifact::UNKNOWN; ++index )
+        for ( uint32_t index = 0; artifacts[index] != Artifact::UNKNOWN; ++index )
             for ( KingdomHeroes::const_iterator ith = heroes.begin(); ith != heroes.end(); ++ith )
                 totalIncome += ProfitConditions::FromArtifact( artifacts[index] ) * ( **ith ).GetBagArtifacts().Count( Artifact( artifacts[index] ) );
 
@@ -643,20 +643,20 @@ void Kingdoms::Init( void )
         GetKingdom( *it ).Init( *it );
 }
 
-u32 Kingdoms::size( void ) const
+uint32_t Kingdoms::size( void ) const
 {
     return KINGDOMMAX + 1;
 }
 
 void Kingdoms::clear( void )
 {
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         kingdoms[ii].clear();
 }
 
 void Kingdoms::ApplyPlayWithStartingHero( void )
 {
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         if ( kingdoms[ii].isPlay() )
             kingdoms[ii].ApplyPlayWithStartingHero();
 }
@@ -724,21 +724,21 @@ Heroes * Kingdom::GetLastLostHero( void ) const
 
 void Kingdoms::NewDay( void )
 {
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         if ( kingdoms[ii].isPlay() )
             kingdoms[ii].ActionNewDay();
 }
 
 void Kingdoms::NewWeek( void )
 {
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         if ( kingdoms[ii].isPlay() )
             kingdoms[ii].ActionNewWeek();
 }
 
 void Kingdoms::NewMonth( void )
 {
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         if ( kingdoms[ii].isPlay() )
             kingdoms[ii].ActionNewMonth();
 }
@@ -746,7 +746,7 @@ void Kingdoms::NewMonth( void )
 int Kingdoms::GetNotLossColors( void ) const
 {
     int result = 0;
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         if ( kingdoms[ii].GetColor() && !kingdoms[ii].isLoss() )
             result |= kingdoms[ii].GetColor();
     return result;
@@ -755,7 +755,7 @@ int Kingdoms::GetNotLossColors( void ) const
 int Kingdoms::GetLossColors( void ) const
 {
     int result = 0;
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         if ( kingdoms[ii].GetColor() && kingdoms[ii].isLoss() )
             result |= kingdoms[ii].GetColor();
     return result;
@@ -763,7 +763,7 @@ int Kingdoms::GetLossColors( void ) const
 
 int Kingdoms::FindWins( int cond ) const
 {
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         if ( kingdoms[ii].GetColor() && world.KingdomIsWins( kingdoms[ii], cond ) )
             return kingdoms[ii].GetColor();
     return 0;
@@ -799,9 +799,9 @@ void Kingdoms::AddCastles( const AllCastles & castles )
             GetKingdom( ( *it )->GetColor() ).AddCastle( *it );
 }
 
-void Kingdoms::AddTributeEvents( CapturedObjects & captureobj, u32 day, int obj )
+void Kingdoms::AddTributeEvents( CapturedObjects & captureobj, uint32_t day, int obj )
 {
-    for ( u32 ii = 0; ii < size(); ++ii )
+    for ( uint32_t ii = 0; ii < size(); ++ii )
         if ( kingdoms[ii].isPlay() ) {
             const int color = kingdoms[ii].GetColor();
             const Funds & funds = captureobj.TributeCapturedObject( color, obj );
@@ -882,8 +882,8 @@ StreamBase & operator>>( StreamBase & msg, Kingdom & kingdom )
 
 StreamBase & operator<<( StreamBase & msg, const Kingdoms & obj )
 {
-    msg << static_cast<u32>( obj.size() );
-    for ( u32 ii = 0; ii < obj.size(); ++ii )
+    msg << static_cast<uint32_t>( obj.size() );
+    for ( uint32_t ii = 0; ii < obj.size(); ++ii )
         msg << obj.kingdoms[ii];
 
     return msg;
@@ -891,11 +891,11 @@ StreamBase & operator<<( StreamBase & msg, const Kingdoms & obj )
 
 StreamBase & operator>>( StreamBase & msg, Kingdoms & obj )
 {
-    u32 kingdomscount = 0;
+    uint32_t kingdomscount = 0;
     msg >> kingdomscount;
 
     if ( kingdomscount <= KINGDOMMAX + 1 ) {
-        for ( u32 i = 0; i < kingdomscount; ++i )
+        for ( uint32_t i = 0; i < kingdomscount; ++i )
             msg >> obj.kingdoms[i];
     }
 

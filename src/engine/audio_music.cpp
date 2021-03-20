@@ -35,14 +35,14 @@
 
 namespace Music
 {
-    void Play( Mix_Music * mix, /*u32 id,*/ bool loop );
+    void Play( Mix_Music * mix, /*uint32_t id,*/ bool loop );
 
     Mix_Music * music = NULL;
     int fadein = 0;
     int fadeout = 0;
 }
 
-void Music::Play( Mix_Music * mix, /*u32 id,*/ bool loop )
+void Music::Play( Mix_Music * mix, /*uint32_t id,*/ bool loop )
 {
     Reset();
 
@@ -55,10 +55,10 @@ void Music::Play( Mix_Music * mix, /*u32 id,*/ bool loop )
         music = mix;
 }
 
-void Music::Play( const std::vector<u8> & v, bool loop )
+void Music::Play( const std::vector<uint8_t> & v, bool loop )
 {
     if ( Mixer::isValid() && v.size() ) {
-        // u32 id = CheckSum( v );
+        // uint32_t id = CheckSum( v );
         SDL_RWops * rwops = SDL_RWFromConstMem( &v[0], v.size() );
 #if SDL_VERSION_ATLEAST( 2, 0, 0 )
         Mix_Music * mix = Mix_LoadMUS_RW( rwops, 0 );
@@ -73,7 +73,7 @@ void Music::Play( const std::vector<u8> & v, bool loop )
 void Music::Play( const std::string & file, bool loop )
 {
     if ( Mixer::isValid() ) {
-        // u32 id = CheckSum( file );
+        // uint32_t id = CheckSum( file );
         Mix_Music * mix = Mix_LoadMUS( file.c_str() );
 
         if ( !mix ) {
@@ -94,7 +94,7 @@ void Music::SetFadeOut( int f )
     fadeout = f;
 }
 
-u16 Music::Volume( int16_t vol )
+uint16_t Music::Volume( int16_t vol )
 {
     return Mixer::isValid() ? ( Mix_VolumeMusic( vol > MIX_MAX_VOLUME ? MIX_MAX_VOLUME : vol ) ) : 0;
 }
@@ -264,7 +264,7 @@ void Music::SetExtCommand( const std::string & cmd )
     command = cmd;
 }
 
-void Music::Play( const std::vector<u8> & v, bool loop ) {}
+void Music::Play( const std::vector<uint8_t> & v, bool loop ) {}
 
 void Music::Play( const std::string & f, bool loop )
 {
@@ -305,7 +305,7 @@ void Music::SetFadeIn( int f ) {}
 
 void Music::SetFadeOut( int f ) {}
 
-u16 Music::Volume( int16_t vol )
+uint16_t Music::Volume( int16_t vol )
 {
     return 0;
 }

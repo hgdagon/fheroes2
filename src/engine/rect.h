@@ -54,9 +54,9 @@ struct Point
 
 struct Size
 {
-    u16 w, h;
+    uint16_t w, h;
 
-    Size( u16 width = 0, u16 height = 0 );
+    Size( uint16_t width = 0, uint16_t height = 0 );
     Size( const Point & );
 
     bool operator==( const Size & ) const;
@@ -72,8 +72,8 @@ struct Size
 struct Rect : Point, Size
 {
     Rect();
-    Rect( int16_t, int16_t, u16, u16 );
-    Rect( const Point &, u16, u16 );
+    Rect( int16_t, int16_t, uint16_t, uint16_t );
+    Rect( const Point &, uint16_t, uint16_t );
     Rect( const Point &, const Size & );
 
     // TODO: this method must be removed before merging to master
@@ -105,7 +105,7 @@ struct Points : std::vector<Point>
 
 struct Rects : std::vector<Rect>
 {
-    s32 GetIndex( const Point & ) const;
+    int32_t GetIndex( const Point & ) const;
     Rect GetRect( void ) const;
 };
 

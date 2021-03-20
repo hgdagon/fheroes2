@@ -231,15 +231,15 @@ namespace Skill
 
 namespace GameStatic
 {
-    u8 whirlpool_lost_percent = 50;
+    uint8_t whirlpool_lost_percent = 50;
 
     /* town, castle, heroes, artifact_telescope, object_observation_tower, object_magi_eyes */
-    u8 overview_distance[] = {4, 5, 4, 1, 20, 9};
+    uint8_t overview_distance[] = {4, 5, 4, 1, 20, 9};
 
-    u8 gameover_lost_days = 7;
+    uint8_t gameover_lost_days = 7;
 
     // kingdom
-    u8 kingdom_max_heroes = 8;
+    uint8_t kingdom_max_heroes = 8;
     cost_t kingdom_starting_resource[] = {{10000, 30, 10, 30, 10, 10, 10},
                                           {7500, 20, 5, 20, 5, 5, 5},
                                           {5000, 10, 2, 10, 2, 2, 2},
@@ -249,20 +249,20 @@ namespace GameStatic
                                           {10000, 30, 10, 30, 10, 10, 10}};
 
     // castle
-    u8 castle_grown_well = 2;
-    u8 castle_grown_wel2 = 8;
-    u8 castle_grown_week_of = 5;
-    u8 castle_grown_month_of = 100;
+    uint8_t castle_grown_well = 2;
+    uint8_t castle_grown_wel2 = 8;
+    uint8_t castle_grown_week_of = 5;
+    uint8_t castle_grown_month_of = 100;
 
-    u8 mageguild_restore_spell_points_day[] = {20, 40, 60, 80, 100};
+    uint8_t mageguild_restore_spell_points_day[] = {20, 40, 60, 80, 100};
 
     // heroes
-    u8 heroes_spell_points_day = 1;
+    uint8_t heroes_spell_points_day = 1;
 
     // spells
-    u16 spell_dd_distance = 0;
-    u16 spell_dd_sp = 0;
-    u16 spell_dd_hp = 0;
+    uint16_t spell_dd_distance = 0;
+    uint16_t spell_dd_sp = 0;
+    uint16_t spell_dd_hp = 0;
 
     // monsters
     float monsterUpgradeRatio = 1.0f;
@@ -272,7 +272,7 @@ namespace GameStatic
     int8_t objects_mod[] = {1, 1, 1, 2, -1, -1, -1, 1, 1, 1, 1, -2};
 
     // world
-    u32 uniq = 0;
+    uint32_t uniq = 0;
 }
 
 StreamBase & GameStatic::operator<<( StreamBase & msg, const Data & /*obj*/ )
@@ -280,24 +280,24 @@ StreamBase & GameStatic::operator<<( StreamBase & msg, const Data & /*obj*/ )
     msg << whirlpool_lost_percent << kingdom_max_heroes << castle_grown_well << castle_grown_wel2 << castle_grown_week_of << castle_grown_month_of
         << heroes_spell_points_day << gameover_lost_days << spell_dd_distance << spell_dd_sp << spell_dd_hp;
 
-    u8 array_size = ARRAY_COUNT( overview_distance );
+    uint8_t array_size = ARRAY_COUNT( overview_distance );
     msg << array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg << overview_distance[ii];
 
     array_size = ARRAY_COUNT( kingdom_starting_resource );
     msg << array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg << kingdom_starting_resource[ii];
 
     array_size = ARRAY_COUNT( mageguild_restore_spell_points_day );
     msg << array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg << mageguild_restore_spell_points_day[ii];
 
     array_size = ARRAY_COUNT( objects_mod );
     msg << array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg << objects_mod[ii];
 
     msg << monsterUpgradeRatio << uniq;
@@ -305,12 +305,12 @@ StreamBase & GameStatic::operator<<( StreamBase & msg, const Data & /*obj*/ )
     // skill statics
     array_size = ARRAY_COUNT( Skill::_stats );
     msg << array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg << Skill::_stats[ii];
 
     array_size = ARRAY_COUNT( Skill::_values );
     msg << array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg << Skill::_values[ii];
 
     msg << Skill::_from_witchs_hut;
@@ -323,22 +323,22 @@ StreamBase & GameStatic::operator>>( StreamBase & msg, const Data & /*obj*/ )
     msg >> whirlpool_lost_percent >> kingdom_max_heroes >> castle_grown_well >> castle_grown_wel2 >> castle_grown_week_of >> castle_grown_month_of
         >> heroes_spell_points_day >> gameover_lost_days >> spell_dd_distance >> spell_dd_sp >> spell_dd_hp;
 
-    u8 array_size = 0;
+    uint8_t array_size = 0;
 
     msg >> array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg >> overview_distance[ii];
 
     msg >> array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg >> kingdom_starting_resource[ii];
 
     msg >> array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg >> mageguild_restore_spell_points_day[ii];
 
     msg >> array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg >> objects_mod[ii];
 
     msg >> monsterUpgradeRatio >> uniq;
@@ -347,11 +347,11 @@ StreamBase & GameStatic::operator>>( StreamBase & msg, const Data & /*obj*/ )
     }
 
     msg >> array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg >> Skill::_stats[ii];
 
     msg >> array_size;
-    for ( u32 ii = 0; ii < array_size; ++ii )
+    for ( uint32_t ii = 0; ii < array_size; ++ii )
         msg >> Skill::_values[ii];
 
     msg >> Skill::_from_witchs_hut;
@@ -369,57 +369,57 @@ float GameStatic::GetMonsterUpgradeRatio()
     return monsterUpgradeRatio;
 }
 
-u32 GameStatic::GetLostOnWhirlpoolPercent( void )
+uint32_t GameStatic::GetLostOnWhirlpoolPercent( void )
 {
     return whirlpool_lost_percent;
 }
 
-u32 GameStatic::GetOverViewDistance( u32 d )
+uint32_t GameStatic::GetOverViewDistance( uint32_t d )
 {
     return d >= ARRAY_COUNT( overview_distance ) ? 0 : overview_distance[d];
 }
 
-u32 GameStatic::GetGameOverLostDays( void )
+uint32_t GameStatic::GetGameOverLostDays( void )
 {
     return gameover_lost_days;
 }
 
-u32 GameStatic::GetHeroesRestoreSpellPointsPerDay( void )
+uint32_t GameStatic::GetHeroesRestoreSpellPointsPerDay( void )
 {
     return heroes_spell_points_day;
 }
 
-u32 GameStatic::GetMageGuildRestoreSpellPointsPercentDay( int level )
+uint32_t GameStatic::GetMageGuildRestoreSpellPointsPercentDay( int level )
 {
     return level && level < 6 ? mageguild_restore_spell_points_day[level - 1] : 0;
 }
 
-u32 GameStatic::GetKingdomMaxHeroes( void )
+uint32_t GameStatic::GetKingdomMaxHeroes( void )
 {
     return kingdom_max_heroes;
 }
 
-u32 GameStatic::GetCastleGrownWell( void )
+uint32_t GameStatic::GetCastleGrownWell( void )
 {
     return castle_grown_well;
 }
 
-u32 GameStatic::GetCastleGrownWel2( void )
+uint32_t GameStatic::GetCastleGrownWel2( void )
 {
     return castle_grown_wel2;
 }
 
-u32 GameStatic::GetCastleGrownWeekOf( void )
+uint32_t GameStatic::GetCastleGrownWeekOf( void )
 {
     return castle_grown_week_of;
 }
 
-u32 GameStatic::GetCastleGrownMonthOf( void )
+uint32_t GameStatic::GetCastleGrownMonthOf( void )
 {
     return castle_grown_month_of;
 }
 
-s32 GameStatic::ObjectVisitedModifiers( int obj )
+int32_t GameStatic::ObjectVisitedModifiers( int obj )
 {
     switch ( obj ) {
     case MP2::OBJ_BUOY:
@@ -453,17 +453,17 @@ s32 GameStatic::ObjectVisitedModifiers( int obj )
     return 0;
 }
 
-u32 GameStatic::Spell_DD_Distance( void )
+uint32_t GameStatic::Spell_DD_Distance( void )
 {
     return spell_dd_distance;
 }
 
-u32 GameStatic::Spell_DD_SP( void )
+uint32_t GameStatic::Spell_DD_SP( void )
 {
     return spell_dd_sp;
 }
 
-u32 GameStatic::Spell_DD_HP( void )
+uint32_t GameStatic::Spell_DD_HP( void )
 {
     return spell_dd_hp;
 }
@@ -577,7 +577,7 @@ void Game::KingdomUpdateStartingResource( const TiXmlElement * xml )
         const char * ai_always = xml->Attribute( "ai_always" );
         const char * level[] = {"easy", "normal", "hard", "expert", "impossible", NULL};
 
-        for ( u32 ii = 0; ii < 5; ++ii ) {
+        for ( uint32_t ii = 0; ii < 5; ++ii ) {
             if ( NULL != ( xml_difficult = xml->FirstChildElement( level[ii] ) ) ) {
                 LoadCostFromXMLElement( GameStatic::kingdom_starting_resource[ii], *xml_difficult );
                 if ( ai_always && 0 == std::strcmp( ai_always, level[ii] ) )

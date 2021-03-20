@@ -35,10 +35,10 @@
 #include "text.h"
 #include "world.h"
 
-struct dwelling_t : public std::pair<u32, u32>
+struct dwelling_t : public std::pair<uint32_t, uint32_t>
 {
-    dwelling_t( u32 type, u32 count )
-        : std::pair<u32, u32>( type, count ){};
+    dwelling_t( uint32_t type, uint32_t count )
+        : std::pair<uint32_t, uint32_t>( type, count ){};
 };
 
 struct dwellings_t : public std::vector<dwelling_t>
@@ -49,7 +49,7 @@ struct dwellings_t : public std::vector<dwelling_t>
     };
 };
 
-u32 HowManyRecruitMonster( const Castle & castle, u32 dw, const Funds & add, Funds & res )
+uint32_t HowManyRecruitMonster( const Castle & castle, uint32_t dw, const Funds & add, Funds & res )
 {
     const Monster ms( castle.GetRace(), castle.GetActualDwelling( dw ) );
     const Kingdom & kingdom = castle.GetKingdom();
@@ -57,7 +57,7 @@ u32 HowManyRecruitMonster( const Castle & castle, u32 dw, const Funds & add, Fun
     if ( !castle.GetArmy().CanJoinTroop( ms ) )
         return 0;
 
-    u32 count = castle.getMonstersInDwelling( dw );
+    uint32_t count = castle.getMonstersInDwelling( dw );
     payment_t payment;
 
     while ( count ) {
@@ -115,7 +115,7 @@ void Castle::OpenWell( void )
 
     buttonMax.draw();
 
-    std::vector<u32> alldwellings;
+    std::vector<uint32_t> alldwellings;
     alldwellings.reserve( 6 );
     alldwellings.push_back( DWELLING_MONSTER6 );
     alldwellings.push_back( DWELLING_MONSTER5 );
@@ -142,10 +142,10 @@ void Castle::OpenWell( void )
         if ( buttonMax.isEnabled() && le.MouseClickLeft( buttonMax.area() ) ) {
             std::vector<Troop> results;
             Funds cur, total;
-            u32 can_recruit;
+            uint32_t can_recruit;
             std::string str;
 
-            for ( std::vector<u32>::const_iterator it = alldwellings.begin(); it != alldwellings.end(); ++it ) {
+            for ( std::vector<uint32_t>::const_iterator it = alldwellings.begin(); it != alldwellings.end(); ++it ) {
                 if ( 0 != ( can_recruit = HowManyRecruitMonster( *this, *it, total, cur ) ) ) {
                     const Monster ms( race, GetActualDwelling( *it ) );
                     results.emplace_back( ms, can_recruit );
@@ -225,14 +225,14 @@ void Castle::WellRedrawInfoArea( const Point & cur_pt, const std::vector<RandomM
     dst_pt.y = cur_pt.y + 462;
     text.Blit( dst_pt.x, dst_pt.y );
 
-    u32 dw = DWELLING_MONSTER1;
+    uint32_t dw = DWELLING_MONSTER1;
     size_t monsterId = 0u;
 
     while ( dw <= DWELLING_MONSTER6 ) {
         bool present = false;
-        u32 dw_orig = DWELLING_MONSTER1;
-        u32 icnindex = 0;
-        u32 available = 0;
+        uint32_t dw_orig = DWELLING_MONSTER1;
+        uint32_t icnindex = 0;
+        uint32_t available = 0;
 
         switch ( dw ) {
         case DWELLING_MONSTER1:
@@ -340,7 +340,7 @@ void Castle::WellRedrawInfoArea( const Point & cur_pt, const std::vector<RandomM
         text.Blit( dst_pt.x, dst_pt.y );
 
         if ( present ) {
-            u32 grown = monster.GetGrown();
+            uint32_t grown = monster.GetGrown();
             grown += building & BUILD_WELL ? GetGrownWell() : 0;
             if ( DWELLING_MONSTER1 & dw )
                 grown += building & BUILD_WEL2 ? GetGrownWel2() : 0;

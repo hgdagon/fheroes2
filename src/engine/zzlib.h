@@ -32,8 +32,8 @@
 #include "serialize.h"
 #include "types.h"
 
-std::vector<u8> zlibCompress( const u8 *, size_t srcsz );
-std::vector<u8> zlibDecompress( const u8 *, size_t srcsz, size_t realsz = 0 );
+std::vector<uint8_t> zlibCompress( const uint8_t *, size_t srcsz );
+std::vector<uint8_t> zlibDecompress( const uint8_t *, size_t srcsz, size_t realsz = 0 );
 
 #endif
 

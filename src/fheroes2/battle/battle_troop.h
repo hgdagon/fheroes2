@@ -38,12 +38,12 @@ class HeroBase;
 
 namespace Battle
 {
-    struct ModeDuration : public std::pair<u32, u32>
+    struct ModeDuration : public std::pair<uint32_t, uint32_t>
     {
         ModeDuration();
-        ModeDuration( u32, u32 );
+        ModeDuration( uint32_t, uint32_t );
 
-        bool isMode( u32 ) const;
+        bool isMode( uint32_t ) const;
         bool isZeroDuration( void ) const;
         void DecreaseDuration( void );
     };
@@ -52,12 +52,12 @@ namespace Battle
     {
         ModesAffected();
 
-        u32 GetMode( u32 ) const;
-        void AddMode( u32, u32 );
-        void RemoveMode( u32 );
+        uint32_t GetMode( uint32_t ) const;
+        void AddMode( uint32_t, uint32_t );
+        void RemoveMode( uint32_t );
         void DecreaseDuration( void );
 
-        u32 FindZeroDuration( void ) const;
+        uint32_t FindZeroDuration( void ) const;
     };
 
     StreamBase & operator<<( StreamBase &, const ModesAffected & );
@@ -73,16 +73,16 @@ namespace Battle
     class Unit : public ArmyTroop, public BitModes, public Control
     {
     public:
-        Unit( const Troop &, s32 pos, bool reflect );
+        Unit( const Troop &, int32_t pos, bool reflect );
         ~Unit();
 
-        virtual bool isModes( u32 ) const override;
+        virtual bool isModes( uint32_t ) const override;
         virtual bool isBattle() const override;
         virtual std::string GetShotString() const override;
         virtual std::string GetSpeedString() const override;
-        virtual u32 GetHitPointsLeft() const override;
-        virtual u32 GetAffectedDuration( u32 ) const override;
-        virtual u32 GetSpeed() const override;
+        virtual uint32_t GetHitPointsLeft() const override;
+        virtual uint32_t GetAffectedDuration( uint32_t ) const override;
+        virtual uint32_t GetSpeed() const override;
         virtual int GetMorale() const override;
 
         Unit * GetMirror();
@@ -100,53 +100,53 @@ namespace Battle
         bool isHandFighting( void ) const;
         bool isReflect( void ) const;
         bool isHaveDamage( void ) const;
-        bool isMagicResist( const Spell &, u32 ) const;
+        bool isMagicResist( const Spell &, uint32_t ) const;
         bool OutOfWalls( void ) const;
         bool canReach( int index ) const;
         bool canReach( const Unit & unit ) const;
 
         std::string String( bool more = false ) const;
 
-        u32 GetUID( void ) const;
-        bool isUID( u32 ) const;
+        uint32_t GetUID( void ) const;
+        bool isUID( uint32_t ) const;
 
-        s32 GetHeadIndex( void ) const;
-        s32 GetTailIndex( void ) const;
+        int32_t GetHeadIndex( void ) const;
+        int32_t GetTailIndex( void ) const;
         const Position & GetPosition( void ) const;
-        void SetPosition( s32 );
+        void SetPosition( int32_t );
         void SetPosition( const Position & );
         void SetReflection( bool );
 
-        virtual u32 GetAttack() const override;
-        virtual u32 GetDefense() const override;
+        virtual uint32_t GetAttack() const override;
+        virtual uint32_t GetDefense() const override;
         int GetArmyColor( void ) const;
         virtual int GetColor() const override;
         int GetCurrentColor() const; // the unit can be under spell what changes its affiliation
         int GetCurrentControl() const;
         uint32_t GetMoveRange() const;
-        u32 GetSpeed( bool skip_standing_check ) const;
+        uint32_t GetSpeed( bool skip_standing_check ) const;
         virtual int GetControl() const override;
-        u32 GetDamage( const Unit & ) const;
-        s32 GetScoreQuality( const Unit & ) const;
-        u32 GetDead( void ) const;
-        u32 GetHitPoints( void ) const;
-        u32 GetShots( void ) const;
-        u32 ApplyDamage( Unit &, u32 );
-        u32 ApplyDamage( u32 );
+        uint32_t GetDamage( const Unit & ) const;
+        int32_t GetScoreQuality( const Unit & ) const;
+        uint32_t GetDead( void ) const;
+        uint32_t GetHitPoints( void ) const;
+        uint32_t GetShots( void ) const;
+        uint32_t ApplyDamage( Unit &, uint32_t );
+        uint32_t ApplyDamage( uint32_t );
         uint32_t CalculateRetaliationDamage( uint32_t damageTaken ) const;
-        u32 CalculateMinDamage( const Unit & ) const;
-        u32 CalculateMaxDamage( const Unit & ) const;
-        u32 CalculateDamageUnit( const Unit & enemy, double dmg ) const;
+        uint32_t CalculateMinDamage( const Unit & ) const;
+        uint32_t CalculateMaxDamage( const Unit & ) const;
+        uint32_t CalculateDamageUnit( const Unit & enemy, double dmg ) const;
         bool ApplySpell( const Spell &, const HeroBase * hero, TargetInfo & );
         bool AllowApplySpell( const Spell &, const HeroBase * hero, std::string * msg = NULL, bool forceApplyToAlly = false ) const;
         bool isUnderSpellEffect( const Spell & spell ) const;
         void PostAttackAction( Unit & );
         void ResetBlind( void );
         void SetBlindAnswer( bool value );
-        void SpellModesAction( const Spell &, u32, const HeroBase * );
-        void SpellApplyDamage( const Spell &, u32, const HeroBase *, TargetInfo & );
-        void SpellRestoreAction( const Spell &, u32, const HeroBase * );
-        u32 Resurrect( u32, bool, bool );
+        void SpellModesAction( const Spell &, uint32_t, const HeroBase * );
+        void SpellApplyDamage( const Spell &, uint32_t, const HeroBase *, TargetInfo & );
+        void SpellRestoreAction( const Spell &, uint32_t, const HeroBase * );
+        uint32_t Resurrect( uint32_t, bool, bool );
 
         bool SwitchAnimation( int rule, bool reverse = false );
         bool SwitchAnimation( const std::vector<int> & animationList, bool reverse = false );
@@ -177,15 +177,15 @@ namespace Battle
         Point GetCenterPoint() const;
         Rect GetRectPosition( void ) const;
 
-        u32 HowManyCanKill( const Unit & ) const;
-        u32 HowManyWillKilled( u32 ) const;
+        uint32_t HowManyCanKill( const Unit & ) const;
+        uint32_t HowManyWillKilled( uint32_t ) const;
 
         void SetResponse( void );
         void UpdateDirection( void );
         bool UpdateDirection( const Rect & );
         void PostKilledAction( void );
 
-        u32 GetMagicResist( const Spell &, u32 ) const;
+        uint32_t GetMagicResist( const Spell &, uint32_t ) const;
         int GetSpellMagic( bool force = false ) const;
 
         const HeroBase * GetCommander( void ) const;
@@ -203,12 +203,12 @@ namespace Battle
         friend StreamBase & operator<<( StreamBase &, const Unit & );
         friend StreamBase & operator>>( StreamBase &, Unit & );
 
-        u32 uid;
-        u32 hp;
-        u32 count0;
-        u32 dead;
-        u32 shots;
-        u32 disruptingray;
+        uint32_t uid;
+        uint32_t hp;
+        uint32_t count0;
+        uint32_t dead;
+        uint32_t shots;
+        uint32_t disruptingray;
         bool reflect;
 
         Position position;

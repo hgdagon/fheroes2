@@ -33,29 +33,29 @@
 #include "ui_button.h"
 #include "ui_window.h"
 
-class SettingsListBox : public Interface::ListBox<u32>
+class SettingsListBox : public Interface::ListBox<uint32_t>
 {
 public:
     SettingsListBox( const Point & pt, bool f )
-        : Interface::ListBox<u32>( pt )
+        : Interface::ListBox<uint32_t>( pt )
         , readonly( f )
         , _restorer( fheroes2::Display::instance() )
     {}
 
-    virtual void RedrawItem( const u32 &, s32, s32, bool ) override;
+    virtual void RedrawItem( const uint32_t &, int32_t, int32_t, bool ) override;
     virtual void RedrawBackground( const Point & ) override;
 
     virtual void ActionCurrentUp( void ) override {}
     virtual void ActionCurrentDn( void ) override {}
-    virtual void ActionListDoubleClick( u32 & ) override;
-    virtual void ActionListSingleClick( u32 & ) override;
-    virtual void ActionListPressRight( u32 & ) override {}
+    virtual void ActionListDoubleClick( uint32_t & ) override;
+    virtual void ActionListSingleClick( uint32_t & ) override;
+    virtual void ActionListPressRight( uint32_t & ) override {}
 
     bool readonly;
     fheroes2::ImageRestorer _restorer;
 };
 
-void SettingsListBox::RedrawItem( const u32 & item, s32 ox, s32 oy, bool /*current*/ )
+void SettingsListBox::RedrawItem( const uint32_t & item, int32_t ox, int32_t oy, bool /*current*/ )
 {
     fheroes2::Display & display = fheroes2::Display::instance();
     const Settings & conf = Settings::Get();
@@ -96,12 +96,12 @@ void SettingsListBox::RedrawBackground( const Point & origin )
     fheroes2::Blit( lowerPart, display, origin.x + 295, origin.y + ah - lowerPart.height() );
 }
 
-void SettingsListBox::ActionListDoubleClick( u32 & item )
+void SettingsListBox::ActionListDoubleClick( uint32_t & item )
 {
     ActionListSingleClick( item );
 }
 
-void SettingsListBox::ActionListSingleClick( u32 & item )
+void SettingsListBox::ActionListSingleClick( uint32_t & item )
 {
     Settings & conf = Settings::Get();
 
@@ -153,7 +153,7 @@ void Dialog::ExtSettings( bool readonly )
     Text text( "Experimental Game Settings", Font::YELLOW_BIG );
     text.Blit( area.x + ( area.w - text.w() ) / 2, area.y + 6 );
 
-    std::vector<u32> states;
+    std::vector<uint32_t> states;
     states.reserve( 64 );
 
     states.push_back( Settings::GAME_SAVE_REWRITE_CONFIRM );

@@ -91,7 +91,7 @@ namespace Interface
         const fheroes2::Rect & GetScrollTop( void ) const;
         const fheroes2::Rect & GetScrollBottom( void ) const;
 
-        s32 GetDimensionDoorDestination( s32, u32, bool ) const;
+        int32_t GetDimensionDoorDestination( int32_t, uint32_t, bool ) const;
 
         GameArea & GetGameArea( void );
         Radar & GetRadar( void );
@@ -137,19 +137,19 @@ namespace Interface
         int StartGame( void );
 
         void MouseCursorAreaClickLeft( const int32_t index_maps );
-        void MouseCursorAreaPressRight( s32 );
+        void MouseCursorAreaPressRight( int32_t );
 
-        static int GetCursorTileIndex( s32 );
+        static int GetCursorTileIndex( int32_t );
         static int GetCursorFocusCastle( const Castle &, const Maps::Tiles & );
         static int GetCursorFocusHeroes( const Heroes &, const Maps::Tiles & );
         static int GetCursorFocusShipmaster( const Heroes &, const Maps::Tiles & );
-        void CalculateHeroPath( Heroes * hero, s32 destinationIdx );
+        void CalculateHeroPath( Heroes * hero, int32_t destinationIdx );
 
         void Reset(); // call this function only when changing the resolution
 
     private:
         Basic();
-        void ShowPathOrStartMoveHero( Heroes *, s32 );
+        void ShowPathOrStartMoveHero( Heroes *, int32_t );
         void MoveHeroFromArrowKeys( Heroes & hero, int direct );
         int HumanTurn( bool );
 

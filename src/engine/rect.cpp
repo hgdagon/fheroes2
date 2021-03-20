@@ -76,9 +76,9 @@ Point Point::operator-( const Point & pt ) const
 
 bool Point::inABC( const Point & pt1, const Point & pt2, const Point & pt3 ) const
 {
-    s32 a = ( pt1.x - x ) * ( pt2.y - pt1.y ) - ( pt2.x - pt1.x ) * ( pt1.y - y );
-    s32 b = ( pt2.x - x ) * ( pt3.y - pt2.y ) - ( pt3.x - pt2.x ) * ( pt2.y - y );
-    s32 c = ( pt3.x - x ) * ( pt1.y - pt3.y ) - ( pt1.x - pt3.x ) * ( pt3.y - y );
+    int32_t a = ( pt1.x - x ) * ( pt2.y - pt1.y ) - ( pt2.x - pt1.x ) * ( pt1.y - y );
+    int32_t b = ( pt2.x - x ) * ( pt3.y - pt2.y ) - ( pt3.x - pt2.x ) * ( pt2.y - y );
+    int32_t c = ( pt3.x - x ) * ( pt1.y - pt3.y ) - ( pt1.x - pt3.x ) * ( pt3.y - y );
 
     return ( ( a >= 0 && b >= 0 && c >= 0 ) || ( a < 0 && b < 0 && c < 0 ) );
 }
@@ -104,7 +104,7 @@ double Point::getAngle( const Point & point ) const
     return std::atan2( point.y - y, point.x - x );
 }
 
-Size::Size( u16 width, u16 height )
+Size::Size( uint16_t width, uint16_t height )
     : w( width )
     , h( height )
 {}
@@ -152,12 +152,12 @@ Size Size::operator-( const Size & sz ) const
 
 Rect::Rect() {}
 
-Rect::Rect( int16_t rx, int16_t ry, u16 rw, u16 rh )
+Rect::Rect( int16_t rx, int16_t ry, uint16_t rw, uint16_t rh )
     : Point( rx, ry )
     , Size( rw, rh )
 {}
 
-Rect::Rect( const Point & pt, u16 rw, u16 rh )
+Rect::Rect( const Point & pt, uint16_t rw, uint16_t rh )
     : Point( pt )
     , Size( rw, rh )
 {}
@@ -286,7 +286,7 @@ Rect Rects::GetRect( void ) const
     return res;
 }
 
-s32 Rects::GetIndex( const Point & pt ) const
+int32_t Rects::GetIndex( const Point & pt ) const
 {
     for ( const_iterator it = begin(); it != end(); ++it )
         if ( *it & pt )

@@ -86,10 +86,10 @@ int TextAscii::CharDescent( int f )
     return isSmallFont( f ) ? 2 : 3;
 }
 
-int TextAscii::w( u32 s, u32 c ) const
+int TextAscii::w( uint32_t s, uint32_t c ) const
 {
-    u32 res = 0;
-    u32 size = message.size();
+    uint32_t res = 0;
+    uint32_t size = message.size();
 
     if ( size ) {
         if ( s > size - 1 )
@@ -97,7 +97,7 @@ int TextAscii::w( u32 s, u32 c ) const
         if ( !c || c > size )
             c = size - s;
 
-        for ( u32 ii = s; ii < s + c; ++ii )
+        for ( uint32_t ii = s; ii < s + c; ++ii )
             res += CharWidth( message[ii], font );
     }
 
@@ -148,7 +148,7 @@ int TextAscii::h( int width ) const
     return res;
 }
 
-void TextAscii::Blit( s32 ax, s32 ay, int maxw, fheroes2::Image & dst )
+void TextAscii::Blit( int32_t ax, int32_t ay, int maxw, fheroes2::Image & dst )
 {
     if ( message.empty() )
         return;
@@ -184,7 +184,7 @@ TextUnicode::TextUnicode( const std::string & msg, int ft )
     , message( StringUTF8_to_UNICODE( msg ) )
 {}
 
-TextUnicode::TextUnicode( const u16 * pt, size_t sz, int ft )
+TextUnicode::TextUnicode( const uint16_t * pt, size_t sz, int ft )
     : TextInterface( ft )
     , message( pt, pt + sz )
 {}
@@ -237,10 +237,10 @@ int TextUnicode::CharHeight( int f )
     return isSmallFont( f ) ? ( AGG::GetFontHeight( true ) + 2 ) : ( AGG::GetFontHeight( false ) + 8 );
 }
 
-int TextUnicode::w( u32 s, u32 c ) const
+int TextUnicode::w( uint32_t s, uint32_t c ) const
 {
-    u32 res = 0;
-    u32 size = message.size();
+    uint32_t res = 0;
+    uint32_t size = message.size();
 
     if ( size ) {
         if ( s > size - 1 )
@@ -248,7 +248,7 @@ int TextUnicode::w( u32 s, u32 c ) const
         if ( !c || c > size )
             c = size - s;
 
-        for ( u32 ii = s; ii < s + c; ++ii )
+        for ( uint32_t ii = s; ii < s + c; ++ii )
             res += CharWidth( message[ii], font );
     }
 
@@ -275,9 +275,9 @@ int TextUnicode::h( int width ) const
     int res = 0;
     int www = 0;
 
-    std::vector<u16>::const_iterator pos1 = message.begin();
-    std::vector<u16>::const_iterator pos2 = message.end();
-    std::vector<u16>::const_iterator space = pos2;
+    std::vector<uint16_t>::const_iterator pos1 = message.begin();
+    std::vector<uint16_t>::const_iterator pos2 = message.end();
+    std::vector<uint16_t>::const_iterator space = pos2;
 
     while ( pos1 < pos2 ) {
         if ( isspace( *pos1 ) )
@@ -299,11 +299,11 @@ int TextUnicode::h( int width ) const
     return res;
 }
 
-void TextUnicode::Blit( s32 ax, s32 ay, int maxw, fheroes2::Image & dst )
+void TextUnicode::Blit( int32_t ax, int32_t ay, int maxw, fheroes2::Image & dst )
 {
-    const s32 sx = ax;
+    const int32_t sx = ax;
 
-    for ( std::vector<u16>::const_iterator it = message.begin(); it != message.end(); ++it ) {
+    for ( std::vector<uint16_t>::const_iterator it = message.begin(); it != message.end(); ++it ) {
         if ( maxw && ( ax - sx ) >= maxw )
             break;
 
@@ -358,7 +358,7 @@ Text::Text( const std::string & msg, int ft )
 }
 
 #ifdef WITH_TTF
-Text::Text( const u16 * pt, size_t sz, int ft )
+Text::Text( const uint16_t * pt, size_t sz, int ft )
     : message( NULL )
     , gw( 0 )
     , gh( 0 )
@@ -454,17 +454,17 @@ void Text::Blit( const Point & dst_pt, fheroes2::Image & dst ) const
     return message->Blit( dst_pt.x, dst_pt.y, 0, dst );
 }
 
-void Text::Blit( s32 ax, s32 ay, fheroes2::Image & dst ) const
+void Text::Blit( int32_t ax, int32_t ay, fheroes2::Image & dst ) const
 {
     return message->Blit( ax, ay, 0, dst );
 }
 
-void Text::Blit( s32 ax, s32 ay, int maxw, fheroes2::Image & dst ) const
+void Text::Blit( int32_t ax, int32_t ay, int maxw, fheroes2::Image & dst ) const
 {
     return message->Blit( ax, ay, maxw, dst );
 }
 
-u32 Text::width( const std::string & str, int ft, u32 start, u32 count )
+uint32_t Text::width( const std::string & str, int ft, uint32_t start, uint32_t count )
 {
     if ( !str.empty() ) {
 #ifdef WITH_TTF
@@ -482,7 +482,7 @@ u32 Text::width( const std::string & str, int ft, u32 start, u32 count )
     return 0;
 }
 
-u32 Text::height( const std::string & str, int ft, u32 width )
+uint32_t Text::height( const std::string & str, int ft, uint32_t width )
 {
     if ( !str.empty() ) {
 #ifdef WITH_TTF
@@ -566,13 +566,13 @@ void TextBox::Set( const std::string & msg, int ft, uint32_t width_ )
 
 #ifdef WITH_TTF
     if ( Settings::Get().Unicode() ) {
-        std::vector<u16> unicode = StringUTF8_to_UNICODE( msg );
+        std::vector<uint16_t> unicode = StringUTF8_to_UNICODE( msg );
 
-        const u16 sep = '\n';
-        std::vector<u16> substr;
+        const uint16_t sep = '\n';
+        std::vector<uint16_t> substr;
         substr.reserve( msg.size() );
-        std::vector<u16>::iterator pos1 = unicode.begin();
-        std::vector<u16>::iterator pos2;
+        std::vector<uint16_t>::iterator pos1 = unicode.begin();
+        std::vector<uint16_t>::iterator pos2;
         while ( unicode.end() != ( pos2 = std::find( pos1, unicode.end(), sep ) ) ) {
             substr.assign( pos1, pos2 );
             Append( substr, ft, width_ );
@@ -608,9 +608,9 @@ void TextBox::SetAlign( int f )
     align = f;
 }
 
-void TextBox::Append( const std::string & msg, int ft, u32 width_ )
+void TextBox::Append( const std::string & msg, int ft, uint32_t width_ )
 {
-    u32 www = 0;
+    uint32_t www = 0;
     fheroes2::Rect::width = width_;
 
     std::string::const_iterator pos1 = msg.begin();
@@ -657,20 +657,20 @@ void TextBox::Append( const std::string & msg, int ft, u32 width_ )
 }
 
 #ifdef WITH_TTF
-void TextBox::Append( const std::vector<u16> & msg, int ft, u32 width_ )
+void TextBox::Append( const std::vector<uint16_t> & msg, int ft, uint32_t width_ )
 {
-    u32 www = 0;
+    uint32_t www = 0;
     fheroes2::Rect::width = width_;
 
-    std::vector<u16>::const_iterator pos1 = msg.begin();
-    std::vector<u16>::const_iterator pos2 = pos1;
-    std::vector<u16>::const_iterator pos3 = msg.end();
-    std::vector<u16>::const_iterator space = pos2;
+    std::vector<uint16_t>::const_iterator pos1 = msg.begin();
+    std::vector<uint16_t>::const_iterator pos2 = pos1;
+    std::vector<uint16_t>::const_iterator pos3 = msg.end();
+    std::vector<uint16_t>::const_iterator space = pos2;
 
     while ( pos2 < pos3 ) {
         if ( TextUnicode::isspace( *pos2 ) )
             space = pos2;
-        u32 char_w = TextUnicode::CharWidth( *pos2, ft );
+        uint32_t char_w = TextUnicode::CharWidth( *pos2, ft );
 
         if ( www + char_w >= width_ ) {
             www = 0;
@@ -707,7 +707,7 @@ void TextBox::Append( const std::vector<u16> & msg, int ft, u32 width_ )
 }
 #endif
 
-void TextBox::Blit( s32 ax, s32 ay, fheroes2::Image & sf )
+void TextBox::Blit( int32_t ax, int32_t ay, fheroes2::Image & sf )
 {
     fheroes2::Rect::x = ax;
     fheroes2::Rect::y = ay;
@@ -748,7 +748,7 @@ TextSprite::TextSprite( const std::string & msg, int ft, const Point & pt )
     , hide( true )
 {}
 
-TextSprite::TextSprite( const std::string & msg, int ft, s32 ax, s32 ay )
+TextSprite::TextSprite( const std::string & msg, int ft, int32_t ax, int32_t ay )
     : Text( msg, ft )
     , _restorer( fheroes2::Display::instance(), ax, ay, gw, gh + 5 )
     , hide( true )
@@ -788,7 +788,7 @@ void TextSprite::SetFont( int ft )
     _restorer.update( _restorer.x(), _restorer.y(), gw, gh + 5 );
 }
 
-void TextSprite::SetPos( s32 ax, s32 ay )
+void TextSprite::SetPos( int32_t ax, int32_t ay )
 {
     _restorer.update( ax, ay, gw, gh + 5 );
 }

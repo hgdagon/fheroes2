@@ -30,9 +30,9 @@
 
 namespace Music
 {
-    void Play( const std::vector<u8> &, bool loop );
+    void Play( const std::vector<uint8_t> &, bool loop );
     void Play( const std::string &, bool loop );
-    u16 Volume( int16_t vol );
+    uint16_t Volume( int16_t vol );
     void SetFadeIn( int );
     void SetFadeOut( int );
     void SetExtCommand( const std::string & );
@@ -42,7 +42,7 @@ namespace Music
     bool isPlaying( void );
     bool isPaused( void );
 
-    std::vector<u8> Xmi2Mid( const std::vector<u8> & );
+    std::vector<uint8_t> Xmi2Mid( const std::vector<uint8_t> & );
 }
 
 #endif

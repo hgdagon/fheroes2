@@ -41,7 +41,7 @@ namespace Interface
     class IconsBar
     {
     public:
-        IconsBar( u32 count, const fheroes2::Image & sf )
+        IconsBar( uint32_t count, const fheroes2::Image & sf )
             : marker( sf )
             , iconsCount( count )
             , show( true )
@@ -59,36 +59,36 @@ namespace Interface
 
         void RedrawBackground( const Point & );
 
-        u32 CountIcons( void ) const
+        uint32_t CountIcons( void ) const
         {
             return iconsCount;
         }
-        void SetIconsCount( u32 c )
+        void SetIconsCount( uint32_t c )
         {
             iconsCount = c;
         }
 
-        static u32 GetItemWidth( void );
-        static u32 GetItemHeight( void );
+        static uint32_t GetItemWidth( void );
+        static uint32_t GetItemHeight( void );
         static bool IsVisible( void );
 
     protected:
         const fheroes2::Image & marker;
-        u32 iconsCount;
+        uint32_t iconsCount;
         bool show;
     };
 
-    void RedrawHeroesIcon( const Heroes &, s32, s32 );
-    void RedrawCastleIcon( const Castle &, s32, s32 );
+    void RedrawHeroesIcon( const Heroes &, int32_t, int32_t );
+    void RedrawCastleIcon( const Castle &, int32_t, int32_t );
 
     class HeroesIcons : public Interface::ListBox<HEROES>, public IconsBar
     {
     public:
-        HeroesIcons( u32 count, const fheroes2::Image & sf )
+        HeroesIcons( uint32_t count, const fheroes2::Image & sf )
             : IconsBar( count, sf )
         {}
 
-        void SetPos( s32, s32 );
+        void SetPos( int32_t, int32_t );
         void SetShow( bool );
 
     protected:
@@ -97,7 +97,7 @@ namespace Interface
         void ActionListDoubleClick( HEROES & );
         void ActionListSingleClick( HEROES & );
         void ActionListPressRight( HEROES & );
-        void RedrawItem( const HEROES &, s32 ox, s32 oy, bool current );
+        void RedrawItem( const HEROES &, int32_t ox, int32_t oy, bool current );
         void RedrawBackground( const Point & );
 
     private:
@@ -107,11 +107,11 @@ namespace Interface
     class CastleIcons : public Interface::ListBox<CASTLE>, public IconsBar
     {
     public:
-        CastleIcons( u32 count, const fheroes2::Image & sf )
+        CastleIcons( uint32_t count, const fheroes2::Image & sf )
             : IconsBar( count, sf )
         {}
 
-        void SetPos( s32, s32 );
+        void SetPos( int32_t, int32_t );
         void SetShow( bool );
 
     protected:
@@ -120,7 +120,7 @@ namespace Interface
         void ActionListDoubleClick( CASTLE & );
         void ActionListSingleClick( CASTLE & );
         void ActionListPressRight( CASTLE & );
-        void RedrawItem( const CASTLE &, s32 ox, s32 oy, bool current );
+        void RedrawItem( const CASTLE &, int32_t ox, int32_t oy, bool current );
         void RedrawBackground( const Point & );
 
     private:
@@ -134,7 +134,7 @@ namespace Interface
     public:
         IconsPanel( Basic & );
 
-        void SetPos( s32, s32 );
+        void SetPos( int32_t, int32_t );
         void SavePosition( void );
         void SetRedraw( void ) const;
         void SetRedraw( icons_t ) const;
@@ -142,7 +142,7 @@ namespace Interface
         void Redraw( void );
         void QueueEventProcessing( void );
 
-        u32 CountIcons( void ) const;
+        uint32_t CountIcons( void ) const;
 
         void Select( Heroes * const );
         void Select( Castle * const );

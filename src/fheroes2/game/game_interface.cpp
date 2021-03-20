@@ -93,7 +93,7 @@ void Interface::Basic::SetHideInterface( bool f )
 {
     const fheroes2::Display & display = fheroes2::Display::instance();
     Settings & conf = Settings::Get();
-    const u32 px = display.width() - BORDERWIDTH - RADARWIDTH;
+    const uint32_t px = display.width() - BORDERWIDTH - RADARWIDTH;
 
     conf.SetHideInterface( f );
 
@@ -207,7 +207,7 @@ void Interface::Basic::Redraw( int force )
     redraw = 0;
 }
 
-s32 Interface::Basic::GetDimensionDoorDestination( s32 from, u32 distance, bool water ) const
+int32_t Interface::Basic::GetDimensionDoorDestination( int32_t from, uint32_t distance, bool water ) const
 {
     fheroes2::Display & display = fheroes2::Display::instance();
 
@@ -237,8 +237,8 @@ s32 Interface::Basic::GetDimensionDoorDestination( s32 from, u32 distance, bool 
 
     Cursor & cursor = Cursor::Get();
     LocalEvent & le = LocalEvent::Get();
-    s32 dst = -1;
-    s32 returnValue = -1;
+    int32_t dst = -1;
+    int32_t returnValue = -1;
 
     const Point exitButtonPos( radarArea.x + 32, radarArea.y + radarArea.h - 37 );
     fheroes2::Button buttonExit( exitButtonPos.x, exitButtonPos.y, ( conf.ExtGameEvilInterface() ? ICN::LGNDXTRE : ICN::LGNDXTRA ), 4, 5 );

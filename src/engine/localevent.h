@@ -168,13 +168,13 @@ const char * KeySymGetName( KeySym );
 
 KeySym GetKeySym( int );
 
-bool PressIntKey( u32 max, u32 & result );
+bool PressIntKey( uint32_t max, uint32_t & result );
 
-size_t InsertKeySym( std::string &, size_t, KeySym, u16 mod = 0 );
+size_t InsertKeySym( std::string &, size_t, KeySym, uint16_t mod = 0 );
 
 KeySym KeySymFromChar( char );
 
-char CharFromKeySym( KeySym, u16 mod = 0 );
+char CharFromKeySym( KeySym, uint16_t mod = 0 );
 
 class LocalEvent
 {
@@ -182,15 +182,15 @@ public:
     static LocalEvent & Get( void );
     static LocalEvent & GetClean(); // reset all previous event statuses and return a reference for events
 
-    void SetGlobalFilterMouseEvents( void ( *pf )( s32, s32 ) );
+    void SetGlobalFilterMouseEvents( void ( *pf )( int32_t, int32_t ) );
     void SetGlobalFilterKeysEvents( void ( *pf )( int, int ) );
     void SetGlobalFilter( bool );
     void SetMouseOffsetX( int16_t );
     void SetMouseOffsetY( int16_t );
 
     static void SetStateDefaults( void );
-    static void SetState( u32 type, bool enable );
-    static int GetState( u32 type );
+    static void SetState( uint32_t type, bool enable );
+    static int GetState( uint32_t type );
 
     bool HandleEvents( bool delay = true, bool allowExit = false );
 
@@ -230,7 +230,7 @@ public:
 
     bool MousePressLeft( void ) const;
     bool MousePressLeft( const Rect & rt ) const;
-    bool MousePressLeft( const Point & pt, u32 w, u32 h ) const;
+    bool MousePressLeft( const Point & pt, uint32_t w, uint32_t h ) const;
     bool MousePressMiddle( void ) const;
     bool MousePressMiddle( const Rect & rt ) const;
     bool MousePressRight( void ) const;
@@ -337,7 +337,7 @@ private:
 
     Point mouse_wm; // wheel movement
 
-    void ( *redraw_cursor_func )( s32, s32 );
+    void ( *redraw_cursor_func )( int32_t, int32_t );
     void ( *keyboard_filter_func )( int, int );
 
     int loop_delay;

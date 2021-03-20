@@ -27,10 +27,10 @@
 #include "mp2.h"
 #include "objswmp.h"
 
-int ObjSwmp::GetPassable( u32 index )
+int ObjSwmp::GetPassable( uint32_t index )
 {
-    const u8 disabled[] = {88, 89, 90, 91, 94, 95, 96, 97, 98, 108, 109, 110, 112, 113, 115, 116, 118, 119, 122, 123, 143, 144};
-    const u8 restricted[] = {32,  33,  67,  74,  82,  85,  100, 101, 102, 103, 104, 105, 126, 128, 129, 131, 133, 134, 135, 137, 138, 139, 145, 146,
+    const uint8_t disabled[] = {88, 89, 90, 91, 94, 95, 96, 97, 98, 108, 109, 110, 112, 113, 115, 116, 118, 119, 122, 123, 143, 144};
+    const uint8_t restricted[] = {32,  33,  67,  74,  82,  85,  100, 101, 102, 103, 104, 105, 126, 128, 129, 131, 133, 134, 135, 137, 138, 139, 145, 146,
                              147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 166, 167, 171, 172, 176, 177, 179, 180, 181, 182,
                              183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 196, 198, 199, 200, 201, 203, 205, 208, 209, 212, 213};
 
@@ -42,19 +42,19 @@ int ObjSwmp::GetPassable( u32 index )
     return ARRAY_COUNT_END( restricted ) != std::find( restricted, ARRAY_COUNT_END( restricted ), index ) ? DIRECTION_CENTER_ROW | DIRECTION_BOTTOM_ROW : DIRECTION_ALL;
 }
 
-bool ObjSwmp::isAction( u32 index )
+bool ObjSwmp::isAction( uint32_t index )
 {
     return MP2::OBJ_ZERO != GetActionObject( index );
 }
 
-bool ObjSwmp::isShadow( u32 index )
+bool ObjSwmp::isShadow( uint32_t index )
 {
-    const u8 shadows[] = {14, 21, 31, 43, 66, 83, 125, 127, 130, 132, 136, 141, 163, 170, 175, 178, 195, 197, 202, 204, 207, 211, 215};
+    const uint8_t shadows[] = {14, 21, 31, 43, 66, 83, 125, 127, 130, 132, 136, 141, 163, 170, 175, 178, 195, 197, 202, 204, 207, 211, 215};
 
     return ARRAY_COUNT_END( shadows ) != std::find( shadows, ARRAY_COUNT_END( shadows ), index );
 }
 
-int ObjSwmp::GetActionObject( u32 index )
+int ObjSwmp::GetActionObject( uint32_t index )
 {
     switch ( index ) {
     case 22:

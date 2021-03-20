@@ -184,11 +184,11 @@ public:
     void BinarySave( void ) const;
     void BinaryLoad( void );
 
-    bool CanChangeInGame( u32 ) const;
-    bool ExtModes( u32 ) const;
-    void ExtSetModes( u32 );
-    void ExtResetModes( u32 );
-    const char * ExtName( u32 ) const;
+    bool CanChangeInGame( uint32_t ) const;
+    bool ExtModes( uint32_t ) const;
+    void ExtSetModes( uint32_t );
+    void ExtResetModes( uint32_t );
+    const char * ExtName( uint32_t ) const;
 
     bool ExtHeroBuySpellBookFromShrine( void ) const;
     bool ExtHeroRecruitCostDependedFromLevel( void ) const;
@@ -300,10 +300,10 @@ public:
     bool WinsAllowNormalVictory( void ) const;
     int WinsFindArtifactID( void ) const;
     bool WinsFindUltimateArtifact( void ) const;
-    u32 WinsAccumulateGold( void ) const;
+    uint32_t WinsAccumulateGold( void ) const;
     Point WinsMapsPositionObject( void ) const;
     Point LossMapsPositionObject( void ) const;
-    u32 LossCountDays( void ) const;
+    uint32_t LossCountDays( void ) const;
     int controllerPointerSpeed() const;
 
     std::string GetProgramPath( void ) const

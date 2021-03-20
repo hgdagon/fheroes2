@@ -51,7 +51,7 @@ void Interface::PlayersInfo::UpdateInfo( Players & players, const Point & pt1, c
     clear();
 
     for ( Players::iterator it = players.begin(); it != players.end(); ++it ) {
-        const u32 current = std::distance( players.begin(), it );
+        const uint32_t current = std::distance( players.begin(), it );
         PlayerInfo info;
 
         info.player = *it;
@@ -114,8 +114,8 @@ void Interface::PlayersInfo::RedrawInfo( bool show_play_info ) const /* show_pla
     fheroes2::Display & display = fheroes2::Display::instance();
     const Maps::FileInfo & fi = conf.CurrentFileInfo();
 
-    const u32 humans_colors = conf.GetPlayers().GetColors( CONTROL_HUMAN, true );
-    u32 index = 0;
+    const uint32_t humans_colors = conf.GetPlayers().GetColors( CONTROL_HUMAN, true );
+    uint32_t index = 0;
 
     for ( const_iterator it = begin(); it != end(); ++it ) {
         const Player & player = *( ( *it ).player );
@@ -255,7 +255,7 @@ bool Interface::PlayersInfo::QueueEventProcessing( void )
             const Players & players = conf.GetPlayers();
             if ( ( player->GetColor() & fi.AllowHumanColors() )
                  && ( !Settings::Get().IsGameType( Game::TYPE_MULTI ) || !( player->GetColor() & fi.HumanOnlyColors() ) ) ) {
-                u32 humans = players.GetColors( CONTROL_HUMAN, true );
+                uint32_t humans = players.GetColors( CONTROL_HUMAN, true );
 
                 if ( conf.IsGameType( Game::TYPE_MULTI ) ) {
                     if ( currentSelectedPlayer == nullptr ) {

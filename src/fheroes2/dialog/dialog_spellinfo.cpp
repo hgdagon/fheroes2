@@ -34,7 +34,7 @@
 void Dialog::SpellInfo( const Spell & spell, bool ok_button )
 {
     std::string msg = spell.GetDescription();
-    u32 extra = spell.ExtraValue();
+    uint32_t extra = spell.ExtraValue();
 
     switch ( spell() ) {
     case Spell::HASTE:

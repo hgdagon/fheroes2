@@ -190,7 +190,7 @@ int Captain::GetControl( void ) const
     return home.GetControl();
 }
 
-s32 Captain::GetIndex( void ) const
+int32_t Captain::GetIndex( void ) const
 {
     return home.GetIndex();
 }
@@ -251,7 +251,7 @@ fheroes2::Sprite Captain::GetPortrait( const PortraitType type ) const
     return fheroes2::AGG::GetICN( -1, 0 );
 }
 
-void Captain::PortraitRedraw( s32 px, s32 py, PortraitType type, fheroes2::Image & dstsf ) const
+void Captain::PortraitRedraw( int32_t px, int32_t py, PortraitType type, fheroes2::Image & dstsf ) const
 {
     if ( !isValid() )
         return;

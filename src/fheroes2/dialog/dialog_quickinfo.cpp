@@ -44,7 +44,7 @@
 std::string GetMinesIncomeString( int type )
 {
     const payment_t income = ProfitConditions::FromMine( type );
-    const s32 value = income.Get( type );
+    const int32_t value = income.Get( type );
     std::string res;
 
     if ( value ) {
@@ -621,7 +621,7 @@ void Dialog::QuickInfo( const Castle & castle, const fheroes2::Point & position 
     dst_pt.y = cur_rt.y;
     text.Blit( dst_pt.x, dst_pt.y );
 
-    u32 index = 0;
+    uint32_t index = 0;
 
     switch ( castle.GetRace() ) {
     case Race::KNGT:
@@ -696,7 +696,7 @@ void Dialog::QuickInfo( const Castle & castle, const fheroes2::Point & position 
     text.Blit( dst_pt.x, dst_pt.y );
 
     //
-    u32 count = castle.GetArmy().GetCount();
+    uint32_t count = castle.GetArmy().GetCount();
     const Settings & conf = Settings::Get();
 
     const Heroes * from_hero = Interface::GetFocusHeroes();
@@ -815,9 +815,9 @@ void Dialog::QuickInfo( const Heroes & hero, const fheroes2::Point & position /*
 
     // luck
     if ( showFullInfo ) {
-        const s32 luck = hero.GetLuckWithModificators( NULL );
+        const int32_t luck = hero.GetLuckWithModificators( NULL );
         const fheroes2::Sprite & sprite = fheroes2::AGG::GetICN( ICN::MINILKMR, ( 0 > luck ? 0 : ( 0 < luck ? 1 : 2 ) ) );
-        u32 count = ( 0 == luck ? 1 : std::abs( luck ) );
+        uint32_t count = ( 0 == luck ? 1 : std::abs( luck ) );
         dst_pt.x = cur_rt.x + 120;
         dst_pt.y = cur_rt.y + ( count == 1 ? 20 : 13 );
 
@@ -829,9 +829,9 @@ void Dialog::QuickInfo( const Heroes & hero, const fheroes2::Point & position /*
 
     // morale
     if ( showFullInfo ) {
-        const s32 morale = hero.GetMoraleWithModificators( NULL );
+        const int32_t morale = hero.GetMoraleWithModificators( NULL );
         const fheroes2::Sprite & sprite = fheroes2::AGG::GetICN( ICN::MINILKMR, ( 0 > morale ? 3 : ( 0 < morale ? 4 : 5 ) ) );
-        u32 count = ( 0 == morale ? 1 : std::abs( morale ) );
+        uint32_t count = ( 0 == morale ? 1 : std::abs( morale ) );
         dst_pt.x = cur_rt.x + 10;
         dst_pt.y = cur_rt.y + ( count == 1 ? 20 : 13 );
 
@@ -842,7 +842,7 @@ void Dialog::QuickInfo( const Heroes & hero, const fheroes2::Point & position /*
     }
 
     // color flags
-    u32 index = 0;
+    uint32_t index = 0;
 
     switch ( hero.GetColor() ) {
     case Color::BLUE:

@@ -44,7 +44,7 @@ namespace SDL
 
         bool IsRun( void ) const;
 
-        u32 GetID( void ) const;
+        uint32_t GetID( void ) const;
 
     private:
         SDL_Thread * thread;
@@ -57,7 +57,7 @@ namespace SDL
 
         bool IsValid( void ) const;
 
-        void Run( u32, u32 ( * )( u32, void * ), void * param = NULL );
+        void Run( uint32_t, uint32_t ( * )( uint32_t, void * ), void * param = NULL );
         void Remove( void );
 
     private:

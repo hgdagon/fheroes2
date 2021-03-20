@@ -28,7 +28,7 @@
 
 #define INFL 12
 
-void Battle::Position::Set( s32 head, bool wide, bool reflect )
+void Battle::Position::Set( int32_t head, bool wide, bool reflect )
 {
     first = Board::GetCell( head );
 
@@ -70,7 +70,7 @@ Rect Battle::Position::GetRect( void ) const
     return Rect();
 }
 
-Battle::Position Battle::Position::GetCorrect( const Unit & b, s32 head )
+Battle::Position Battle::Position::GetCorrect( const Unit & b, int32_t head )
 {
     Position result;
 
@@ -120,7 +120,7 @@ Battle::Cell::Cell()
     , troop( NULL )
 {}
 
-Battle::Cell::Cell( s32 ii )
+Battle::Cell::Cell( int32_t ii )
     : index( ii )
     , object( 0 )
     , direction( UNKNOWN )
@@ -176,12 +176,12 @@ bool Battle::Cell::isPositionIncludePoint( const Point & pt ) const
     return UNKNOWN != GetTriangleDirection( pt );
 }
 
-s32 Battle::Cell::GetIndex( void ) const
+int32_t Battle::Cell::GetIndex( void ) const
 {
     return index;
 }
 
-s32 Battle::Cell::GetQuality( void ) const
+int32_t Battle::Cell::GetQuality( void ) const
 {
     return quality;
 }
@@ -196,7 +196,7 @@ void Battle::Cell::SetDirection( int val )
     direction = val;
 }
 
-void Battle::Cell::SetQuality( u32 val )
+void Battle::Cell::SetQuality( uint32_t val )
 {
     quality = val;
 }
@@ -297,12 +297,12 @@ void Battle::Cell::ResetDirection( void )
 
 StreamBase & Battle::operator<<( StreamBase & msg, const Cell & c )
 {
-    return msg << c.index << c.object << c.direction << c.quality << ( c.troop ? c.troop->GetUID() : static_cast<u32>( 0 ) );
+    return msg << c.index << c.object << c.direction << c.quality << ( c.troop ? c.troop->GetUID() : static_cast<uint32_t>( 0 ) );
 }
 
 StreamBase & Battle::operator>>( StreamBase & msg, Cell & c )
 {
-    u32 uid = 0;
+    uint32_t uid = 0;
     msg >> c.index >> c.object >> c.direction >> c.quality >> uid;
     c.troop = GetArena()->GetTroopUID( uid );
     return msg;

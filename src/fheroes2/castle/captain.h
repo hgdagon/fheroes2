@@ -43,7 +43,7 @@ public:
     virtual int GetColor() const override;
     virtual int GetType() const override;
     virtual int GetControl() const override;
-    s32 GetIndex() const;
+    int32_t GetIndex() const;
 
     virtual const std::string & GetName() const override;
 
@@ -70,7 +70,7 @@ public:
     virtual void ActionPreBattle() override;
     virtual void ActionAfterBattle() override;
 
-    virtual void PortraitRedraw( s32 px, s32 py, PortraitType type, fheroes2::Image & dstsf ) const override;
+    virtual void PortraitRedraw( int32_t px, int32_t py, PortraitType type, fheroes2::Image & dstsf ) const override;
     fheroes2::Sprite GetPortrait( const PortraitType type ) const;
 
 private:

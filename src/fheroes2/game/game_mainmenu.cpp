@@ -42,7 +42,7 @@ namespace
 {
     struct ButtonInfo
     {
-        u32 frame;
+        uint32_t frame;
         fheroes2::Button & button;
         bool isOver;
         bool wasOver;
@@ -119,7 +119,7 @@ int Game::MainMenu( bool isFirstGameRun )
     const fheroes2::Rect resolutionArea( static_cast<int32_t>( 63 * scaleX ), static_cast<int32_t>( 202 * scaleY ), static_cast<int32_t>( 90 * scaleX ),
                                          static_cast<int32_t>( 160 * scaleY ) );
 
-    u32 lantern_frame = 0;
+    uint32_t lantern_frame = 0;
 
     ButtonInfo buttons[] = {{NEWGAME_DEFAULT, buttonNewGame, false, false},
                             {LOADGAME_DEFAULT, buttonLoadGame, false, false},
@@ -127,7 +127,7 @@ int Game::MainMenu( bool isFirstGameRun )
                             {CREDITS_DEFAULT, buttonCredits, false, false},
                             {QUIT_DEFAULT, buttonQuit, false, false}};
 
-    for ( u32 i = 0; le.MouseMotion() && i < ARRAY_COUNT( buttons ); ++i ) {
+    for ( uint32_t i = 0; le.MouseMotion() && i < ARRAY_COUNT( buttons ); ++i ) {
         cursor.Hide();
         const fheroes2::Sprite & sprite = fheroes2::AGG::GetICN( ICN::BTNSHNGL, buttons[i].frame );
         fheroes2::Blit( sprite, display, sprite.x(), sprite.y() );
@@ -149,7 +149,7 @@ int Game::MainMenu( bool isFirstGameRun )
 
         bool redrawScreen = false;
 
-        for ( u32 i = 0; i < ARRAY_COUNT( buttons ); ++i ) {
+        for ( uint32_t i = 0; i < ARRAY_COUNT( buttons ); ++i ) {
             buttons[i].wasOver = buttons[i].isOver;
 
             if ( le.MousePressLeft( buttons[i].button.area() ) ) {
@@ -162,7 +162,7 @@ int Game::MainMenu( bool isFirstGameRun )
             buttons[i].isOver = le.MouseCursor( buttons[i].button.area() );
 
             if ( buttons[i].isOver != buttons[i].wasOver ) {
-                u32 frame = buttons[i].frame;
+                uint32_t frame = buttons[i].frame;
 
                 if ( buttons[i].isOver && !buttons[i].wasOver )
                     ++frame;
